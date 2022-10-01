@@ -1,0 +1,11 @@
+[
+  {
+    "id":1,
+    "alias":"Temperature",
+    "register_address":1000,
+    "data_type":"integer",
+    "display_point":"temperature",
+    "col_name":"temperature",
+    "multiplier":1
+  }
+]

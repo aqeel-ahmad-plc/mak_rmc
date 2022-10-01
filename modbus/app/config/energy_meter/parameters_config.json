@@ -1,0 +1,148 @@
+[
+  {
+    "id":1,
+    "alias":"Voltage L1",
+    "register_address":2,
+    "display_point":"voltage_l1",
+    "data_type":"integer",
+    "col_name":"voltage_a",
+    "multiplier":0.01
+  },
+  {
+    "id":2,
+    "alias":"Voltage L2",
+    "register_address":4,
+    "data_type":"integer",
+    "display_point":"voltage_l2",
+    "col_name":"voltage_b",
+    "multiplier":0.01
+  },
+  {
+    "id":3,
+    "alias":"Voltage L3",
+    "register_address":6,
+    "display_point":"voltage_l3",
+    "col_name":"voltage_c",
+    "data_type":"integer",
+    "multiplier":0.01
+  },
+  {
+    "id":4,
+    "alias":"Current L1",
+    "register_address":7,
+    "display_point":"current_l1",
+    "col_name":"current_a",
+    "data_type":"32bit_int",
+    "multiplier":0.0001
+  },
+  {
+    "id":5,
+    "alias":"Current L2",
+    "register_address":9,
+    "display_point":"current_l2",
+    "col_name":"current_b",
+    "data_type":"32bit_int",
+    "multiplier":0.0001
+  },
+  {
+    "id":6,
+    "alias":"Current L3",
+    "register_address":11,
+    "display_point":"current_l3",
+    "col_name":"current_c",
+    "data_type":"32bit_int",
+    "multiplier":0.0001
+  },
+  {
+    "id":7,
+    "alias":"Voltage L1-L2",
+    "register_address":14,
+    "display_point":"voltage_l1l2",
+    "data_type":"integer",
+    "col_name":"voltage_ab",
+    "multiplier":0.01
+  },
+  {
+    "id":8,
+    "alias":"Voltage L2-L3",
+    "register_address":16,
+    "display_point":"voltage_l2l3",
+    "data_type":"integer",
+    "col_name":"voltage_bc",
+    "multiplier":0.01
+  },
+  {
+    "id":9,
+    "alias":"Voltage L3-L1",
+    "register_address":18,
+    "display_point":"voltage_l3l1",
+    "col_name":"voltage_ca",
+    "data_type":"integer",
+    "multiplier":0.01
+  },
+  {
+    "id":10,
+    "alias":"Frequency",
+    "register_address":50,
+    "data_type":"integer",
+    "display_point":"frequency",
+    "col_name":"frequency",
+    "multiplier":0.001
+  },
+  {
+    "id":11,
+    "alias":"PF A",
+    "register_address":37,
+    "display_point":"pf_a",
+    "col_name":"pf_a",
+    "data_type":"signedint",
+    "multiplier":0.0001
+  },
+  {
+    "id":12,
+    "alias":"PF B",
+    "register_address":39,
+    "display_point":"pf_b",
+    "col_name":"pf_b",
+    "data_type":"signedint",
+    "multiplier":0.0001
+  },
+  {
+    "id":13,
+    "alias":"PF C",
+    "register_address":41,
+    "display_point":"pf_c",
+    "col_name":"pf_c",
+    "data_type":"signedint",
+    "multiplier":0.0001
+  },
+  {
+    "id":14,
+    "alias":"Power A",
+    "register_address":19,
+    "display_point":"power_a",
+    "col_name":"power_a",
+    "data_type":"32bit_int",
+    "multiplier":0.00001
+  },
+  {
+    "id":15,
+    "alias":"Power B",
+    "register_address":21,
+    "display_point":"power_b",
+    "col_name":"power_b",
+    "data_type":"32bit_int",
+    "multiplier":0.00001
+  },
+  {
+    "id":16,
+    "alias":"Power C",
+    "display_point":"power_c",
+    "register_address":23,
+    "col_name":"power_c",
+    "data_type":"32bit_int",
+    "multiplier":0.00001
+  }
+
+
+]
