@@ -55,7 +55,7 @@
                     <option value="2">Manager</option>
                     <option value="3">Surveyor</option>
                     <option value="4">User</option>
-                    <option value="5">Stock/Inventory User</option>
+                    <option value="5">Stock/mak_rmc User</option>
                 </select>
             </div>
         </div>

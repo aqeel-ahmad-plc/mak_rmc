@@ -22,7 +22,7 @@
           console.log('updateStats');
           $.ajax({
               type: 'GET',
-              url: '/inventory/stats/show',
+              url: '/mak_rmc/stats/show',
               async:false,
               success: function(data) {
 
@@ -64,7 +64,7 @@
         console.log('updateTemperature');
         $.ajax({
             type: 'GET',
-            url: '/inventory/temperature/show',
+            url: '/mak_rmc/temperature/show',
             async:false,
             success: function(data) {
 
@@ -87,7 +87,7 @@
         console.log('updateRPM');
         $.ajax({
             type: 'GET',
-            url: '/inventory/rpm/show',
+            url: '/mak_rmc/rpm/show',
             async:false,
             success: function(data) {
 
@@ -160,7 +160,7 @@
             var  stocks = new Array();
             $.ajax({
                 type: 'GET',
-                url: '/inventory/stocks/get_stocks',
+                url: '/mak_rmc/stocks/get_stocks',
                 async:false,
                 success: function(data) {
                     stocks = JSON.parse(data);
@@ -234,7 +234,7 @@
             var  sites = new Array();
             $.ajax({
                 type: 'GET',
-                url: '/inventory/dashboard/get_sites',
+                url: '/mak_rmc/dashboard/get_sites',
                 async:false,
                 success: function(data) {
                     sites = JSON.parse(data);
@@ -347,7 +347,7 @@
             var  sites = new Array();
             $.ajax({
                 type: 'GET',
-                url: '/inventory/dashboard/get_sites_info',
+                url: '/mak_rmc/dashboard/get_sites_info',
                 async:false,
                 success: function(data) {
                     sites = JSON.parse(data);

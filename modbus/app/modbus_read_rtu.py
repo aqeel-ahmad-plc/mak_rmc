@@ -1,7 +1,7 @@
 
 from helpers.functions import *
 import requests
-url = 'http://localhost/inventory/temperature/create'
+url = 'http://localhost/mak_rmc/temperature/create'
 
 while 1:
     client = connectModbusRTU(9600, 'COM7')

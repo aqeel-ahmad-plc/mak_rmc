@@ -12,7 +12,7 @@
                 <h3>Surveyor</h3>
                 <strong>SV</strong>
             <?php elseif(session()->get("role") == 5):?>
-                <h3>Stock/Inventory User</h3>
+                <h3>Stock/mak_rmc User</h3>
                 <strong>S/I</strong>
             <?php else:?>
                 <h3>User</h3>

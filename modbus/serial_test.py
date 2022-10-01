@@ -3,7 +3,7 @@ import serial
 import requests
 import json
 import struct
-url = 'http://localhost/inventory/rpm/create'
+url = 'http://localhost/mak_rmc/rpm/create'
 # configure the serial connections (the parameters differs on the device you are connecting to)
 ser = serial.Serial(
 	port='COM8',

@@ -2,7 +2,7 @@
 from helpers.functions import *
 import datetime
 import requests
-url = 'http://localhost/inventory/stats/create'
+url = 'http://localhost/mak_rmc/stats/create'
 
 while 1:
     client = connectModbusTCP("10.10.100.254", 8899, 1)

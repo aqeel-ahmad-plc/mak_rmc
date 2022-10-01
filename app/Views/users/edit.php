@@ -53,7 +53,7 @@
                     <option value="2" <?= $user['role'] == 2 ? 'selected': '' ?>>Manager</option>
                     <option value="3" <?= $user['role'] == 3 ? 'selected': '' ?>>Surveyor</option>
                     <option value="4" <?= $user['role'] == 4 ? 'selected': '' ?>>User</option>
-                    <option value="5" <?= $user['role'] == 5 ? 'selected': '' ?>>Stock/Inventory User</option>
+                    <option value="5" <?= $user['role'] == 5 ? 'selected': '' ?>>Stock/mak_rmc User</option>
                 </select>
             </div>
         </div>
