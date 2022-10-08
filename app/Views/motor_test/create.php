@@ -1,7 +1,7 @@
 <div class="container">
 
     <h3 class="mt-3">Create Motor Test</h3>
-    <form action="<?php echo base_url()."/motor_test/create";?>" method="post">
+    <form action="<?php echo base_url()."/motor_test/create";?>" method="post" enctype="multipart/form-data">
 
       <h3 class="mt-3">Test Information</h3>
         <div class="form-row">
@@ -132,6 +132,13 @@
             <div class="form-group col-md-6">
                 <label for="motor_sno">Motor Serial No</label>
                 <input type="text" class="form-control" name="motor_sno" id="motor_sno"  value="<?= set_value('motor_sno') ?>" placeholder="Enter Motor Serial No">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="motor_pic">Motor Picture</label>
+                <input type="file" class="form-control" name="motor_pic" id="motor_pic" required>
             </div>
         </div>
 

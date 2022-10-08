@@ -38,6 +38,10 @@ class Motor_Test extends BaseController
         'ip_rating' => 'required',
         'connection_type' => 'required',
         'motor_sno' => 'required',
+				'motor_pic' => [
+						'label' => 'Motor Pic',
+						'rules' => 'uploaded[motor_pic]|max_size[motor_pic, 1024]|is_image[motor_pic]'
+					]
 			];
 
 			if (! $this->validate($rules)) {
@@ -73,7 +77,14 @@ class Motor_Test extends BaseController
           'ip_rating' => $this->request->getVar('ip_rating'),
           'connection_type' => $this->request->getVar('connection_type'),
           'motor_sno' => $this->request->getVar('motor_sno'),
+
 				];
+
+				$motor_pic = $this->request->getFile('motor_pic');
+				//$motor_pic->move('./assets/uploads');
+				$motor_pic_name = $motor_pic->getName();
+				$newData['motor_pic'] = $motor_pic_name;
+				// print_r($newData);
 
 				$model->insert($newData);
 				$session = session();
