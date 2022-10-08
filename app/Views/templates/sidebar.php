@@ -45,6 +45,21 @@
             </li>
             <?php endif?>
 
+            <?php if(session()->get("role") == 1):?>
+            <li class="active">
+                <a href="#motortestingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                     Motor Testing
+                </a>
+                <ul class="collapse list-unstyled" id="motortestingSubmenu">
+                    <li>
+                        <a href="<?php echo base_url()."/motor_test/create";?>"><i class="fa fa-plus" aria-hidden="true"></i>Test Information</a>
+                    </li>
+                </ul>
+            </li>
+            <?php endif?>
+
         </ul>
     </nav>
     <!-- Page Content  -->

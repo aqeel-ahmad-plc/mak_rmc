@@ -57,6 +57,15 @@ $routes->get('/users/manage', 'Users::manage', ['filter' => 'admin']);
 $routes->get('/users/delete', 'Users::manage', ['filter' => 'admin']);
 $routes->match(['get','post'],'/users/delete/(:any)', 'Users::delete/$1', ['filter' => 'admin']);
 
+
+//Motor Testing
+$routes->match(['get','post'],'/motor_test/create', 'Motor_Test::create', ['filter' => 'admin']);
+// $routes->match(['get','post'],'/motor_test/edit', 'Motor_Test::manage', ['filter' => 'admin']);
+// $routes->match(['get','post'],'/motor_test/edit/(:any)', 'Motor_Test::edit/$1', ['filter' => 'admin']);
+// $routes->get('/motor_test/manage', 'Motor_Test::manage', ['filter' => 'admin']);
+// $routes->get('/motor_test/delete', 'Motor_Test::manage', ['filter' => 'admin']);
+// $routes->match(['get','post'],'/motor_test/delete/(:any)', 'Motor_Test::delete/$1', ['filter' => 'admin']);
+
 //Serveys
 $routes->match(['get','post'],'/serveys/create', 'Serveys::manage', ['filter' => 'admin_exec_surveyor']);
 $routes->match(['get','post'],'/serveys/create/(:any)', 'Serveys::create/$1', ['filter' => 'admin_exec_surveyor']);
