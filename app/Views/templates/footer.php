@@ -22,7 +22,7 @@
           console.log('updateStats');
           $.ajax({
               type: 'GET',
-              url: '/mak_rmc/stats/show',
+              url: '/stats/show',
               async:false,
               success: function(data) {
 
@@ -31,23 +31,30 @@
                   for(var k in obj[0]){
                     //console.log(k, obj[0][k]);
                     $("#"+k).text(obj[0][k])
+                    $("#"+k).val(obj[0][k])
                   }
                   console.log("voltage a", obj[0]["voltage_b"]);
                   averge_voltage = (parseFloat(obj[0]["voltage_a"]) + parseFloat(obj[0]["voltage_b"]) + parseFloat(obj[0]["voltage_c"]))/3;
                   $("#averge_voltage").text(averge_voltage.toFixed(2));
+                  $("#averge_voltage").val(averge_voltage.toFixed(2));
 
 
                   averge_voltage_phase_to_phase = (parseFloat(obj[0]["voltage_ab"]) + parseFloat(obj[0]["voltage_bc"]) + parseFloat(obj[0]["voltage_ca"]))/3;
                   $("#averge_voltage_phase_to_phase").text(averge_voltage_phase_to_phase.toFixed(2));
 
+                  $("#averge_voltage_phase_to_phase").val(averge_voltage_phase_to_phase.toFixed(2));
+
                   total_current = (parseFloat(obj[0]["current_a"]) + parseFloat(obj[0]["current_b"]) + parseFloat(obj[0]["current_c"]));
                   $("#total_current").text(total_current.toFixed(2));
+                  $("#total_current").val(total_current.toFixed(2));
 
                   average_pf = (parseFloat(obj[0]["pf_a"]) + parseFloat(obj[0]["pf_b"]) + parseFloat(obj[0]["pf_c"]))/3;
                   $("#average_pf").text(average_pf.toFixed(3));
+                  $("#average_pf").val(average_pf.toFixed(3));
 
                   average_power = (parseFloat(obj[0]["power_a"]) + parseFloat(obj[0]["power_b"]) + parseFloat(obj[0]["power_c"]));
                   $("#average_power").text(average_power.toFixed(3));
+                  $("#average_power").val(average_power.toFixed(3));
 
 
 
@@ -64,7 +71,7 @@
         console.log('updateTemperature');
         $.ajax({
             type: 'GET',
-            url: '/mak_rmc/temperature/show',
+            url: '/temperature/show',
             async:false,
             success: function(data) {
 
@@ -73,6 +80,7 @@
                 for(var k in obj[0]){
                   //console.log(k, obj[0][k]);
                   $("#"+k).text(obj[0][k]+" °C")
+                  $("#"+k).val(obj[0][k])
                 }
             },
             error: function() {
@@ -87,7 +95,7 @@
         console.log('updateRPM');
         $.ajax({
             type: 'GET',
-            url: '/mak_rmc/rpm/show',
+            url: '/rpm/show',
             async:false,
             success: function(data) {
 
@@ -108,12 +116,21 @@
         $(document).ready(function()
         {
             //setInterval(updateStats(), 10000);
-            updateStats();
-            updateTemperature();
-            updateRPM();
-            setInterval('updateStats()',2000);
-            setInterval('updateTemperature()',2000);
-            setInterval('updateRPM()',2000);
+
+
+
+            console.log(window.location.pathname);
+            if(window.location.pathname.includes('/motor_test/no_load_test') || window.location.pathname.includes('/motor_test/load_test') || window.location.pathname == '/dashboard'){
+
+              updateStats();
+              updateTemperature();
+              updateRPM();
+              setInterval('updateStats()',2000);
+              setInterval('updateTemperature()',2000);
+              setInterval('updateRPM()',2000);
+
+            }
+
 
             if(document.body.contains(document.getElementById('map_card')))
             {

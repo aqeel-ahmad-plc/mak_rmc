@@ -2,6 +2,7 @@
 
 use App\Models\Motor_Test_model;
 use App\Models\No_Load_Test_model;
+use App\Models\Load_Test_model;
 
 
 class Motor_Test extends BaseController
@@ -214,16 +215,76 @@ class Motor_Test extends BaseController
 
         $test_id = $this->request->getVar('test_id');
 
+//				print_r($newData);
+
+
 				$model->insert($newData);
 				$session = session();
 				$session->setFlashdata('success', 'No load test data saved');
-				return redirect()->to(base_url().'/motor_test/no_load_test/'.$test_id);
+				return redirect()->to(base_url().'/motor_test/load_test/'.$test_id);
 
 		}
 		  $data['test_id'] = $test_id;
 			echo view('templates/header');
 			echo view('templates/sidebar');
 			echo view('motor_test/no_load_test', $data);
+			echo view('templates/footer');
+	}
+
+	public function load_test($test_id){
+
+		if ($this->request->getMethod() == 'post') {
+			//let's do the validation here
+
+				$model = new Load_Test_model();
+
+				$newData = [
+					'rpm_load' => $this->request->getVar('rpm_load'),
+					'torque' => 0,
+					'shaft_power' => 0,
+					'loading_factor' => 0,
+					'motor_size_load' => $this->request->getVar('motor_size_load'),
+					'voltage_a' => $this->request->getVar('voltage_a'),
+					'voltage_b' => $this->request->getVar('voltage_b'),
+					'voltage_c' => $this->request->getVar('voltage_c'),
+					'averge_voltage' => $this->request->getVar('averge_voltage'),
+					'voltage_ab' => $this->request->getVar('voltage_ab'),
+					'voltage_bc' => $this->request->getVar('voltage_bc'),
+					'voltage_ca' => $this->request->getVar('voltage_ca'),
+					'averge_voltage_phase_to_phase' => $this->request->getVar('averge_voltage_phase_to_phase'),
+					'current_a' => $this->request->getVar('current_a'),
+					'current_b' => $this->request->getVar('current_b'),
+					'current_c' => $this->request->getVar('current_c'),
+					'total_current' => $this->request->getVar('total_current'),
+					'pf_a' => $this->request->getVar('pf_a'),
+					'pf_b' => $this->request->getVar('pf_b'),
+					'pf_c' => $this->request->getVar('pf_c'),
+					'average_pf' => $this->request->getVar('average_pf'),
+					'power_a' => $this->request->getVar('power_a'),
+					'power_b' => $this->request->getVar('power_b'),
+					'power_c' => $this->request->getVar('power_c'),
+					'average_power' => $this->request->getVar('average_power'),
+					'frequency' => $this->request->getVar('frequency'),
+					'amb_temperature' => $this->request->getVar('amb_temperature'),
+					'motor_temperature' => $this->request->getVar('motor_temperature'),
+					'estimated_efficiency' => 0,
+					'motor_test_fk' => $this->request->getVar('test_id')
+				];
+
+
+
+				$test_id = $this->request->getVar('test_id');
+
+				$model->insert($newData);
+				$session = session();
+				$session->setFlashdata('success', 'No load test data saved');
+				return redirect()->to(base_url().'/motor_test/load_test/'.$test_id);
+
+		}
+			$data['test_id'] = $test_id;
+			echo view('templates/header');
+			echo view('templates/sidebar');
+			echo view('motor_test/load_test', $data);
 			echo view('templates/footer');
 	}
 
