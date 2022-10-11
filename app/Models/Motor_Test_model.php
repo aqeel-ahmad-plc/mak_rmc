@@ -27,6 +27,18 @@ class Motor_Test_model extends Model{
                                 'cooling_class',
                                 'ip_rating',
                                 'connection_type',
-                                'motor_sno'
+                                'motor_sno',
+                                'motor_pic',
+                                'specified_temp',
+                                'winding_resistance',
+                                'temp_at_which_winding_resistance_measured',
+                                'rated_curves',
+                                'rated_curves_flag',
+                                'test_description'
                               ];
+
+      public function getMotorTest()
+      {
+          return $this->findAll();
+      }
 }

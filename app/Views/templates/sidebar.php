@@ -54,7 +54,10 @@
                 </a>
                 <ul class="collapse list-unstyled" id="motortestingSubmenu">
                     <li>
-                        <a href="<?php echo base_url()."/motor_test/create";?>"><i class="fa fa-plus" aria-hidden="true"></i>Test Information</a>
+                        <a href="<?php echo base_url()."/motor_test/create";?>"><i class="fa fa-plus" aria-hidden="true"></i> Test Information</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url()."/motor_test/manage";?>"> <i class="fa fa-wrench" aria-hidden="true"></i> Manage Tests</a>
                     </li>
                 </ul>
             </li>
