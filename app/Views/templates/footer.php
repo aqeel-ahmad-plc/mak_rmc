@@ -22,7 +22,7 @@
           console.log('updateStats');
           $.ajax({
               type: 'GET',
-              url: '/stats/show',
+              url: '/mak_rmc/stats/show',
               async:false,
               success: function(data) {
 
@@ -71,7 +71,7 @@
         console.log('updateTemperature');
         $.ajax({
             type: 'GET',
-            url: '/temperature/show',
+            url: '/mak_rmc/temperature/show',
             async:false,
             success: function(data) {
 
@@ -95,7 +95,7 @@
         console.log('updateRPM');
         $.ajax({
             type: 'GET',
-            url: '/rpm/show',
+            url: '/mak_rmc/rpm/show',
             async:false,
             success: function(data) {
 
@@ -119,8 +119,8 @@
 
 
 
-            console.log(window.location.pathname);
-            if(window.location.pathname.includes('/motor_test/no_load_test') || window.location.pathname.includes('/motor_test/load_test') || window.location.pathname == '/dashboard'){
+            console.log("pathname", window.location.pathname);
+            if(window.location.pathname.includes('/motor_test/no_load_test') || window.location.pathname.includes('/motor_test/load_test') || window.location.pathname.includes('/dashboard')){
 
               updateStats();
               updateTemperature();
