@@ -65,6 +65,7 @@ $routes->match(['get','post'],'/motor_test/edit', 'Motor_Test::manage', ['filter
 $routes->get('/motor_test/manage', 'Motor_Test::manage', ['filter' => 'admin']);
 
 $routes->get('/motor_test/complete_test/(:any)', 'Motor_Test::complete_test/$1', ['filter' => 'admin']);
+$routes->get('/motor_test/generate_report/(:any)', 'Motor_Test::generate_report/$1', ['filter' => 'admin']);
 
 
 

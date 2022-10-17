@@ -4,6 +4,128 @@ use App\Models\Motor_Test_model;
 use App\Models\No_Load_Test_model;
 use App\Models\Load_Test_model;
 
+use FPDF;
+
+class PDF extends FPDF
+{
+	var $widths;
+	var $aligns;
+	/* Page header */
+	function Header()
+	{
+		/* Logo */
+		//$this->Image(base_url().'/assets/images/logo_2.png',10,6,15);
+		/* Move to the right */
+		$this->Cell(70);
+		$this->SetFont('Arial','B',20);
+		$this->Cell(50,15,'MOTOR EFFICIENCY TEST REPORT',0,0,'C');
+		$this->Ln(10);
+		$this->SetFont('Arial','B',12);
+		$this->Cell(180 ,15,' IEEE 112 METHOD A',0,1,'C');
+		//$this->Line(0, 25, 210, 25);
+
+	}
+
+	function SetWidths($w)
+	{
+		//Set the array of column widths
+		$this->widths=$w;
+	}
+
+	function SetAligns($a)
+	{
+		//Set the array of column alignments
+		$this->aligns=$a;
+	}
+
+	function Row($data)
+	{
+		//Calculate the height of the row
+		$nb=0;
+		for($i=0;$i<count($data);$i++)
+			$nb=max($nb,$this->NbLines($this->widths[$i],$data[$i]));
+		$h=5*$nb;
+		//Issue a page break first if needed
+		$this->CheckPageBreak($h);
+		//Draw the cells of the row
+		for($i=0;$i<count($data);$i++)
+		{
+			$w=$this->widths[$i];
+			$a=isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+			//Save the current position
+			$x=$this->GetX();
+			$y=$this->GetY();
+			//Draw the border
+			$this->Rect($x,$y,$w,$h);
+			//Print the text
+			$this->MultiCell($w,5,$data[$i],0,$a);
+			//Put the position to the right of the cell
+			$this->SetXY($x+$w,$y);
+		}
+		//Go to the next line
+		$this->Ln($h);
+	}
+
+	function CheckPageBreak($h)
+	{
+		//If the height h would cause an overflow, add a new page immediately
+		if($this->GetY()+$h>$this->PageBreakTrigger)
+			$this->AddPage($this->CurOrientation);
+	}
+
+	function NbLines($w,$txt)
+	{
+		//Computes the number of lines a MultiCell of width w will take
+		$cw=&$this->CurrentFont['cw'];
+		if($w==0)
+			$w=$this->w-$this->rMargin-$this->x;
+		$wmax=($w-2*$this->cMargin)*1000/$this->FontSize;
+		$s=str_replace("\r",'',$txt);
+		$nb=strlen($s);
+		if($nb>0 and $s[$nb-1]=="\n")
+			$nb--;
+		$sep=-1;
+		$i=0;
+		$j=0;
+		$l=0;
+		$nl=1;
+		while($i<$nb)
+		{
+			$c=$s[$i];
+			if($c=="\n")
+			{
+				$i++;
+				$sep=-1;
+				$j=$i;
+				$l=0;
+				$nl++;
+				continue;
+			}
+			if($c==' ')
+				$sep=$i;
+			$l+=$cw[$c];
+			if($l>$wmax)
+			{
+				if($sep==-1)
+				{
+					if($i==$j)
+						$i++;
+				}
+				else
+					$i=$sep+1;
+				$sep=-1;
+				$j=$i;
+				$l=0;
+				$nl++;
+			}
+			else
+				$i++;
+		}
+		return $nl;
+	}
+
+}
+
 
 class Motor_Test extends BaseController
 {
@@ -297,27 +419,6 @@ class Motor_Test extends BaseController
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public function complete_test($test_id){
 
 		$motor_tests_model = new Motor_Test_model();
@@ -336,6 +437,52 @@ class Motor_Test extends BaseController
 
 	}
 
+	public function generate_report($id){
+
+		$pdf = new PDF();
+		$pdf->AddPage();
+		$motor_tests_model = new Motor_Test_model();
+		$result = $motor_tests_model->getMotorTestData($id);
+		// print_r($result[0]['test_report_no']);
+
+		/*output the result*/
+
+		$pdf->SetFont('Arial','B',16);
+		// $pdf->Cell(150 ,5,'',0,1);
+		$pdf->Ln(10);
+		$pdf->Cell(130 ,5,'TEST REPORT NO. '.$result[0]['test_report_no'],0,1,'R');
+		$pdf->SetFont('Arial','B',13);
+		$pdf->Ln(2);
+		$pdf->Cell(110 ,5,date('D', strtotime($result[0]['test_date'])).', '.$result[0]['test_date'].base_url(),0,1,'R');
+
+		$pdf->Ln(10);
+		$pdf->Image(base_url().'/mak_rmc/assets/images/komax_logo.png',10,6,15);
+		//$pdf->Cell(50 ,5,'',0,1);
+		// $pdf->SetFont('Arial','B',10);
+		// /*Heading Of the table*/
+		// $pdf->Cell(20 ,5,'Sr. No',1,0,'L');
+		// $pdf->Cell(40 ,5,'Site ID',1,0,'L');
+		// $pdf->Cell(40 ,5,'Masjid Name',1,0,'L');
+		// $pdf->Cell(40 ,5,'District',1,0,'L');
+		// $pdf->Cell(40 ,5,'Problem Description',1,1,'L');
+		// /*Heading Of the table end*/
+		// $pdf->SetFont('Arial','',8);
+		// $pdf->SetWidths(array(20,40,40,40,40));
+		// $index  = 0;
+		// for ($i = 0; $i < sizeof($serveys); $i++) {
+		// 	if($serveys[$i]['site_status'] == "0")
+		// 	{
+		// 		$pdf->Row(array($index,$serveys[$i]['siteid'],$serveys[$i]['masgid'],$serveys[$i]['district'],$serveys[$i]['problem_description']));
+		// 		$index++;
+		// 	}
+		// }
+		// if ($index == 0)
+		// {
+		// 	$pdf->Cell(160, 5, "No Not-Ok Sites found", 1, 1, 'C');
+		// }
+
+		$pdf->Output('D','Not_OK_Sites.pdf');
+  }
 
 
 }

@@ -43,6 +43,20 @@ class Motor_Test_model extends Model{
           return $this->findAll();
       }
 
+
+      public function getMotorTestData($test_id = null)
+      {
+
+
+       $query = $this->builder()->select()->where(['id' => $test_id])->get();
+       return $query->getResultArray();
+
+
+          // $query = $this->builder()->select('sites.site_id as siteid,sites.status as is_surveyed,sites.is_installed,sites.fat_status,sites.handing_taking_status, sites.masgid,sites.district,sites.tehsil,sites.na_pk,sites.package,sites.uc_vc_name_and_no, servey.*')->join('sites', 'sites.id = servey.site_id')->where(['servey.site_id' => $servey_id])->get();
+          // return $query->getResultArray();
+
+      }
+
       //$servey_model->updateServey($this->request->getVar('site_id'), $newData);
 
       public function updateTestStatus($test_id, $data)
