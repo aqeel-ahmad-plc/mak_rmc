@@ -453,10 +453,12 @@ class Motor_Test extends BaseController
 		$pdf->Cell(130 ,5,'TEST REPORT NO. '.$result[0]['test_report_no'],0,1,'R');
 		$pdf->SetFont('Arial','B',13);
 		$pdf->Ln(2);
-		$pdf->Cell(110 ,5,date('D', strtotime($result[0]['test_date'])).', '.$result[0]['test_date'].base_url(),0,1,'R');
+		$pdf->Cell(110 ,5,date('D', strtotime($result[0]['test_date'])).', '.$result[0]['test_date'],0,1,'R');
 
-		$pdf->Ln(10);
-		$pdf->Image(base_url().'/mak_rmc/assets/images/komax_logo.png',10,6,15);
+		$pdf->Ln(20);
+
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',75,75,60),0,1,'R');
+
 		//$pdf->Cell(50 ,5,'',0,1);
 		// $pdf->SetFont('Arial','B',10);
 		// /*Heading Of the table*/
@@ -481,7 +483,7 @@ class Motor_Test extends BaseController
 		// 	$pdf->Cell(160, 5, "No Not-Ok Sites found", 1, 1, 'C');
 		// }
 
-		$pdf->Output('D','Not_OK_Sites.pdf');
+		$pdf->Output('D','Test_Report.pdf');
   }
 
 
