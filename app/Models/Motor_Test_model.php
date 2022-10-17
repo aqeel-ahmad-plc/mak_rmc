@@ -45,7 +45,7 @@ class Motor_Test_model extends Model{
 
       //$servey_model->updateServey($this->request->getVar('site_id'), $newData);
 
-      public function updateNoLoadTest($test_id, $data)
+      public function updateTestStatus($test_id, $data)
       {
           $this->where('id', $test_id)->update($this->test_id, $data);
       }

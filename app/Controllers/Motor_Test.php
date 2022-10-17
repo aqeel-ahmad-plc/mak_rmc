@@ -224,7 +224,7 @@ class Motor_Test extends BaseController
 				$updateData = [];
 				$updateData['test_status'] = 1;
 
-				$motor_tests_model->updateNoLoadTest($this->request->getVar('test_id'), $updateData);
+				$motor_tests_model->updateTestStatus($this->request->getVar('test_id'), $updateData);
 				$session = session();
 				$session->setFlashdata('success', 'No load test data saved');
 				return redirect()->to(base_url().'/motor_test/load_test/'.$test_id);
@@ -245,10 +245,10 @@ class Motor_Test extends BaseController
 				$model = new Load_Test_model();
 
 				$newData = [
-					'rpm_load' => $this->request->getVar('rpm_load'),
-					'torque' => 0,
-					'shaft_power' => 0,
-					'loading_factor' => 0,
+					'rpm_load' => $this->request->getVar('load_test_rpm'),
+					'torque' => $this->request->getVar('load_test_torque'),
+					'shaft_power' =>  $this->request->getVar('load_test_shaft_power'),
+					'loading_factor' => $this->request->getVar('loading_factor_load'),
 					'motor_size_load' => $this->request->getVar('motor_size_load'),
 					'voltage_a' => $this->request->getVar('voltage_a'),
 					'voltage_b' => $this->request->getVar('voltage_b'),
@@ -273,7 +273,7 @@ class Motor_Test extends BaseController
 					'frequency' => $this->request->getVar('frequency'),
 					'amb_temperature' => $this->request->getVar('amb_temperature'),
 					'motor_temperature' => $this->request->getVar('motor_temperature'),
-					'estimated_efficiency' => 0,
+					'estimated_efficiency' => $this->request->getVar('motor_efficiency_load_test'),
 					'motor_test_fk' => $this->request->getVar('test_id')
 				];
 
@@ -294,6 +294,47 @@ class Motor_Test extends BaseController
 			echo view('templates/footer');
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function complete_test($test_id){
+
+		$motor_tests_model = new Motor_Test_model();
+		//update motor test status
+		$updateData = [];
+		$updateData['test_status'] = 2;
+		$motor_tests_model->updateTestStatus($test_id, $updateData);
+    //get all test data
+		$motor_tests  = $motor_tests_model->getMotorTest();
+
+		$data['motor_tests'] 	= $motor_tests ;
+		echo view('templates/header', $data);
+		echo view('templates/sidebar');
+		echo view('motor_test/manage');
+		echo view('templates/footer');
+
+	}
 
 
 

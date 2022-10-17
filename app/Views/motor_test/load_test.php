@@ -202,6 +202,10 @@
       <div class="col-xl-2 col-md-2">
         <input type="submit" value="Record Load Point" class="btn btn-primary"/>
       </div>
+      <div class="col-xl-2 col-md-2">
+
+          <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/complete_test/".$test_id;?>"><i class="fas fa-edit"></i> Complete Test </a>
+      </div>
 
     </div>
   </form>
