@@ -118,7 +118,7 @@ var motor_rated_hp = 0;
         var  data = new Array();
         $.ajax({
             type: 'GET',
-            url: '/dashboard/get_sites_info',
+            url: '/mak_rmc/dashboard/get_sites_info',
             async:false,
             success: function(data) {
                 data = JSON.parse(data);
@@ -139,7 +139,7 @@ var motor_rated_hp = 0;
         console.log('updateTorque');
         $.ajax({
             type: 'GET',
-            url: '/torque/show',
+            url: '/mak_rmc/torque/show',
             async:false,
             success: function(data) {
 
