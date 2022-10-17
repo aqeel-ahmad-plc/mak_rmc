@@ -34,11 +34,19 @@ class Motor_Test_model extends Model{
                                 'temp_at_which_winding_resistance_measured',
                                 'rated_curves',
                                 'rated_curves_flag',
-                                'test_description'
+                                'test_description',
+                                'test_status'
                               ];
 
       public function getMotorTest()
       {
           return $this->findAll();
+      }
+
+      //$servey_model->updateServey($this->request->getVar('site_id'), $newData);
+
+      public function updateNoLoadTest($test_id, $data)
+      {
+          $this->where('id', $test_id)->update($this->test_id, $data);
       }
 }

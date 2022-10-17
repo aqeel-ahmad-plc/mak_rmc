@@ -25,7 +25,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Torque (N.m)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">49.45 N.m</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="torque"></span></div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Shaft Power (kW)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">100 kW</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="shaft_power"></span></div>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Loading Factor (%)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">99 %</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="loading_factor"></span></div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Motor Size (HP)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">20 HP</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="motor_size"></span></div>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                   <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                           <div class="text-xl font-weight-bold text-primary text-uppercase">Estimated Efficiency(%)</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">80%</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="motor_efficiency"><span></div>
                       </div>
                   </div>
               </div>

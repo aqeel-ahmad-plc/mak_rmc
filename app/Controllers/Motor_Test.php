@@ -173,6 +173,8 @@ class Motor_Test extends BaseController
 
 	public function no_load_test($test_id){
 
+		$motor_tests_model    = new Motor_Test_model();
+
 		if ($this->request->getMethod() == 'post') {
 			//let's do the validation here
 
@@ -219,6 +221,10 @@ class Motor_Test extends BaseController
 
 
 				$model->insert($newData);
+				$updateData = [];
+				$updateData['test_status'] = 1;
+
+				$motor_tests_model->updateNoLoadTest($this->request->getVar('test_id'), $updateData);
 				$session = session();
 				$session->setFlashdata('success', 'No load test data saved');
 				return redirect()->to(base_url().'/motor_test/load_test/'.$test_id);
