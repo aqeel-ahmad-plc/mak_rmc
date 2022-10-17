@@ -9,7 +9,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl-N13dPLykJG9rBZKUBjpeyY_i5dWoc0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.4/html2canvas.min.js"></script>
 <script>
-
+var motor_rated_hp = 0;
         function capture () {
           html2canvas(document.body).then((canvas) => {
             let a = document.createElement("a");
@@ -113,6 +113,76 @@
 
       }
 
+      function ratedData(){
+
+        var  data = new Array();
+        $.ajax({
+            type: 'GET',
+            url: '/dashboard/get_sites_info',
+            async:false,
+            success: function(data) {
+                data = JSON.parse(data);
+                motor_rated_hp = data['motor_rated_hp']
+                // console.log(sites["total_sites"]);
+            },
+            error: function() {
+            },
+        });
+
+
+
+
+      }
+
+
+      function updateTorque_RPM(){
+        console.log('updateTorque');
+        $.ajax({
+            type: 'GET',
+            url: '/torque/show',
+            async:false,
+            success: function(data) {
+
+                //console.log(data);
+                obj = JSON.parse(data);
+                for(var k in obj[0]){
+                  //console.log(k, obj[0][k]);
+                  $("#"+k).text(obj[0][k]+" N.m")
+                }
+
+
+                //Calculations
+                shaft_power = obj[0]['rpm'] * obj[0]['torque'] * 0.00010472;
+                loading_factor = (shaft_power * 100)/(motor_rated_hp*0.746);
+                total_power = $('#average_power').text();
+                motor_efficiency = (shaft_power * 100)/total_power;
+                //Load Test Page
+                $("#load_test_torque").val(obj[0]['torque']);
+                $("#load_test_rpm").val(obj[0]['rpm']);
+                $("#motor_size_load").val(motor_rated_hp);
+                $("#loading_factor_load").val(loading_factor.toFixed(2));
+                $("#motor_efficiency_load_test").val(motor_efficiency.toFixed(2));
+                $("#load_test_shaft_power").val(shaft_power);
+
+                //No Load Test Page
+                $("#motor_size_no_load").val(motor_rated_hp);
+
+                //dashboard data
+                $("#shaft_power").text(shaft_power +" kW");
+                $("#motor_size").text(motor_rated_hp +" HP");
+                $("#loading_factor").text(loading_factor.toFixed(2) +" %");
+                $("#motor_efficiency").text(motor_efficiency.toFixed(2) +" %");
+
+                //alert("updateTorque_RPM"+motor_rated_hp);
+
+            },
+            error: function() {
+            },
+        });
+        //print(stocks);
+
+      }
+
         $(document).ready(function()
         {
             //setInterval(updateStats(), 10000);
@@ -123,11 +193,16 @@
             if(window.location.pathname.includes('/motor_test/no_load_test') || window.location.pathname.includes('/motor_test/load_test') || window.location.pathname.includes('/dashboard')){
 
               updateStats();
+              ret = ratedData();
+              console.log("ratedData", ret);
               updateTemperature();
-              updateRPM();
+              //updateRPM();
+              updateTorque_RPM();
               setInterval('updateStats()',2000);
               setInterval('updateTemperature()',2000);
-              setInterval('updateRPM()',2000);
+              setInterval('updateTorque_RPM()',2000);
+              //setInterval('updateRPM()',2000);
+              //setInterval('updateTorque()',2000);
 
             }
 

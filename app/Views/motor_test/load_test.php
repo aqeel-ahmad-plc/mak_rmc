@@ -37,7 +37,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Torque (N.m)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0 N.m</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"> <input type="text" name="load_test_torque" id="load_test_torque"> </div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Speed (RPM)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"> <input type="text" name="rpm_load" id="rpm_load"> </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"> <input type="text" name="load_test_rpm" id="load_test_rpm"> </div>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Shaft Power (kW)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0 kW</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><input type="text" name="load_test_shaft_power" id="load_test_shaft_power"></div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xl font-weight-bold text-primary text-uppercase">Loading Factor (%)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0 %</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><input type="text" name="loading_factor_load" id="loading_factor_load"></div>
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                   <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                           <div class="text-xl font-weight-bold text-primary text-uppercase">Estimated Efficiency(%)</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">0%</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800"><input type="text" style="width:150px" name="motor_efficiency_load_test" id="motor_efficiency_load_test"></div>
                       </div>
                   </div>
               </div>
@@ -201,6 +201,10 @@
       </div>
       <div class="col-xl-2 col-md-2">
         <input type="submit" value="Record Load Point" class="btn btn-primary"/>
+      </div>
+      <div class="col-xl-2 col-md-2">
+
+          <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/complete_test/".$test_id;?>"><i class="fas fa-edit"></i> Complete Test </a>
       </div>
 
     </div>
