@@ -135,10 +135,10 @@ class PDF extends FPDF
 			// Data
 			foreach($data as $row)
 			{
-					$this->Cell($w[0],6,$row[0],'LR');
-					$this->Cell($w[1],6,$row[1],'LR');
-					$this->Cell($w[2],6,number_format($row[2]),'LR',0,'R');
-					$this->Cell($w[3],6,number_format($row[3]),'LR',0,'R');
+					$this->Cell($w[0],6,$row[0],1,0,'LR');
+					$this->Cell($w[1],6,$row[1],1,0,'LR');
+					$this->Cell($w[2],6,number_format($row[2]),1,0,'R');
+					$this->Cell($w[3],6,number_format($row[3]),1,0,'R');
 					$this->Ln();
 			}
 			// Closing line
@@ -494,24 +494,34 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$motor_tests_model = new Motor_Test_model();
 		$result = $motor_tests_model->getMotorTestData($id);
-		// print_r($result[0]['test_report_no']);
 
 		/*output the result*/
 
-		$pdf->SetFont('Arial','B',12);
-		// $pdf->Cell(150 ,5,'',0,1);
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(150 ,5,'',0,1);
 
 		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
-		$header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
-		// Data loading
-		$data = array(
-  array('Country3','Country2',1,2),
-  array('Capital','Capital',1,2),
-  array('Area (sq km)','Area (sq km)',1,2),
-  array('Pop. (thousands)','Pop. (thousands)',1,2)
-);
 
-		$pdf->ImprovedTable($header,$data);
+
+		// Header
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'LR');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+    $pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'1. MOTOR PICTURE(S)',1,0,'C', true);
+		$pdf->Ln(10);
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,100,60),0,1,'R');
+
+		//$pdf->ImprovedTable($header,$data);
 		// $pdf->Cell(130 ,5,'TEST REPORT NO. '.$result[0]['test_report_no'],0,1,'R');
 		// $pdf->SetFont('Arial','B',13);
 		//
