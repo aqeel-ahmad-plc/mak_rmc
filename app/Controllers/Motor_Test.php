@@ -124,6 +124,27 @@ class PDF extends FPDF
 		return $nl;
 	}
 
+	function ImprovedTable($header, $data)
+	{
+			// Column widths
+			$w = array(40, 35, 40, 45);
+			// Header
+			for($i=0;$i<count($header);$i++)
+					$this->Cell($w[$i],7,$header[$i],1,0,'C');
+			$this->Ln();
+			// Data
+			foreach($data as $row)
+			{
+					$this->Cell($w[0],6,$row[0],'LR');
+					$this->Cell($w[1],6,$row[1],'LR');
+					$this->Cell($w[2],6,number_format($row[2]),'LR',0,'R');
+					$this->Cell($w[3],6,number_format($row[3]),'LR',0,'R');
+					$this->Ln();
+			}
+			// Closing line
+			$this->Cell(array_sum($w),0,'','T');
+	}
+
 }
 
 
@@ -416,6 +437,8 @@ class Motor_Test extends BaseController
 			echo view('templates/footer');
 	}
 
+	// Better table
+
 
 
 
@@ -457,7 +480,44 @@ class Motor_Test extends BaseController
 
 		$pdf->Ln(20);
 
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',75,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
+
+		$pdf->Ln(20);
+
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+
+
+		//Second page
+
+		$pdf->AddPage();
+		$motor_tests_model = new Motor_Test_model();
+		$result = $motor_tests_model->getMotorTestData($id);
+		// print_r($result[0]['test_report_no']);
+
+		/*output the result*/
+
+		$pdf->SetFont('Arial','B',12);
+		// $pdf->Cell(150 ,5,'',0,1);
+
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
+		// Data loading
+		$data = array(
+  array('Country3','Country2',1,2),
+  array('Capital','Capital',1,2),
+  array('Area (sq km)','Area (sq km)',1,2),
+  array('Pop. (thousands)','Pop. (thousands)',1,2)
+);
+
+		$pdf->ImprovedTable($header,$data);
+		// $pdf->Cell(130 ,5,'TEST REPORT NO. '.$result[0]['test_report_no'],0,1,'R');
+		// $pdf->SetFont('Arial','B',13);
+		//
+		// $pdf->Cell(110 ,5,date('D', strtotime($result[0]['test_date'])).', '.$result[0]['test_date'],0,1,'R');
+
+
 
 		//$pdf->Cell(50 ,5,'',0,1);
 		// $pdf->SetFont('Arial','B',10);
