@@ -523,7 +523,7 @@ class Motor_Test extends BaseController
 		$pdf->Ln(10);
 
 		//need uncomment
-		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,100,60),0,1,'R');
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/uploads/'.$result[0]['motor_pic'],70,100,60),0,1,'R');
 
 		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
 		$pdf->Ln(10);
