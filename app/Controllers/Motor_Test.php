@@ -480,13 +480,14 @@ class Motor_Test extends BaseController
 
 		$pdf->Ln(20);
 
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
+    //need uncomment
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
 
 		$pdf->Ln(20);
-
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+    //need uncomment
+		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
 
 
 		//Second page
@@ -500,14 +501,15 @@ class Motor_Test extends BaseController
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(150 ,5,'',0,1);
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		//need uncomment
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
 		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
 		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
 		$pdf->Cell(30,6,'DATED',1,0,'LR');
-		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
 		$pdf->Ln();
 		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
 		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
@@ -519,7 +521,126 @@ class Motor_Test extends BaseController
     $pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'1. MOTOR PICTURE(S)',1,0,'C', true);
 		$pdf->Ln(10);
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,100,60),0,1,'R');
+
+		//need uncomment
+		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,100,60),0,1,'R');
+
+		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
+		$pdf->Ln(10);
+
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+
+
+
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_manufacturer'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'MANUFACTURER',0,0,'LR');
+    $pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['motor_rated_pf'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'PF',0,0,'LR');
+		$pdf->Ln();
+    $pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_model'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'MODEL',0,0,'LR');
+    $pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['motor_rated_rpm'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'RPM',0,0,'LR');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_type'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'TYPE',0,0,'LR');
+		$pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['no_of_poles'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'POLE',0,0,'LR');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_type'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'FRAME',0,0,'LR');
+		$pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['efficiency'],0,0,'LR');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'EFFICIENCY',0,0,'LR');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['number_of_phase'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'PHASE',0,0,'LR');
+		$pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['number_of_phase'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'DUTY',0,0,'LR');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_rated_kw'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'KW',0,0,'LR');
+		$pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['insulation_class'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'INS. CLASS',0,0,'LR');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_rated_hp'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'HP',0,0,'LR');
+		$pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['insulation_class'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'IC',0,0,'LR');
+
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_rated_voltage'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'VOLTS',0,0,'LR');
+		$pdf->Cell(50,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(10,6,$result[0]['ip_rating'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'IP',0,0,'LR');
+
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_rated_frequency'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'HERTZ',0,0,'LR');
+		$pdf->Cell(40,6,'',0,0,'LR');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(20,6,$result[0]['connection_type'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'CONNECTION',0,0,'LR');
+
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(70,6,$result[0]['motor_rated_current'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(40,6,'AMPS',0,0,'LR');
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(60,6,$result[0]['motor_sno'],0,0,'C');
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(10,6,'SR. NO.',0,0,'LR');
+
+
+
+
+
 
 		//$pdf->ImprovedTable($header,$data);
 		// $pdf->Cell(130 ,5,'TEST REPORT NO. '.$result[0]['test_report_no'],0,1,'R');
