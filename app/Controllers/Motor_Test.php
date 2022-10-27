@@ -481,13 +481,13 @@ class Motor_Test extends BaseController
 		$pdf->Ln(20);
 
     //need uncomment
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
 
 		$pdf->Ln(20);
     //need uncomment
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
 
 
 		//Second page
@@ -502,7 +502,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -523,7 +523,7 @@ class Motor_Test extends BaseController
 		$pdf->Ln(10);
 
 		//need uncomment
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/uploads/'.$result[0]['motor_pic'],70,100,60),0,1,'R');
+		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/uploads/'.$result[0]['motor_pic'],70,100,60),0,1,'R');
 
 		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
 		$pdf->Ln(10);
@@ -636,6 +636,226 @@ class Motor_Test extends BaseController
 		$pdf->Cell(60,6,$result[0]['motor_sno'],0,0,'C');
 		$pdf->SetFont('Arial','B',12);
 		$pdf->Cell(10,6,'SR. NO.',0,0,'LR');
+
+
+		$rated_curves = json_decode($result[0]['rated_curves'],true);
+
+
+		/******************** 3. MOTOR RATED DATA ***************************/
+
+
+
+
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'3. MOTOR RATED DATA',1,0,'C', true);
+		$pdf->Ln();
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+
+
+
+		$pdf->Cell(5,6,'1',1,0,'C');
+		$pdf->Cell(50,6,'Shaft Power (P2), in kW',1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_1'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_2'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_3'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_4'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_5'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_6'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_7'],1,0,'C');
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'2',1,0,'LR');
+		$pdf->Cell(50,6,'Efficiency, in %',1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_1'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_2'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_3'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_4'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_5'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_6'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_7'],1,0,'C');
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'3',1,0,'LR');
+		$pdf->Cell(50,6,'Speed, in RPM',1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['speed_in_rpm_1'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['speed_in_rpm_2'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['speed_in_rpm_3'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['speed_in_rpm_4'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['speed_in_rpm_5'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['speed_in_rpm_6'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['speed_in_rpm_7'],1,0,'C');
+		$k = $result[0]['motor_rated_frequency'];
+		$o = $result[0]['no_of_poles'];
+
+
+		$slip_in_pu_1 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_1']))/(120*($k/$o));$slip_in_pu_1 = number_format((float)$slip_in_pu_1, 2, '.', '');
+		$slip_in_pu_2 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_2']))/(120*($k/$o));$slip_in_pu_2 = number_format((float)$slip_in_pu_2, 2, '.', '');
+		$slip_in_pu_3 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_3']))/(120*($k/$o));$slip_in_pu_3 = number_format((float)$slip_in_pu_3, 2, '.', '');
+		$slip_in_pu_4 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_4']))/(120*($k/$o));$slip_in_pu_4 = number_format((float)$slip_in_pu_4, 2, '.', '');
+		$slip_in_pu_5 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_5']))/(120*($k/$o));$slip_in_pu_5 = number_format((float)$slip_in_pu_5, 2, '.', '');
+		$slip_in_pu_6 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_6']))/(120*($k/$o));$slip_in_pu_6 = number_format((float)$slip_in_pu_6, 2, '.', '');
+		$slip_in_pu_7 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_7']))/(120*($k/$o));$slip_in_pu_7 = number_format((float)$slip_in_pu_7, 2, '.', '');
+
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'4',1,0,'LR');
+		$pdf->Cell(50,6,'Slip, in p.u.',1,0,'C');
+		$pdf->Cell(20,6,$slip_in_pu_1,1,0,'C');
+		$pdf->Cell(20,6,$slip_in_pu_2,1,0,'C');
+		$pdf->Cell(20,6,$slip_in_pu_3,1,0,'C');
+		$pdf->Cell(20,6,$slip_in_pu_4,1,0,'C');
+		$pdf->Cell(20,6,$slip_in_pu_5,1,0,'C');
+		$pdf->Cell(20,6,$slip_in_pu_6,1,0,'C');
+		$pdf->Cell(20,6,$slip_in_pu_7,1,0,'C');
+
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'5',1,0,'LR');
+		$pdf->Cell(50,6,'Current, in Amps',1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['current_in_amps_1'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['current_in_amps_2'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['current_in_amps_3'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['current_in_amps_4'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['current_in_amps_5'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['current_in_amps_6'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['current_in_amps_7'],1,0,'C');
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'6',1,0,'LR');
+		$pdf->Cell(50,6,'CosØ, in %',1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_1'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_2'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_3'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_4'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_5'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_6'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_7'],1,0,'C');
+
+		$pdf->Ln();
+
+		/******************** 4. MAXIMUM ALLOWED DEVIATION FROM RATED DATA AS PER IEC 60034-1 TABLE-20 ***************************/
+
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'4. MAXIMUM ALLOWED DEVIATION FROM RATED DATA AS PER IEC 60034-1 TABLE-20',1,0,'C', true);
+		$pdf->Ln();
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+
+
+
+		$pdf->Cell(5,6,'1',1,0,'C');
+		$pdf->Cell(50,6,'Shaft Power (P2), in kW',1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_1'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_2'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_3'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_4'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_5'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_6'],1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_7'],1,0,'C');
+    $efactor = 0;
+		$pdf->Ln();
+		if($result[0]['motor_rated_kw'] > 150){
+			$efactor = 0.1;
+		}else{
+			$efactor = 0.15;
+		}
+
+
+		$eff_percent_1 = ($rated_curves['efficiency_in_percent_1'] - ($efactor * (100 - $rated_curves['efficiency_in_percent_1'])));
+    $eff_percent_2 = ($rated_curves['efficiency_in_percent_2'] - ($efactor * (100 - $rated_curves['efficiency_in_percent_2'])));
+    $eff_percent_3 = ($rated_curves['efficiency_in_percent_3'] - ($efactor * (100 - $rated_curves['efficiency_in_percent_3'])));
+    $eff_percent_4 = ($rated_curves['efficiency_in_percent_4'] - ($efactor * (100 - $rated_curves['efficiency_in_percent_4'])));
+    $eff_percent_5 = ($rated_curves['efficiency_in_percent_5'] - ($efactor * (100 - $rated_curves['efficiency_in_percent_5'])));
+    $eff_percent_6 = ($rated_curves['efficiency_in_percent_6'] - ($efactor * (100 - $rated_curves['efficiency_in_percent_6'])));
+    $eff_percent_7 = ($rated_curves['efficiency_in_percent_7'] - ($efactor * (100 - $rated_curves['efficiency_in_percent_7'])));
+
+
+
+		$pdf->Cell(5,6,'2',1,0,'LR');
+		$pdf->Cell(50,6,'Efficiency, in %',1,0,'C');
+		$pdf->Cell(20,6,($eff_percent_1 < 0) ? 0 : $eff_percent_1,1,0,'C');
+		$pdf->Cell(20,6,($eff_percent_2 < 0) ? 0 : $eff_percent_2,1,0,'C');
+		$pdf->Cell(20,6,($eff_percent_3 < 0) ? 0 : $eff_percent_3,1,0,'C');
+		$pdf->Cell(20,6,($eff_percent_4 < 0) ? 0 : $eff_percent_4,1,0,'C');
+		$pdf->Cell(20,6,($eff_percent_5 < 0) ? 0 : $eff_percent_5,1,0,'C');
+		$pdf->Cell(20,6,($eff_percent_6 < 0) ? 0 : $eff_percent_6,1,0,'C');
+		$pdf->Cell(20,6,($eff_percent_7 < 0) ? 0 : $eff_percent_7,1,0,'C');
+
+		$sfactor = 0;
+		if($result[0]['motor_rated_kw'] >= 1){
+			$sfactor = 0.2;
+		}else{
+			$sfactor = 0.3;
+		}
+    $max_speed_rpm_1 = (120*($k/$o))*(1-($slip_in_pu_1-($slip_in_pu_1 * $sfactor)));
+		$max_speed_rpm_2 = (120*($k/$o))*(1-($slip_in_pu_2-($slip_in_pu_2 * $sfactor)));
+		$max_speed_rpm_3 = (120*($k/$o))*(1-($slip_in_pu_3-($slip_in_pu_3 * $sfactor)));
+		$max_speed_rpm_4 = (120*($k/$o))*(1-($slip_in_pu_4-($slip_in_pu_4 * $sfactor)));
+		$max_speed_rpm_5 = (120*($k/$o))*(1-($slip_in_pu_5-($slip_in_pu_5 * $sfactor)));
+		$max_speed_rpm_6 = (120*($k/$o))*(1-($slip_in_pu_6-($slip_in_pu_6 * $sfactor)));
+		$max_speed_rpm_7 = (120*($k/$o))*(1-($slip_in_pu_7-($slip_in_pu_7 * $sfactor)));
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'3',1,0,'LR');
+		$pdf->Cell(50,6,'Max Speed, in RPM',1,0,'C');
+		$pdf->Cell(20,6,$max_speed_rpm_1,1,0,'C');
+		$pdf->Cell(20,6,$max_speed_rpm_2,1,0,'C');
+		$pdf->Cell(20,6,$max_speed_rpm_3,1,0,'C');
+		$pdf->Cell(20,6,$max_speed_rpm_4,1,0,'C');
+		$pdf->Cell(20,6,$max_speed_rpm_5,1,0,'C');
+		$pdf->Cell(20,6,$max_speed_rpm_6,1,0,'C');
+		$pdf->Cell(20,6,$max_speed_rpm_7,1,0,'C');
+
+		$min_speed_rpm_1 = (120*($k/$o))*(1-($slip_in_pu_1+($slip_in_pu_1 * $sfactor)));
+		$min_speed_rpm_2 = (120*($k/$o))*(1-($slip_in_pu_2+($slip_in_pu_2 * $sfactor)));
+		$min_speed_rpm_3 = (120*($k/$o))*(1-($slip_in_pu_3+($slip_in_pu_3 * $sfactor)));
+		$min_speed_rpm_4 = (120*($k/$o))*(1-($slip_in_pu_4+($slip_in_pu_4 * $sfactor)));
+		$min_speed_rpm_5 = (120*($k/$o))*(1-($slip_in_pu_5+($slip_in_pu_5 * $sfactor)));
+		$min_speed_rpm_6 = (120*($k/$o))*(1-($slip_in_pu_6+($slip_in_pu_6 * $sfactor)));
+		$min_speed_rpm_7 = (120*($k/$o))*(1-($slip_in_pu_7+($slip_in_pu_7 * $sfactor)));
+
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'3',1,0,'LR');
+		$pdf->Cell(50,6,'Min Speed, in RPM',1,0,'C');
+		$pdf->Cell(20,6,$min_speed_rpm_1,1,0,'C');
+		$pdf->Cell(20,6,$min_speed_rpm_2,1,0,'C');
+		$pdf->Cell(20,6,$min_speed_rpm_3,1,0,'C');
+		$pdf->Cell(20,6,$min_speed_rpm_4,1,0,'C');
+		$pdf->Cell(20,6,$min_speed_rpm_5,1,0,'C');
+		$pdf->Cell(20,6,$min_speed_rpm_6,1,0,'C');
+		$pdf->Cell(20,6,$min_speed_rpm_7,1,0,'C');
+
+		$pfactor = abs(0.16 * (100 - $rated_curves['cos_in_percent_1']));
+		$pfactor = ($pfactor > 7) ? 7 : $pfactor;
+		$pfactor = ($pfactor < 2) ? 2 : $pfactor;
+
+
+
+
+
+		$pdf->Ln();
+		$pdf->Cell(5,6,'6',1,0,'LR');
+		$pdf->Cell(50,6,'CosØ, in %',1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_1'] - $pfactor ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_2'] - $pfactor ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_3'] - $pfactor ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_4'] - $pfactor ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_5'] - $pfactor ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_6'] - $pfactor ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_7'] - $pfactor ,1,0,'C');
+
+
 
 
 
