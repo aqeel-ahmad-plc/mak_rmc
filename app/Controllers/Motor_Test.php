@@ -144,6 +144,61 @@ class PDF extends FPDF
 			// Closing line
 			$this->Cell(array_sum($w),0,'','T');
 	}
+	function WordWrap(&$text, $maxwidth)
+{
+    $text = trim($text);
+    if ($text==='')
+        return 0;
+    $space = $this->GetStringWidth(' ');
+    $lines = explode("\n", $text);
+    $text = '';
+    $count = 0;
+
+    foreach ($lines as $line)
+    {
+        $words = preg_split('/ +/', $line);
+        $width = 0;
+
+        foreach ($words as $word)
+        {
+            $wordwidth = $this->GetStringWidth($word);
+            if ($wordwidth > $maxwidth)
+            {
+                // Word is too long, we cut it
+                for($i=0; $i<strlen($word); $i++)
+                {
+                    $wordwidth = $this->GetStringWidth(substr($word, $i, 1));
+                    if($width + $wordwidth <= $maxwidth)
+                    {
+                        $width += $wordwidth;
+                        $text .= substr($word, $i, 1);
+                    }
+                    else
+                    {
+                        $width = $wordwidth;
+                        $text = rtrim($text)."\n".substr($word, $i, 1);
+                        $count++;
+                    }
+                }
+            }
+            elseif($width + $wordwidth <= $maxwidth)
+            {
+                $width += $wordwidth + $space;
+                $text .= $word.' ';
+            }
+            else
+            {
+                $width = $wordwidth + $space;
+                $text = rtrim($text)."\n".$word.' ';
+                $count++;
+            }
+        }
+        $text = rtrim($text)."\n";
+        $count++;
+    }
+    $text = rtrim($text);
+    return $count;
+}
 
 }
 
@@ -466,7 +521,9 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$motor_tests_model = new Motor_Test_model();
 		$result = $motor_tests_model->getMotorTestData($id);
-		// print_r($result[0]['test_report_no']);
+
+		$noload_test_tests_model = new No_Load_Test_model();
+		$no_load_test_result = $noload_test_tests_model->getNoLoadTestData($id);
 
 		/*output the result*/
 
@@ -481,20 +538,19 @@ class Motor_Test extends BaseController
 		$pdf->Ln(20);
 
     //need uncomment
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
 
 		$pdf->Ln(20);
     //need uncomment
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
 
 
 		//Second page
 
 		$pdf->AddPage();
-		$motor_tests_model = new Motor_Test_model();
-		$result = $motor_tests_model->getMotorTestData($id);
+
 
 		/*output the result*/
 
@@ -502,7 +558,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -523,7 +579,7 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 		//need uncomment
-		$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,75),0,1,'R');
+		//$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,75),0,1,'R');
 
 		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
 		$pdf->Ln(10);
@@ -840,10 +896,6 @@ class Motor_Test extends BaseController
 		$pfactor = ($pfactor > 7) ? 7 : $pfactor;
 		$pfactor = ($pfactor < 2) ? 2 : $pfactor;
 
-
-
-
-
 		$pdf->Ln();
 		$pdf->Cell(5,6,'6',1,0,'LR');
 		$pdf->Cell(50,6,'CosØ, in %',1,0,'C');
@@ -855,44 +907,153 @@ class Motor_Test extends BaseController
 		$pdf->Cell(20,6,$rated_curves['cos_in_percent_6'] - $pfactor ,1,0,'C');
 		$pdf->Cell(20,6,$rated_curves['cos_in_percent_7'] - $pfactor ,1,0,'C');
 
+		/******************** 5. TEST INFORMATION ***************************/
+
+
+		$pdf->Ln();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'5. TEST INFORMATION',1,0,'C', true);
+		$pdf->Ln(10);
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+
+		$nb=$pdf->WordWrap($result[0]['test_description'],180);
+		$pdf->Write(5,$result[0]['test_description']);
+
+		/******************** 6. NO LOAD DATA (MOTOR UNCOUPLED) ***************************/
+
+
+		$pdf->AddPage();
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(150 ,5,'',0,1);
+
+		//need uncomment
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+
+
+		// Header
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+
+
+		$pdf->Ln();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'6. NO LOAD DATA (MOTOR UNCOUPLED)',1,0,'C', true);
+		$pdf->Ln(10);
+
+		$pdf->SetFont('Arial','B',14);
+		$pdf->SetFillColor(125,125,125);
+		$pdf->SetTextColor(0,0,0);
+
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Parameter',1,0,'C');
+		$pdf->Cell(90,6,'Value',1,0,'C');
+
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,102);
+		$pdf->SetTextColor(0,0,0);
+
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Frequency, in Hz',1,0,'C');
+		$pdf->Cell(90,6,$no_load_test_result[0]['frequency'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Line-to-Line Voltage, in V',1,0,'C');
+		$pdf->Cell(90,6,$no_load_test_result[0]['averge_voltage_phase_to_phase'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Line Current, in A',1,0,'C');
+		$pdf->Cell(90,6,$no_load_test_result[0]['total_current'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Power Factor, in p.u.',1,0,'C');
+		$pdf->Cell(90,6,$no_load_test_result[0]['average_pf'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Stator Power, in kW',1,0,'C');
+		$pdf->Cell(90,6,$no_load_test_result[0]['average_power'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Observed Speed, in r/min',1,0,'C');
+		$pdf->Cell(90,6,$no_load_test_result[0]['rpm_no_load'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(90,6,'Corrected Speed, in r/min',1,0,'C');
+		$pdf->Cell(90,6,$no_load_test_result[0]['rpm_no_load'],1,0,'C');
+
+
+
+		/******************** 7. LOAD TEST RESULTS ***************************/
+
+
+		$pdf->AddPage();
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(150 ,5,'',0,1);
+
+		//need uncomment
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+
+
+		// Header
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+
+
+		$pdf->Ln();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'7. LOAD TEST RESULTS',1,0,'C', true);
+		$pdf->Ln();
+
+		$pdf->SetFont('Arial','B',14);
+		$pdf->SetFillColor(125,125,125);
+		$pdf->SetTextColor(0,0,0);
+
+		$pdf->Cell(5,6,'#',1,0,'C');
+		$pdf->Cell(71,6,'Test Point',1,0,'C');
+		$pdf->Cell(17,6,'0%',1,0,'C');
+		$pdf->Cell(17,6,'25%',1,0,'C');
+		$pdf->Cell(17,6,'50%',1,0,'C');
+		$pdf->Cell(17,6,'75%',1,0,'C');
+		$pdf->Cell(17,6,'100%',1,0,'C');
+		$pdf->Cell(17,6,'115%',1,0,'C');
+		$pdf->Cell(17,6,'130%',1,0,'C');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(125,125,125);
+		$pdf->SetTextColor(0,0,0);
+
+		$pdf->Cell(5,6,'#',1,0,'C');
+		$pdf->Cell(71,6,'Specified temperature, ts, in °C',1,0,'C');
+		$pdf->Cell(17,6,'0%',1,0,'C');
+		$pdf->Cell(17,6,'25%',1,0,'C');
+		$pdf->Cell(17,6,'50%',1,0,'C');
+		$pdf->Cell(17,6,'75%',1,0,'C');
+		$pdf->Cell(17,6,'100%',1,0,'C');
+		$pdf->Cell(17,6,'115%',1,0,'C');
+		$pdf->Cell(17,6,'130%',1,0,'C');
 
 
 
 
 
-
-
-		//$pdf->ImprovedTable($header,$data);
-		// $pdf->Cell(130 ,5,'TEST REPORT NO. '.$result[0]['test_report_no'],0,1,'R');
-		// $pdf->SetFont('Arial','B',13);
-		//
-		// $pdf->Cell(110 ,5,date('D', strtotime($result[0]['test_date'])).', '.$result[0]['test_date'],0,1,'R');
-
-
-
-		//$pdf->Cell(50 ,5,'',0,1);
-		// $pdf->SetFont('Arial','B',10);
-		// /*Heading Of the table*/
-		// $pdf->Cell(20 ,5,'Sr. No',1,0,'L');
-		// $pdf->Cell(40 ,5,'Site ID',1,0,'L');
-		// $pdf->Cell(40 ,5,'Masjid Name',1,0,'L');
-		// $pdf->Cell(40 ,5,'District',1,0,'L');
-		// $pdf->Cell(40 ,5,'Problem Description',1,1,'L');
-		// /*Heading Of the table end*/
-		// $pdf->SetFont('Arial','',8);
-		// $pdf->SetWidths(array(20,40,40,40,40));
-		// $index  = 0;
-		// for ($i = 0; $i < sizeof($serveys); $i++) {
-		// 	if($serveys[$i]['site_status'] == "0")
-		// 	{
-		// 		$pdf->Row(array($index,$serveys[$i]['siteid'],$serveys[$i]['masgid'],$serveys[$i]['district'],$serveys[$i]['problem_description']));
-		// 		$index++;
-		// 	}
-		// }
-		// if ($index == 0)
-		// {
-		// 	$pdf->Cell(160, 5, "No Not-Ok Sites found", 1, 1, 'C');
-		// }
 
 		$pdf->Output('D','Test_Report.pdf');
   }

@@ -45,4 +45,9 @@ class No_Load_Test_model extends Model
         $result = $query->getResultArray();
         return $result;
       }
+      public function getNoLoadTestData($test_id = null)
+      {
+         $query = $this->builder()->select()->where(['motor_test_fk' => $test_id])->get();
+         return $query->getResultArray();
+      }
 }
