@@ -525,6 +525,9 @@ class Motor_Test extends BaseController
 		$noload_test_tests_model = new No_Load_Test_model();
 		$no_load_test_result = $noload_test_tests_model->getNoLoadTestData($id);
 
+		$load_test_tests_model = new Load_Test_model();
+		$load_test_result = $load_test_tests_model->getLoadTestData($id);
+
 		/*output the result*/
 
 		$pdf->SetFont('Arial','B',16);
@@ -538,13 +541,13 @@ class Motor_Test extends BaseController
 		$pdf->Ln(20);
 
     //need uncomment
-		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
-		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
-		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
 
 		$pdf->Ln(20);
     //need uncomment
-		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
 
 
 		//Second page
@@ -558,7 +561,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -579,7 +582,7 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 		//need uncomment
-		//$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,75),0,1,'R');
+		$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,75),0,1,'R');
 
 		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
 		$pdf->Ln(10);
@@ -933,7 +936,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -1000,7 +1003,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -1040,15 +1043,127 @@ class Motor_Test extends BaseController
 		$pdf->SetFillColor(125,125,125);
 		$pdf->SetTextColor(0,0,0);
 
-		$pdf->Cell(5,6,'#',1,0,'C');
-		$pdf->Cell(71,6,'Specified temperature, ts, in °C',1,0,'C');
-		$pdf->Cell(17,6,'0%',1,0,'C');
-		$pdf->Cell(17,6,'25%',1,0,'C');
-		$pdf->Cell(17,6,'50%',1,0,'C');
-		$pdf->Cell(17,6,'75%',1,0,'C');
-		$pdf->Cell(17,6,'100%',1,0,'C');
-		$pdf->Cell(17,6,'115%',1,0,'C');
-		$pdf->Cell(17,6,'130%',1,0,'C');
+		$pdf->Cell(5,6,'1',1,0,'C');
+		$pdf->Cell(71,6,'Specified temperature, ts, in C',1,0,'LR');
+		$pdf->Cell(119,6,$result[0]['specified_temp'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(5,6,'2',1,0,'C');
+		$pdf->Cell(71,6,'Stator Resistance (Cold), in Ohms',1,0,'LR');
+		$pdf->Cell(119,6,$result[0]['winding_resistance'],1,0,'C');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',10);
+		$pdf->SetFillColor(125,125,125);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->Cell(5,6,'3',1,0,'C');
+		$pdf->Cell(71,6,'Stator Resistance(Cold) measure at Temp C',1,0,'LR');
+		$pdf->Cell(119,6,$result[0]['temp_at_which_winding_resistance_measured'],1,0,'C');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','',12);
+
+
+
+		$load_test_col = array(
+			"motor_temperature", "amb_temperature", "averge_voltage_phase_to_phase", "frequency",
+			"synchronous_speed_rpm","rpm_load","observed_slip_rmin", "observed_slip_pu", "corrected_slip_pu",
+			"corrected_speed_rmin","torque","dynamometer_correction","corrected_torque","shaft_power","total_current","average_power",
+			"stator_i2r_loss_kw","winding_resistance_ts","stator_i2r_loss_kw_ts","stator_power_correction_kw","corrected_stator_power_correction_kw",
+			"efficiency_percentage","power_factor_percentage"
+		);
+		$load_test_label = array(
+			"Stator Winding Temp, tt in C", "Ambient Temperature, in C", "Line-to-Line Voltage, in V", "Frequency, in Hz",
+			"Synchronous speed, ns, in RPM","Observed Speed, in r/min","Observed Slip, in r/min", "Observed Slip, in p.u.",
+			"Corrected Slip, in p.u.","Corrected Speed, in r/min","Torque, in N-m","Dynamometer Correction, in N-m","Corrected Torque, in N-m",
+			"Shaft Power, in kW","Line Current, in A","Stator Power, in kW","Stator I2R Loss, in kW, at tt","Winding Resistance at ts",
+			"Stator I2R Loss, in kW, at ts","Stator Power Correction, in kW","Corrected Stator Power, in kW","Efficiency, in %","Power Factor, in %"
+		);
+
+
+		for ($i=0; $i < sizeof($load_test_col); $i++) {
+
+			$pdf->Cell(5,6,$i+4,1,0,'C');
+			$pdf->Cell(71,6,$load_test_label[$i],1,0,'LR');
+
+
+			for ($var = 0; $var < sizeof($load_test_result); $var++) {
+
+				$A = $result[0]['specified_temp'];
+				$B = $result[0]['winding_resistance'];
+				$C = $result[0]['temp_at_which_winding_resistance_measured'];
+				$D = $load_test_result[$var]['motor_temperature'];
+				$R = $load_test_result[$var]['total_current'];
+				$U = ($B*($A+234.5)/($C+234.5));
+				$V = ((1.5*$R*$R*$U)/1000);
+				$T = (((1.5*$R*$R*$B*(234.5+$D))/(234.5+$C))/1000);
+
+				if($load_test_col[$i] == 'synchronous_speed_rpm'){
+					$load_test_result[$var][$load_test_col[$i]] = (120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'];
+				}
+				if($load_test_col[$i] == 'observed_slip_rmin'){
+					$load_test_result[$var][$load_test_col[$i]] = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					$load_test_result[$var][$load_test_col[$i]] = number_format($load_test_result[$var][$load_test_col[$i]], 2);
+				}
+				if($load_test_col[$i] == 'observed_slip_pu'){
+					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
+					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					$load_test_result[$var][$load_test_col[$i]] = number_format($j/$h,2);
+				}
+				if($load_test_col[$i] == 'corrected_slip_pu'){
+					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
+					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					$k = $j/$h;
+					$load_test_result[$var][$load_test_col[$i]] = number_format(($k * ($A+234.5)/($D+234.5)), 2);
+				}
+				if($load_test_col[$i] == 'corrected_speed_rmin'){
+					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
+					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					$k = $j/$h;
+					$L = (($k * ($A+234.5)/($D+234.5)));
+					$load_test_result[$var][$load_test_col[$i]] = ceil(((120*($result[0]['motor_rated_frequency']/$result[0]['no_of_poles'])) * (1-$L)));
+				}
+				if($load_test_col[$i] == 'dynamometer_correction'){
+					$load_test_result[$var][$load_test_col[$i]] = 0;
+				}
+				if($load_test_col[$i] == 'corrected_torque'){
+					$load_test_result[$var][$load_test_col[$i]] = 0 + $load_test_result[$var]['torque'];
+				}
+				if($load_test_col[$i] == 'stator_i2r_loss_kw'){
+					$load_test_result[$var][$load_test_col[$i]] = number_format((((1.5*$R*$R*$B*(234.5+$D))/(234.5+$C))/1000),2);
+				}
+				if($load_test_col[$i] == 'winding_resistance_ts'){
+					$load_test_result[$var][$load_test_col[$i]] = number_format(($B*($A+234.5)/($C+234.5)),2);
+				}
+				if($load_test_col[$i] == 'stator_i2r_loss_kw_ts'){
+					$U = ($B*($A+234.5)/($C+234.5));
+					$load_test_result[$var][$load_test_col[$i]] = number_format(((1.5*$R*$R*$U)/1000),2);
+				}
+				if($load_test_col[$i] == 'stator_power_correction_kw'){
+					$U = ($B*($A+234.5)/($C+234.5));
+					$V = ((1.5*$R*$R*$U)/1000);
+					$T = (((1.5*$R*$R*$B*(234.5+$D))/(234.5+$C))/1000);
+					$load_test_result[$var][$load_test_col[$i]] = number_format(($V - $T),2);
+				}
+
+				if($load_test_col[$i] == 'corrected_stator_power_correction_kw'){
+					$W = $V - $T;
+					$load_test_result[$var][$load_test_col[$i]] = number_format(($load_test_result[$var]['average_power'] + $W), 2);
+				}
+				if($load_test_col[$i] == 'efficiency_percentage'){
+					$W = $V - $T;
+					$X = $load_test_result[$var]['average_power'] + $W;
+					$load_test_result[$var][$load_test_col[$i]] = number_format(((100*$load_test_result[$var]['shaft_power'])/$X),2);
+				}
+				if($load_test_col[$i] == 'power_factor_percentage'){
+					$W = $V - $T;
+					$X = $load_test_result[$var]['average_power'] + $W;
+					$F = $load_test_result[$var]['averge_voltage_phase_to_phase'];
+					$Z = ((100*$X)/(1.732*$F*$R))*1000;
+					$load_test_result[$var][$load_test_col[$i]] = number_format($Z, 2);
+				}
+				$pdf->Cell(17,6,$load_test_result[$var][$load_test_col[$i]],1,0,'C');
+			}
+			$pdf->Ln();
+		}
+
 
 
 
