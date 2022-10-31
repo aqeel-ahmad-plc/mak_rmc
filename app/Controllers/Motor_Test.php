@@ -1105,20 +1105,34 @@ class Motor_Test extends BaseController
 				if($load_test_col[$i] == 'observed_slip_pu'){
 					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
 					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
-					$load_test_result[$var][$load_test_col[$i]] = number_format($j/$h,2);
+					if($h == 0){
+						$load_test_result[$var][$load_test_col[$i]] = '--';
+					}else{
+					   $load_test_result[$var][$load_test_col[$i]] = number_format($j/$h,2);
+					}
+
 				}
 				if($load_test_col[$i] == 'corrected_slip_pu'){
 					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
 					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
-					$k = $j/$h;
-					$load_test_result[$var][$load_test_col[$i]] = number_format(($k * ($A+234.5)/($D+234.5)), 2);
+					if($h == 0){
+						$load_test_result[$var][$load_test_col[$i]] = '--';
+					}else{
+						$k = $j/$h;
+						$load_test_result[$var][$load_test_col[$i]] = number_format(($k * ($A+234.5)/($D+234.5)), 2);
+					}
 				}
 				if($load_test_col[$i] == 'corrected_speed_rmin'){
 					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
 					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
-					$k = $j/$h;
-					$L = (($k * ($A+234.5)/($D+234.5)));
-					$load_test_result[$var][$load_test_col[$i]] = ceil(((120*($result[0]['motor_rated_frequency']/$result[0]['no_of_poles'])) * (1-$L)));
+					if($h == 0){
+						$load_test_result[$var][$load_test_col[$i]] = '--';
+					}else{
+						$k = $j/$h;
+						$L = (($k * ($A+234.5)/($D+234.5)));
+						$load_test_result[$var][$load_test_col[$i]] = ceil(((120*($result[0]['motor_rated_frequency']/$result[0]['no_of_poles'])) * (1-$L)));
+					}
+
 				}
 				if($load_test_col[$i] == 'dynamometer_correction'){
 					$load_test_result[$var][$load_test_col[$i]] = 0;
@@ -1156,8 +1170,13 @@ class Motor_Test extends BaseController
 					$W = $V - $T;
 					$X = $load_test_result[$var]['average_power'] + $W;
 					$F = $load_test_result[$var]['averge_voltage_phase_to_phase'];
-					$Z = ((100*$X)/(1.732*$F*$R))*1000;
-					$load_test_result[$var][$load_test_col[$i]] = number_format($Z, 2);
+					if($F == 0 && $R == 0){
+            $load_test_result[$var][$load_test_col[$i]] = '--';
+					}else{
+						$Z = ((100*$X)/(1.732*$F*$R))*1000;
+						$load_test_result[$var][$load_test_col[$i]] = number_format($Z, 2);
+					}
+
 				}
 				$pdf->Cell(17,6,$load_test_result[$var][$load_test_col[$i]],1,0,'C');
 			}
