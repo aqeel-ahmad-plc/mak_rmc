@@ -6,6 +6,7 @@ use App\Models\Load_Test_model;
 
 use FPDF;
 
+
 class PDF extends FPDF
 {
 	var $widths;
@@ -199,6 +200,153 @@ class PDF extends FPDF
     $text = rtrim($text);
     return $count;
 }
+function LineGraph($w, $h, $data, $options='', $colors=null, $maxVal=0, $nbDiv=4){
+        /*******************************************
+        Explain the variables:
+        $w = the width of the diagram
+        $h = the height of the diagram
+        $data = the data for the diagram in the form of a multidimensional array
+        $options = the possible formatting options which include:
+            'V' = Print Vertical Divider lines
+            'H' = Print Horizontal Divider Lines
+            'kB' = Print bounding box around the Key (legend)
+            'vB' = Print bounding box around the values under the graph
+            'gB' = Print bounding box around the graph
+            'dB' = Print bounding box around the entire diagram
+        $colors = A multidimensional array containing RGB values
+        $maxVal = The Maximum Value for the graph vertically
+        $nbDiv = The number of vertical Divisions
+        *******************************************/
+        $this->SetDrawColor(0,0,0);
+        $this->SetLineWidth(0.2);
+        $keys = array_keys($data);
+        $ordinateWidth = 10;
+        $w -= $ordinateWidth;
+        $valX = $this->getX()+$ordinateWidth;
+        $valY = $this->getY();
+        $margin = 1;
+        $titleH = 8;
+        $titleW = $w;
+        $lineh = 5;
+        $keyH = count($data)*$lineh;
+        $keyW = $w/5;
+        $graphValH = 5;
+        $graphValW = $w-$keyW-3*$margin;
+        $graphH = $h-(3*$margin)-$graphValH;
+        $graphW = $w-(2*$margin)-($keyW+$margin);
+        $graphX = $valX+$margin;
+        $graphY = $valY+$margin;
+        $graphValX = $valX+$margin;
+        $graphValY = $valY+2*$margin+$graphH;
+        $keyX = $valX+(2*$margin)+$graphW;
+        $keyY = $valY+$margin+.5*($h-(2*$margin))-.5*($keyH);
+        //draw graph frame border
+        if(strstr($options,'gB')){
+            $this->Rect($valX,$valY,$w,$h);
+        }
+        //draw graph diagram border
+        if(strstr($options,'dB')){
+            $this->Rect($valX+$margin,$valY+$margin,$graphW,$graphH);
+        }
+        //draw key legend border
+        if(strstr($options,'kB')){
+            $this->Rect($keyX,$keyY,$keyW,$keyH);
+        }
+        //draw graph value box
+        if(strstr($options,'vB')){
+            $this->Rect($graphValX,$graphValY,$graphValW,$graphValH);
+        }
+        //define colors
+        if($colors===null){
+            $safeColors = array(0,51,102,153,204,225);
+            for($i=0;$i<count($data);$i++){
+                $colors[$keys[$i]] = array($safeColors[array_rand($safeColors)],$safeColors[array_rand($safeColors)],$safeColors[array_rand($safeColors)]);
+            }
+        }
+        //form an array with all data values from the multi-demensional $data array
+        $ValArray = array();
+        foreach($data as $key => $value){
+            foreach($data[$key] as $val){
+                $ValArray[]=$val;
+            }
+        }
+        //define max value
+        if($maxVal<ceil(max($ValArray))){
+            $maxVal = ceil(max($ValArray));
+        }
+        //draw horizontal lines
+        $vertDivH = $graphH/$nbDiv;
+        if(strstr($options,'H')){
+            for($i=0;$i<=$nbDiv;$i++){
+                if($i<$nbDiv){
+                    $this->Line($graphX,$graphY+$i*$vertDivH,$graphX+$graphW,$graphY+$i*$vertDivH);
+                } else{
+                    $this->Line($graphX,$graphY+$graphH,$graphX+$graphW,$graphY+$graphH);
+                }
+            }
+        }
+        //draw vertical lines
+        $horiDivW = floor($graphW/(count($data[$keys[0]])-1));
+        if(strstr($options,'V')){
+            for($i=0;$i<=(count($data[$keys[0]])-1);$i++){
+                if($i<(count($data[$keys[0]])-1)){
+                    $this->Line($graphX+$i*$horiDivW,$graphY,$graphX+$i*$horiDivW,$graphY+$graphH);
+                } else {
+                    $this->Line($graphX+$graphW,$graphY,$graphX+$graphW,$graphY+$graphH);
+                }
+            }
+        }
+        //draw graph lines
+        foreach($data as $key => $value){
+            $this->setDrawColor($colors[$key][0],$colors[$key][1],$colors[$key][2]);
+            $this->SetLineWidth(0.8);
+            $valueKeys = array_keys($value);
+            for($i=0;$i<count($value);$i++){
+                if($i==count($value)-2){
+                    $this->Line(
+                        $graphX+($i*$horiDivW),
+                        $graphY+$graphH-($value[$valueKeys[$i]]/$maxVal*$graphH),
+                        $graphX+$graphW,
+                        $graphY+$graphH-($value[$valueKeys[$i+1]]/$maxVal*$graphH)
+                    );
+                } else if($i<(count($value)-1)) {
+                    $this->Line(
+                        $graphX+($i*$horiDivW),
+                        $graphY+$graphH-($value[$valueKeys[$i]]/$maxVal*$graphH),
+                        $graphX+($i+1)*$horiDivW,
+                        $graphY+$graphH-($value[$valueKeys[$i+1]]/$maxVal*$graphH)
+                    );
+                }
+            }
+            //Set the Key (legend)
+            $this->SetFont('Courier','',10);
+            if(!isset($n))$n=0;
+            $this->Line($keyX+1,$keyY+$lineh/2+$n*$lineh,$keyX+8,$keyY+$lineh/2+$n*$lineh);
+            $this->SetXY($keyX+8,$keyY+$n*$lineh);
+            $this->Cell($keyW,$lineh,$key,0,1,'L');
+            $n++;
+        }
+        //print the abscissa values
+        foreach($valueKeys as $key => $value){
+            if($key==0){
+                $this->SetXY($graphValX,$graphValY);
+                $this->Cell(30,$lineh,$value,0,0,'L');
+            } else if($key==count($valueKeys)-1){
+                $this->SetXY($graphValX+$graphValW-30,$graphValY);
+                $this->Cell(30,$lineh,$value,0,0,'R');
+            } else {
+                $this->SetXY($graphValX+$key*$horiDivW-15,$graphValY);
+                $this->Cell(30,$lineh,$value,0,0,'C');
+            }
+        }
+        //print the ordinate values
+        for($i=0;$i<=$nbDiv;$i++){
+            $this->SetXY($graphValX-10,$graphY+($nbDiv-$i)*$vertDivH-3);
+            $this->Cell(8,6,sprintf('%.1f',$maxVal/$nbDiv*$i),0,0,'R');
+        }
+        $this->SetDrawColor(0,0,0);
+        $this->SetLineWidth(0.2);
+    }
 
 }
 
@@ -1003,7 +1151,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -1077,6 +1225,12 @@ class Motor_Test extends BaseController
 			"Stator I2R Loss, in kW, at ts","Stator Power Correction, in kW","Corrected Stator Power, in kW","Efficiency, in %","Power Factor, in %"
 		);
 
+		$efficiency_graph = array();
+		$shaft_power_graph = array();
+		$corrected_speed_rmin_graph = array();
+		$total_current_graph = array();
+		$power_factor_percentage_graph = array();
+
 
 		for ($i=0; $i < sizeof($load_test_col); $i++) {
 
@@ -1127,10 +1281,12 @@ class Motor_Test extends BaseController
 					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
 					if($h == 0){
 						$load_test_result[$var][$load_test_col[$i]] = '--';
+						array_push($corrected_speed_rmin_graph,0);
 					}else{
 						$k = $j/$h;
 						$L = (($k * ($A+234.5)/($D+234.5)));
 						$load_test_result[$var][$load_test_col[$i]] = ceil(((120*($result[0]['motor_rated_frequency']/$result[0]['no_of_poles'])) * (1-$L)));
+						array_push($corrected_speed_rmin_graph,$load_test_result[$var][$load_test_col[$i]]);
 					}
 
 				}
@@ -1165,6 +1321,7 @@ class Motor_Test extends BaseController
 					$W = $V - $T;
 					$X = $load_test_result[$var]['average_power'] + $W;
 					$load_test_result[$var][$load_test_col[$i]] = number_format(((100*$load_test_result[$var]['shaft_power'])/$X),2);
+					array_push($efficiency_graph,$load_test_result[$var][$load_test_col[$i]]);
 				}
 				if($load_test_col[$i] == 'power_factor_percentage'){
 					$W = $V - $T;
@@ -1172,16 +1329,238 @@ class Motor_Test extends BaseController
 					$F = $load_test_result[$var]['averge_voltage_phase_to_phase'];
 					if($F == 0 && $R == 0){
             $load_test_result[$var][$load_test_col[$i]] = '--';
+						array_push($power_factor_percentage_graph,0);
 					}else{
 						$Z = ((100*$X)/(1.732*$F*$R))*1000;
 						$load_test_result[$var][$load_test_col[$i]] = number_format($Z, 2);
+						array_push($power_factor_percentage_graph,$load_test_result[$var][$load_test_col[$i]]);
 					}
 
+				}
+				if($load_test_col[$i] == 'shaft_power'){
+					array_push($shaft_power_graph,$load_test_result[$var][$load_test_col[$i]]);
+				}
+				if($load_test_col[$i] == 'total_current'){
+					array_push($total_current_graph,$load_test_result[$var][$load_test_col[$i]]);
 				}
 				$pdf->Cell(17,6,$load_test_result[$var][$load_test_col[$i]],1,0,'C');
 			}
 			$pdf->Ln();
 		}
+
+		/****************** Efficiency Curve ***************************/
+
+
+
+
+		$pdf->SetFont('Arial','',10);
+		$data = array(
+				'Hitachi Curve' => array(
+						$rated_curves['shaft_power_p2_1'] => $rated_curves['efficiency_in_percent_1'],
+						$rated_curves['shaft_power_p2_2'] => $rated_curves['efficiency_in_percent_2'],
+						$rated_curves['shaft_power_p2_3'] => $rated_curves['efficiency_in_percent_3'],
+						$rated_curves['shaft_power_p2_4'] => $rated_curves['efficiency_in_percent_4'],
+						$rated_curves['shaft_power_p2_5'] => $rated_curves['efficiency_in_percent_5'],
+						$rated_curves['shaft_power_p2_6'] => $rated_curves['efficiency_in_percent_6'],
+						$rated_curves['shaft_power_p2_7'] => $rated_curves['efficiency_in_percent_7']
+				),
+				'Test Curve' => array(
+						$shaft_power_graph[0] => $efficiency_graph[0],
+						$shaft_power_graph[1] => $efficiency_graph[1],
+						$shaft_power_graph[2] => $efficiency_graph[2],
+						$shaft_power_graph[3] => $efficiency_graph[3],
+						$shaft_power_graph[4] => $efficiency_graph[4],
+						$shaft_power_graph[5] => $efficiency_graph[5],
+						$shaft_power_graph[6] => $efficiency_graph[6]
+				),
+				'Min Allowed' => array(
+						$rated_curves['shaft_power_p2_1'] => $eff_percent_1,
+						$rated_curves['shaft_power_p2_2'] => $eff_percent_2,
+						$rated_curves['shaft_power_p2_3'] => $eff_percent_3,
+						$rated_curves['shaft_power_p2_4'] => $eff_percent_4,
+						$rated_curves['shaft_power_p2_5'] => $eff_percent_5,
+						$rated_curves['shaft_power_p2_6'] => $eff_percent_6,
+						$rated_curves['shaft_power_p2_7'] => $eff_percent_7
+				)
+		);
+		$colors = array(
+				'Hitachi Curve' => array(200,36,220),
+				'Test Curve' => array(114,171,237),
+				'Min Allowed' => array(163,36,153)
+
+		);
+
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'8. EFFICIENCY CURVE',1,0,'C', true);
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors,6,3);
+
+		/****************** Speed Curve ***************************/
+
+
+		$data = array(
+
+				'Max Allowed' => array(
+					$rated_curves['shaft_power_p2_1'] => $max_speed_rpm_1,
+					$rated_curves['shaft_power_p2_2'] => $max_speed_rpm_2,
+					$rated_curves['shaft_power_p2_3'] => $max_speed_rpm_3,
+					$rated_curves['shaft_power_p2_4'] => $max_speed_rpm_4,
+					$rated_curves['shaft_power_p2_5'] => $max_speed_rpm_5,
+					$rated_curves['shaft_power_p2_6'] => $max_speed_rpm_6,
+					$rated_curves['shaft_power_p2_7'] => $max_speed_rpm_7
+				),
+				'Min Allowed' => array(
+						$rated_curves['shaft_power_p2_1'] => $min_speed_rpm_1,
+						$rated_curves['shaft_power_p2_2'] => $min_speed_rpm_2,
+						$rated_curves['shaft_power_p2_3'] => $min_speed_rpm_3,
+						$rated_curves['shaft_power_p2_4'] => $min_speed_rpm_4,
+						$rated_curves['shaft_power_p2_5'] => $min_speed_rpm_5,
+						$rated_curves['shaft_power_p2_6'] => $min_speed_rpm_6,
+						$rated_curves['shaft_power_p2_7'] => $min_speed_rpm_7
+				),
+				'Hitachi Curve' => array(
+						$rated_curves['shaft_power_p2_1'] => $rated_curves['speed_in_rpm_1'],
+						$rated_curves['shaft_power_p2_2'] => $rated_curves['speed_in_rpm_2'],
+						$rated_curves['shaft_power_p2_3'] => $rated_curves['speed_in_rpm_3'],
+						$rated_curves['shaft_power_p2_4'] => $rated_curves['speed_in_rpm_4'],
+						$rated_curves['shaft_power_p2_5'] => $rated_curves['speed_in_rpm_5'],
+						$rated_curves['shaft_power_p2_6'] => $rated_curves['speed_in_rpm_6'],
+						$rated_curves['shaft_power_p2_7'] => $rated_curves['speed_in_rpm_7']
+				),
+				'Test Curve' => array(
+						$shaft_power_graph[0] => $corrected_speed_rmin_graph[0],
+						$shaft_power_graph[1] => $corrected_speed_rmin_graph[1],
+						$shaft_power_graph[2] => $corrected_speed_rmin_graph[2],
+						$shaft_power_graph[3] => $corrected_speed_rmin_graph[3],
+						$shaft_power_graph[4] => $corrected_speed_rmin_graph[4],
+						$shaft_power_graph[5] => $corrected_speed_rmin_graph[5],
+						$shaft_power_graph[6] => $corrected_speed_rmin_graph[6]
+				),
+		);
+		$colors = array(
+				'Test Curve' => array(0,0,0),
+				'Max Allowed' => array(163,36,153),
+				'Min Allowed' => array(200,36,220),
+				'Hitachi Curve' => array(150,206,210),
+				'F.L' => array(150,206,210)
+		);
+
+
+
+
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'9. SPEED CURVE',1,0,'C', true);
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+
+		$pdf->LineGraph(190,100,$data,'HgBdB',null,3600,5);
+
+
+
+		/****************** 10. CURRENT CURVE ***************************/
+
+
+		$data = array(
+				'Hitachi Curve' => array(
+						$rated_curves['shaft_power_p2_1'] => $rated_curves['current_in_amps_1'],
+						$rated_curves['shaft_power_p2_2'] => $rated_curves['current_in_amps_2'],
+						$rated_curves['shaft_power_p2_3'] => $rated_curves['current_in_amps_3'],
+						$rated_curves['shaft_power_p2_4'] => $rated_curves['current_in_amps_4'],
+						$rated_curves['shaft_power_p2_5'] => $rated_curves['current_in_amps_5'],
+						$rated_curves['shaft_power_p2_6'] => $rated_curves['current_in_amps_6'],
+						$rated_curves['shaft_power_p2_7'] => $rated_curves['current_in_amps_7']
+				),
+				'Test Curve' => array(
+						$shaft_power_graph[0] => $total_current_graph[0],
+						$shaft_power_graph[1] => $total_current_graph[1],
+						$shaft_power_graph[2] => $total_current_graph[2],
+						$shaft_power_graph[3] => $total_current_graph[3],
+						$shaft_power_graph[4] => $total_current_graph[4],
+						$shaft_power_graph[5] => $total_current_graph[5],
+						$shaft_power_graph[6] => $total_current_graph[6]
+				),
+		);
+		$colors = array(
+			  'Hitachi Curve' => array(150,206,210),
+				'Test Curve' => array(200,36,220)
+
+		);
+
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'10. CURRENT CURVE',1,0,'C', true);
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+
+		$pdf->LineGraph(190,100,$data,'HgBdB',null,200,5);
+
+
+		/****************** 11. COSØ CURVE ***************************/
+
+
+		$data = array(
+				'Hitachi Curve' => array(
+						$rated_curves['shaft_power_p2_1'] => $rated_curves['cos_in_percent_1'],
+						$rated_curves['shaft_power_p2_2'] => $rated_curves['cos_in_percent_2'],
+						$rated_curves['shaft_power_p2_3'] => $rated_curves['cos_in_percent_3'],
+						$rated_curves['shaft_power_p2_4'] => $rated_curves['cos_in_percent_4'],
+						$rated_curves['shaft_power_p2_5'] => $rated_curves['cos_in_percent_5'],
+						$rated_curves['shaft_power_p2_6'] => $rated_curves['cos_in_percent_6'],
+						$rated_curves['shaft_power_p2_7'] => $rated_curves['cos_in_percent_7']
+				),
+				'Test Curve' => array(
+						$shaft_power_graph[0] => $power_factor_percentage_graph[0],
+						$shaft_power_graph[1] => $power_factor_percentage_graph[1],
+						$shaft_power_graph[2] => $power_factor_percentage_graph[2],
+						$shaft_power_graph[3] => $power_factor_percentage_graph[3],
+						$shaft_power_graph[4] => $power_factor_percentage_graph[4],
+						$shaft_power_graph[5] => $power_factor_percentage_graph[5],
+						$shaft_power_graph[6] => $power_factor_percentage_graph[6]
+				),
+				'Min Allowed' => array(
+						$rated_curves['shaft_power_p2_1'] => $rated_curves['cos_in_percent_1'] - $pfactor,
+						$rated_curves['shaft_power_p2_2'] => $rated_curves['cos_in_percent_2'] - $pfactor,
+						$rated_curves['shaft_power_p2_3'] => $rated_curves['cos_in_percent_3'] - $pfactor,
+						$rated_curves['shaft_power_p2_4'] => $rated_curves['cos_in_percent_4'] - $pfactor,
+						$rated_curves['shaft_power_p2_5'] => $rated_curves['cos_in_percent_5'] - $pfactor,
+						$rated_curves['shaft_power_p2_6'] => $rated_curves['cos_in_percent_6'] - $pfactor,
+						$rated_curves['shaft_power_p2_7'] => $rated_curves['cos_in_percent_7'] - $pfactor
+				)
+		);
+		$colors = array(
+				'Hitachi Curve' => array(150,206,210),
+				'Test Curve' => array(20,36,220),
+				'Min Allowed' => array(100,136,210)
+
+		);
+
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'11. COSØ CURVE',1,0,'C', true);
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+
+		$pdf->LineGraph(190,100,$data,'HgBdB',null,100,5);
+
 
 
 
