@@ -87,7 +87,7 @@
 
             <div class="form-group col-md-4">
                 <label for="motor_rated_pf">Motor Rated PF</label>
-                <input type="number" class="form-control" name="motor_rated_pf" id="motor_rated_pf" value="<?= set_value('motor_rated_pf') ?>" placeholder="Enter Motor Rated PF">
+                <input type="number" step="0.01" class="form-control" name="motor_rated_pf" id="motor_rated_pf" value="<?= set_value('motor_rated_pf') ?>" placeholder="Enter Motor Rated PF">
             </div>
             <div class="form-group col-md-4">
                 <label for="motor_rated_rpm">Motor Rated RPM</label>
