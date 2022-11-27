@@ -50,4 +50,9 @@ class Load_Test_model extends Model
          $query = $this->builder()->select()->where(['motor_test_fk' => $test_id])->get();
          return $query->getResultArray();
       }
+      public function countLoadTestData($test_id = null)
+      {
+         $query = $this->builder()->select("count(*) as count_load_test_record")->where(['motor_test_fk' => $test_id])->get();
+         return $query->getResultArray();
+      }
 }

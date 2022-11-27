@@ -663,6 +663,15 @@ class Motor_Test extends BaseController
 
 	}
 
+	public function countLoadTestData($id){
+
+
+		$load_test_tests_model = new Load_Test_model();
+		$load_test_record_count = $load_test_tests_model->countLoadTestData($id);
+		echo json_encode($load_test_record_count);
+
+	}
+
 	public function generate_report($id){
 
 		$pdf = new PDF();
