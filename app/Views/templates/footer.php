@@ -22,7 +22,7 @@ var motor_rated_hp = 0;
           console.log('updateStats');
           $.ajax({
               type: 'GET',
-              url: '/mak_rmc/stats/show',
+              url: '/stats/show',
               async:false,
               success: function(data) {
 
@@ -71,7 +71,7 @@ var motor_rated_hp = 0;
         console.log('updateTemperature');
         $.ajax({
             type: 'GET',
-            url: '/mak_rmc/temperature/show',
+            url: '/temperature/show',
             async:false,
             success: function(data) {
 
@@ -95,7 +95,7 @@ var motor_rated_hp = 0;
         console.log('updateRPM');
         $.ajax({
             type: 'GET',
-            url: '/mak_rmc/rpm/show',
+            url: '/rpm/show',
             async:false,
             success: function(data) {
 
@@ -118,7 +118,7 @@ var motor_rated_hp = 0;
         var  data = new Array();
         $.ajax({
             type: 'GET',
-            url: '/mak_rmc/dashboard/get_sites_info',
+            url: '/dashboard/get_sites_info',
             async:false,
             success: function(data) {
                 data = JSON.parse(data);
@@ -129,8 +129,31 @@ var motor_rated_hp = 0;
             },
         });
 
+      }
 
+      function countLoadTestData(id){
+        console.log('countLoadTestData');
 
+        var  data = new Array();
+        $.ajax({
+            type: 'GET',
+            url: '/motor_test/countLoadTestData/'+id,
+            async:false,
+            success: function(data) {
+                data = JSON.parse(data);
+                if(data[0]['count_load_test_record']>=7){
+                  $("#record_load_point_button").hide();
+                  $("#complete_test_button").show();
+
+                }else{
+                  $("#record_load_point_button").show();
+                  $("#complete_test_button").hide();
+                }
+                console.log("countLoadTestData", data[0]['count_load_test_record']);
+            },
+            error: function() {
+            },
+        });
 
       }
 
@@ -139,7 +162,7 @@ var motor_rated_hp = 0;
         console.log('updateTorque');
         $.ajax({
             type: 'GET',
-            url: '/mak_rmc/torque/show',
+            url: '/torque/show',
             async:false,
             success: function(data) {
 
@@ -186,15 +209,19 @@ var motor_rated_hp = 0;
         $(document).ready(function()
         {
             //setInterval(updateStats(), 10000);
+            split_path = window.location.pathname.split("/");
 
 
 
-            console.log("pathname", window.location.pathname);
+
+
+            console.log("pathname", split_path[split_path.length-1]);
             if(window.location.pathname.includes('/motor_test/no_load_test') || window.location.pathname.includes('/motor_test/load_test') || window.location.pathname.includes('/dashboard')){
 
               updateStats();
               ret = ratedData();
               console.log("ratedData", ret);
+              countLoadTestData(split_path[split_path.length-1]);
               updateTemperature();
               //updateRPM();
               updateTorque_RPM();
