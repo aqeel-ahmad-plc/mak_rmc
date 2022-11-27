@@ -1151,7 +1151,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
