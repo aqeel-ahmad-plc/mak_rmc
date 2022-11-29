@@ -1052,20 +1052,38 @@ class Motor_Test extends BaseController
 		$pdf->Cell(20,6,$min_speed_rpm_6,1,0,'C');
 		$pdf->Cell(20,6,$min_speed_rpm_7,1,0,'C');
 
-		$pfactor = abs(0.16 * (100 - $rated_curves['cos_in_percent_1']));
-		$pfactor = ($pfactor > 7) ? 7 : $pfactor;
-		$pfactor = ($pfactor < 2) ? 2 : $pfactor;
+		$pfactor1 = abs(0.167 * (100 - $rated_curves['cos_in_percent_1']));
+		$pfactor2 = abs(0.167 * (100 - $rated_curves['cos_in_percent_2']));
+		$pfactor3 = abs(0.167 * (100 - $rated_curves['cos_in_percent_3']));
+		$pfactor4 = abs(0.167 * (100 - $rated_curves['cos_in_percent_4']));
+		$pfactor5 = abs(0.167 * (100 - $rated_curves['cos_in_percent_5']));
+		$pfactor6 = abs(0.167 * (100 - $rated_curves['cos_in_percent_6']));
+		$pfactor7 = abs(0.167 * (100 - $rated_curves['cos_in_percent_7']));
+		$pfactor1 = ($pfactor1 > 7) ? 7 : $pfactor1;
+		$pfactor1 = ($pfactor1 < 2) ? 2 : $pfactor1;
+		$pfactor2 = ($pfactor2 > 7) ? 7 : $pfactor2;
+		$pfactor2 = ($pfactor2 < 2) ? 2 : $pfactor2;
+		$pfactor3 = ($pfactor3 > 7) ? 7 : $pfactor3;
+		$pfactor3 = ($pfactor3 < 2) ? 2 : $pfactor3;
+		$pfactor4 = ($pfactor4 > 7) ? 7 : $pfactor4;
+		$pfactor4 = ($pfactor4 < 2) ? 2 : $pfactor4;
+		$pfactor5 = ($pfactor5 > 7) ? 7 : $pfactor5;
+		$pfactor5 = ($pfactor5 < 2) ? 2 : $pfactor5;
+		$pfactor6 = ($pfactor6 > 7) ? 7 : $pfactor6;
+		$pfactor6 = ($pfactor6 < 2) ? 2 : $pfactor6;
+		$pfactor7 = ($pfactor7 > 7) ? 7 : $pfactor7;
+		$pfactor7 = ($pfactor7 < 2) ? 2 : $pfactor7;
 
 		$pdf->Ln();
 		$pdf->Cell(5,6,'5',1,0,'LR');
 		$pdf->Cell(50,6,'CosØ, in %',1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_1'] - $pfactor ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_2'] - $pfactor ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_3'] - $pfactor ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_4'] - $pfactor ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_5'] - $pfactor ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_6'] - $pfactor ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_7'] - $pfactor ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_1'] - $pfactor1 ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_2'] - $pfactor2 ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_3'] - $pfactor3 ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_4'] - $pfactor4 ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_5'] - $pfactor5 ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_6'] - $pfactor6 ,1,0,'C');
+		$pdf->Cell(20,6,$rated_curves['cos_in_percent_7'] - $pfactor7 ,1,0,'C');
 
 		/******************** 5. TEST INFORMATION ***************************/
 
@@ -1542,13 +1560,13 @@ class Motor_Test extends BaseController
 						$shaft_power_graph[6] => $power_factor_percentage_graph[6]
 				),
 				'Min Allowed' => array(
-						$rated_curves['shaft_power_p2_1'] => $rated_curves['cos_in_percent_1'] - $pfactor,
-						$rated_curves['shaft_power_p2_2'] => $rated_curves['cos_in_percent_2'] - $pfactor,
-						$rated_curves['shaft_power_p2_3'] => $rated_curves['cos_in_percent_3'] - $pfactor,
-						$rated_curves['shaft_power_p2_4'] => $rated_curves['cos_in_percent_4'] - $pfactor,
-						$rated_curves['shaft_power_p2_5'] => $rated_curves['cos_in_percent_5'] - $pfactor,
-						$rated_curves['shaft_power_p2_6'] => $rated_curves['cos_in_percent_6'] - $pfactor,
-						$rated_curves['shaft_power_p2_7'] => $rated_curves['cos_in_percent_7'] - $pfactor
+						$rated_curves['shaft_power_p2_1'] => $rated_curves['cos_in_percent_1'] - $pfactor1,
+						$rated_curves['shaft_power_p2_2'] => $rated_curves['cos_in_percent_2'] - $pfactor2,
+						$rated_curves['shaft_power_p2_3'] => $rated_curves['cos_in_percent_3'] - $pfactor3,
+						$rated_curves['shaft_power_p2_4'] => $rated_curves['cos_in_percent_4'] - $pfactor4,
+						$rated_curves['shaft_power_p2_5'] => $rated_curves['cos_in_percent_5'] - $pfactor5,
+						$rated_curves['shaft_power_p2_6'] => $rated_curves['cos_in_percent_6'] - $pfactor6,
+						$rated_curves['shaft_power_p2_7'] => $rated_curves['cos_in_percent_7'] - $pfactor7
 				)
 		);
 		$colors = array(
