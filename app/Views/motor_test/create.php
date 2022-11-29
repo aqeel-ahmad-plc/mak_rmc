@@ -87,7 +87,7 @@
 
             <div class="form-group col-md-4">
                 <label for="motor_rated_pf">Motor Rated PF</label>
-                <input type="number" step="0.01" class="form-control" name="motor_rated_pf" id="motor_rated_pf" value="<?= set_value('motor_rated_pf') ?>" placeholder="Enter Motor Rated PF">
+                <input type="number" step="0.00001" class="form-control" name="motor_rated_pf" id="motor_rated_pf" value="<?= set_value('motor_rated_pf') ?>" placeholder="Enter Motor Rated PF">
             </div>
             <div class="form-group col-md-4">
                 <label for="motor_rated_rpm">Motor Rated RPM</label>
@@ -156,15 +156,15 @@
 
               <div class="form-group col-md-4">
                   <label for="specified_temp">Specified Temperature</label>
-                  <input type="number" step="0.01" class="form-control" name="specified_temp" id="specified_temp" value="<?= set_value('specified_temp') ?>" placeholder="Enter Specified Temperature">
+                  <input type="number" step="0.00001" class="form-control" name="specified_temp" id="specified_temp" value="<?= set_value('specified_temp') ?>" placeholder="Enter Specified Temperature">
               </div>
               <div class="form-group col-md-4">
                   <label for="winding_resistance">Winding Resistance in Ohm</label>
-                  <input type="number" step="0.01" class="form-control" name="winding_resistance" id="winding_resistance"  value="<?= set_value('winding_resistance') ?>" placeholder="Enter Winding Resistance in Ohm">
+                  <input type="number" step="0.00001" class="form-control" name="winding_resistance" id="winding_resistance"  value="<?= set_value('winding_resistance') ?>" placeholder="Enter Winding Resistance in Ohm">
               </div>
               <div class="form-group col-md-4">
                   <label for="temp_at_which_winding_resistance_measured">Temperature at winding resistance is measured</label>
-                  <input type="number" step="0.01" class="form-control" name="temp_at_which_winding_resistance_measured" id="temp_at_which_winding_resistance_measured"  value="<?= set_value('temp_at_which_winding_resistance_measured') ?>" placeholder="Enter Temperature at which winding resistance is measured">
+                  <input type="number" step="0.00001" class="form-control" name="temp_at_which_winding_resistance_measured" id="temp_at_which_winding_resistance_measured"  value="<?= set_value('temp_at_which_winding_resistance_measured') ?>" placeholder="Enter Temperature at which winding resistance is measured">
               </div>
           </div>
           <h3 class="mt-3">Rated Curves  <input onclick="hideTable()" type="checkbox" style="width:22px; height:22px" name="rated_curves_checkbox" id="rated_curves_checkbox" checked> </h3>

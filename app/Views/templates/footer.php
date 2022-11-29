@@ -44,7 +44,7 @@ var motor_rated_hp = 0;
 
                   $("#averge_voltage_phase_to_phase").val(averge_voltage_phase_to_phase.toFixed(2));
 
-                  total_current = (parseFloat(obj[0]["current_a"]) + parseFloat(obj[0]["current_b"]) + parseFloat(obj[0]["current_c"]));
+                  total_current = (parseFloat(obj[0]["current_a"]) + parseFloat(obj[0]["current_b"]) + parseFloat(obj[0]["current_c"]))/3;
                   $("#total_current").text(total_current.toFixed(2));
                   $("#total_current").val(total_current.toFixed(2));
 

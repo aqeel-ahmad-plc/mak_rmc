@@ -698,13 +698,13 @@ class Motor_Test extends BaseController
 		$pdf->Ln(20);
 
     //need uncomment
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
+		//$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
 
 		$pdf->Ln(20);
     //need uncomment
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+		//$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
 
 
 		//Second page
@@ -718,7 +718,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -728,9 +728,9 @@ class Motor_Test extends BaseController
 		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
 		$pdf->Ln();
 		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
-		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
 		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
-		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
@@ -739,7 +739,7 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 		//need uncomment
-		$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,75),0,1,'R');
+		//$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,75),0,1,'R');
 
 		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
 		$pdf->Ln(10);
@@ -910,13 +910,13 @@ class Motor_Test extends BaseController
 		$o = $result[0]['no_of_poles'];
 
 
-		$slip_in_pu_1 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_1']))/(120*($k/$o));$slip_in_pu_1 = number_format((float)$slip_in_pu_1, 2, '.', '');
-		$slip_in_pu_2 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_2']))/(120*($k/$o));$slip_in_pu_2 = number_format((float)$slip_in_pu_2, 2, '.', '');
-		$slip_in_pu_3 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_3']))/(120*($k/$o));$slip_in_pu_3 = number_format((float)$slip_in_pu_3, 2, '.', '');
-		$slip_in_pu_4 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_4']))/(120*($k/$o));$slip_in_pu_4 = number_format((float)$slip_in_pu_4, 2, '.', '');
-		$slip_in_pu_5 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_5']))/(120*($k/$o));$slip_in_pu_5 = number_format((float)$slip_in_pu_5, 2, '.', '');
-		$slip_in_pu_6 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_6']))/(120*($k/$o));$slip_in_pu_6 = number_format((float)$slip_in_pu_6, 2, '.', '');
-		$slip_in_pu_7 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_7']))/(120*($k/$o));$slip_in_pu_7 = number_format((float)$slip_in_pu_7, 2, '.', '');
+		$slip_in_pu_1 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_1']))/(120*($k/$o));$slip_in_pu_1 = number_format((float)$slip_in_pu_1, 4, '.', '');
+		$slip_in_pu_2 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_2']))/(120*($k/$o));$slip_in_pu_2 = number_format((float)$slip_in_pu_2, 4, '.', '');
+		$slip_in_pu_3 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_3']))/(120*($k/$o));$slip_in_pu_3 = number_format((float)$slip_in_pu_3, 4, '.', '');
+		$slip_in_pu_4 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_4']))/(120*($k/$o));$slip_in_pu_4 = number_format((float)$slip_in_pu_4, 4, '.', '');
+		$slip_in_pu_5 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_5']))/(120*($k/$o));$slip_in_pu_5 = number_format((float)$slip_in_pu_5, 4, '.', '');
+		$slip_in_pu_6 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_6']))/(120*($k/$o));$slip_in_pu_6 = number_format((float)$slip_in_pu_6, 4, '.', '');
+		$slip_in_pu_7 = ((120*($k/$o)) - ($rated_curves['speed_in_rpm_7']))/(120*($k/$o));$slip_in_pu_7 = number_format((float)$slip_in_pu_7, 4, '.', '');
 
 
 		$pdf->Ln();
@@ -1042,7 +1042,7 @@ class Motor_Test extends BaseController
 
 
 		$pdf->Ln();
-		$pdf->Cell(5,6,'3',1,0,'LR');
+		$pdf->Cell(5,6,'4',1,0,'LR');
 		$pdf->Cell(50,6,'Min Speed, in RPM',1,0,'C');
 		$pdf->Cell(20,6,$min_speed_rpm_1,1,0,'C');
 		$pdf->Cell(20,6,$min_speed_rpm_2,1,0,'C');
@@ -1057,7 +1057,7 @@ class Motor_Test extends BaseController
 		$pfactor = ($pfactor < 2) ? 2 : $pfactor;
 
 		$pdf->Ln();
-		$pdf->Cell(5,6,'6',1,0,'LR');
+		$pdf->Cell(5,6,'5',1,0,'LR');
 		$pdf->Cell(50,6,'CosØ, in %',1,0,'C');
 		$pdf->Cell(20,6,$rated_curves['cos_in_percent_1'] - $pfactor ,1,0,'C');
 		$pdf->Cell(20,6,$rated_curves['cos_in_percent_2'] - $pfactor ,1,0,'C');
@@ -1093,7 +1093,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -1103,9 +1103,9 @@ class Motor_Test extends BaseController
 		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
 		$pdf->Ln();
 		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
-		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
 		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
-		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
 
 
 		$pdf->Ln();
@@ -1160,7 +1160,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		//$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
 
 		// Header
@@ -1170,9 +1170,9 @@ class Motor_Test extends BaseController
 		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
 		$pdf->Ln();
 		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
-		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
 		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
-		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
 
 
 		$pdf->Ln();
@@ -1188,13 +1188,13 @@ class Motor_Test extends BaseController
 
 		$pdf->Cell(5,6,'#',1,0,'C');
 		$pdf->Cell(71,6,'Test Point',1,0,'C');
-		$pdf->Cell(17,6,'0%',1,0,'C');
-		$pdf->Cell(17,6,'25%',1,0,'C');
-		$pdf->Cell(17,6,'50%',1,0,'C');
-		$pdf->Cell(17,6,'75%',1,0,'C');
-		$pdf->Cell(17,6,'100%',1,0,'C');
-		$pdf->Cell(17,6,'115%',1,0,'C');
-		$pdf->Cell(17,6,'130%',1,0,'C');
+		$pdf->Cell(17,6,$load_test_result[0]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,$load_test_result[1]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,$load_test_result[2]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,$load_test_result[3]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,$load_test_result[4]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,$load_test_result[5]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,$load_test_result[6]['loading_factor']."%",1,0,'C');
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(125,125,125);
