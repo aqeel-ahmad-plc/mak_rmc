@@ -1425,12 +1425,6 @@ class Motor_Test extends BaseController
 		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/efficiency_data.json", "w") or die("Unable to open file!");
 		fwrite($myfile, json_encode($efficiency_data));
 
-
-    sleep(5);
-
-
-
-
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
@@ -1444,55 +1438,51 @@ class Motor_Test extends BaseController
 		/****************** Speed Curve ***************************/
 
 
-		$data = array(
+		$speed_data = array(
 
-				'Max Allowed' => array(
-					$rated_curves['shaft_power_p2_1'] => $max_speed_rpm_1,
-					$rated_curves['shaft_power_p2_2'] => $max_speed_rpm_2,
-					$rated_curves['shaft_power_p2_3'] => $max_speed_rpm_3,
-					$rated_curves['shaft_power_p2_4'] => $max_speed_rpm_4,
-					$rated_curves['shaft_power_p2_5'] => $max_speed_rpm_5,
-					$rated_curves['shaft_power_p2_6'] => $max_speed_rpm_6,
-					$rated_curves['shaft_power_p2_7'] => $max_speed_rpm_7
+				'Max_Allowed' => array(
+					"max_speed_1" => $max_speed_rpm_1,
+					"max_speed_2" => $max_speed_rpm_2,
+					"max_speed_3" => $max_speed_rpm_3,
+					"max_speed_4" => $max_speed_rpm_4,
+					"max_speed_5" => $max_speed_rpm_5,
+					"max_speed_6" => $max_speed_rpm_6,
+					"max_speed_7" => $max_speed_rpm_7
 				),
-				'Min Allowed' => array(
-						$rated_curves['shaft_power_p2_1'] => $min_speed_rpm_1,
-						$rated_curves['shaft_power_p2_2'] => $min_speed_rpm_2,
-						$rated_curves['shaft_power_p2_3'] => $min_speed_rpm_3,
-						$rated_curves['shaft_power_p2_4'] => $min_speed_rpm_4,
-						$rated_curves['shaft_power_p2_5'] => $min_speed_rpm_5,
-						$rated_curves['shaft_power_p2_6'] => $min_speed_rpm_6,
-						$rated_curves['shaft_power_p2_7'] => $min_speed_rpm_7
+				'Min_Allowed' => array(
+						"min_speed_1" => $min_speed_rpm_1,
+						"min_speed_2" => $min_speed_rpm_2,
+						"min_speed_3" => $min_speed_rpm_3,
+						"min_speed_4" => $min_speed_rpm_4,
+						"min_speed_5" => $min_speed_rpm_5,
+						"min_speed_6" => $min_speed_rpm_6,
+						"min_speed_7" => $min_speed_rpm_7
 				),
-				'Hitachi Curve' => array(
-						$rated_curves['shaft_power_p2_1'] => $rated_curves['speed_in_rpm_1'],
-						$rated_curves['shaft_power_p2_2'] => $rated_curves['speed_in_rpm_2'],
-						$rated_curves['shaft_power_p2_3'] => $rated_curves['speed_in_rpm_3'],
-						$rated_curves['shaft_power_p2_4'] => $rated_curves['speed_in_rpm_4'],
-						$rated_curves['shaft_power_p2_5'] => $rated_curves['speed_in_rpm_5'],
-						$rated_curves['shaft_power_p2_6'] => $rated_curves['speed_in_rpm_6'],
-						$rated_curves['shaft_power_p2_7'] => $rated_curves['speed_in_rpm_7']
+				'Hitachi_Curve' => array(
+						"hitachi_1" => $rated_curves['speed_in_rpm_1'],
+						"hitachi_2" => $rated_curves['speed_in_rpm_2'],
+						"hitachi_3" => $rated_curves['speed_in_rpm_3'],
+						"hitachi_4" => $rated_curves['speed_in_rpm_4'],
+						"hitachi_5" => $rated_curves['speed_in_rpm_5'],
+						"hitachi_6" => $rated_curves['speed_in_rpm_6'],
+						"hitachi_7" => $rated_curves['speed_in_rpm_7']
 				),
-				'Test Curve' => array(
-						$shaft_power_graph[0] => $corrected_speed_rmin_graph[0],
-						$shaft_power_graph[1] => $corrected_speed_rmin_graph[1],
-						$shaft_power_graph[2] => $corrected_speed_rmin_graph[2],
-						$shaft_power_graph[3] => $corrected_speed_rmin_graph[3],
-						$shaft_power_graph[4] => $corrected_speed_rmin_graph[4],
-						$shaft_power_graph[5] => $corrected_speed_rmin_graph[5],
-						$shaft_power_graph[6] => $corrected_speed_rmin_graph[6]
+				'Test_Curve' => array(
+						"test_curve_1" => $corrected_speed_rmin_graph[0],
+						"test_curve_2" => $corrected_speed_rmin_graph[1],
+						"test_curve_3" => $corrected_speed_rmin_graph[2],
+						"test_curve_4" => $corrected_speed_rmin_graph[3],
+						"test_curve_5" => $corrected_speed_rmin_graph[4],
+						"test_curve_6" => $corrected_speed_rmin_graph[5],
+						"test_curve_7" => $corrected_speed_rmin_graph[6]
 				),
 		);
-		$colors = array(
-				'Test Curve' => array(0,0,0),
-				'Max Allowed' => array(163,36,153),
-				'Min Allowed' => array(200,36,220),
-				'Hitachi Curve' => array(150,206,210),
-				'F.L' => array(150,206,210)
-		);
+
+		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/speed_data.json", "w") or die("Unable to open file!");
+		fwrite($myfile, json_encode($speed_data));
 
 
-
+    sleep(5);
 
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',12);
@@ -1503,8 +1493,8 @@ class Motor_Test extends BaseController
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/speed_graph.png',10,50,200),0,1,'R');
 
-		$pdf->LineGraph(190,100,$data,'HgBdB',null,3600,5);
 
 
 
@@ -1512,7 +1502,7 @@ class Motor_Test extends BaseController
 
 
 		$data = array(
-				'Hitachi Curve' => array(
+				'Hitachi_Curve' => array(
 						$rated_curves['shaft_power_p2_1'] => $rated_curves['current_in_amps_1'],
 						$rated_curves['shaft_power_p2_2'] => $rated_curves['current_in_amps_2'],
 						$rated_curves['shaft_power_p2_3'] => $rated_curves['current_in_amps_3'],
@@ -1521,7 +1511,7 @@ class Motor_Test extends BaseController
 						$rated_curves['shaft_power_p2_6'] => $rated_curves['current_in_amps_6'],
 						$rated_curves['shaft_power_p2_7'] => $rated_curves['current_in_amps_7']
 				),
-				'Test Curve' => array(
+				'Test_Curve' => array(
 						$shaft_power_graph[0] => $total_current_graph[0],
 						$shaft_power_graph[1] => $total_current_graph[1],
 						$shaft_power_graph[2] => $total_current_graph[2],
