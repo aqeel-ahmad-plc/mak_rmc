@@ -29,7 +29,7 @@ class PDF extends FPDF
 
 	function SetWidths($w)
 	{
-		//Set the array of column widths
+		//Set the array of column widthf
 		$this->widths=$w;
 	}
 
@@ -997,15 +997,25 @@ class Motor_Test extends BaseController
 
 
 
+    $eff_percent_1 = ($eff_percent_1 < 0) ? 0 : $eff_percent_1;
+		$eff_percent_2 = ($eff_percent_2 < 0) ? 0 : $eff_percent_2;
+		$eff_percent_3 = ($eff_percent_3 < 0) ? 0 : $eff_percent_3;
+		$eff_percent_4 = ($eff_percent_4 < 0) ? 0 : $eff_percent_4;
+		$eff_percent_5 = ($eff_percent_5 < 0) ? 0 : $eff_percent_5;
+		$eff_percent_6 = ($eff_percent_6 < 0) ? 0 : $eff_percent_6;
+		$eff_percent_7 = ($eff_percent_7 < 0) ? 0 : $eff_percent_7;
+
+
+
 		$pdf->Cell(5,6,'2',1,0,'LR');
 		$pdf->Cell(50,6,'Efficiency, in %',1,0,'C');
-		$pdf->Cell(20,6,($eff_percent_1 < 0) ? 0 : $eff_percent_1,1,0,'C');
-		$pdf->Cell(20,6,($eff_percent_2 < 0) ? 0 : $eff_percent_2,1,0,'C');
-		$pdf->Cell(20,6,($eff_percent_3 < 0) ? 0 : $eff_percent_3,1,0,'C');
-		$pdf->Cell(20,6,($eff_percent_4 < 0) ? 0 : $eff_percent_4,1,0,'C');
-		$pdf->Cell(20,6,($eff_percent_5 < 0) ? 0 : $eff_percent_5,1,0,'C');
-		$pdf->Cell(20,6,($eff_percent_6 < 0) ? 0 : $eff_percent_6,1,0,'C');
-		$pdf->Cell(20,6,($eff_percent_7 < 0) ? 0 : $eff_percent_7,1,0,'C');
+		$pdf->Cell(20,6,$eff_percent_1,1,0,'C');
+		$pdf->Cell(20,6,$eff_percent_2,1,0,'C');
+		$pdf->Cell(20,6,$eff_percent_3,1,0,'C');
+		$pdf->Cell(20,6,$eff_percent_4,1,0,'C');
+		$pdf->Cell(20,6,$eff_percent_5,1,0,'C');
+		$pdf->Cell(20,6,$eff_percent_6,1,0,'C');
+		$pdf->Cell(20,6,$eff_percent_7,1,0,'C');
 
 		$sfactor = 0;
 		if($result[0]['motor_rated_kw'] >= 1){
@@ -1381,41 +1391,43 @@ class Motor_Test extends BaseController
 
 
 		$pdf->SetFont('Arial','',10);
-		$data = array(
-				'Hitachi Curve' => array(
-						$rated_curves['shaft_power_p2_1'] => $rated_curves['efficiency_in_percent_1'],
-						$rated_curves['shaft_power_p2_2'] => $rated_curves['efficiency_in_percent_2'],
-						$rated_curves['shaft_power_p2_3'] => $rated_curves['efficiency_in_percent_3'],
-						$rated_curves['shaft_power_p2_4'] => $rated_curves['efficiency_in_percent_4'],
-						$rated_curves['shaft_power_p2_5'] => $rated_curves['efficiency_in_percent_5'],
-						$rated_curves['shaft_power_p2_6'] => $rated_curves['efficiency_in_percent_6'],
-						$rated_curves['shaft_power_p2_7'] => $rated_curves['efficiency_in_percent_7']
+
+		$efficiency_data = array(
+				'Hitachi_Curve' => array(
+						"hitachi_1" => $rated_curves['efficiency_in_percent_1'],
+						"hitachi_2" => $rated_curves['efficiency_in_percent_2'],
+						"hitachi_3" => $rated_curves['efficiency_in_percent_3'],
+						"hitachi_4" => $rated_curves['efficiency_in_percent_4'],
+						"hitachi_5" => $rated_curves['efficiency_in_percent_5'],
+						"hitachi_6" => $rated_curves['efficiency_in_percent_6'],
+						"hitachi_7" => $rated_curves['efficiency_in_percent_7']
 				),
-				'Test Curve' => array(
-						$shaft_power_graph[0] => $efficiency_graph[0],
-						$shaft_power_graph[1] => $efficiency_graph[1],
-						$shaft_power_graph[2] => $efficiency_graph[2],
-						$shaft_power_graph[3] => $efficiency_graph[3],
-						$shaft_power_graph[4] => $efficiency_graph[4],
-						$shaft_power_graph[5] => $efficiency_graph[5],
-						$shaft_power_graph[6] => $efficiency_graph[6]
+				'Test_Curve' => array(
+						"test_curve_1" => $efficiency_graph[0],
+						"test_curve_2" => $efficiency_graph[1],
+						"test_curve_3" => $efficiency_graph[2],
+						"test_curve_4" => $efficiency_graph[3],
+						"test_curve_5" => $efficiency_graph[4],
+						"test_curve_6" => $efficiency_graph[5],
+						"test_curve_7" => $efficiency_graph[6]
 				),
-				'Min Allowed' => array(
-						$rated_curves['shaft_power_p2_1'] => $eff_percent_1,
-						$rated_curves['shaft_power_p2_2'] => $eff_percent_2,
-						$rated_curves['shaft_power_p2_3'] => $eff_percent_3,
-						$rated_curves['shaft_power_p2_4'] => $eff_percent_4,
-						$rated_curves['shaft_power_p2_5'] => $eff_percent_5,
-						$rated_curves['shaft_power_p2_6'] => $eff_percent_6,
-						$rated_curves['shaft_power_p2_7'] => $eff_percent_7
+				'Min_Allowed' => array(
+						"min_allowed_1" => $eff_percent_1,
+						"min_allowed_2" => $eff_percent_2,
+						"min_allowed_3" => $eff_percent_3,
+						"min_allowed_4" => $eff_percent_4,
+						"min_allowed_5" => $eff_percent_5,
+						"min_allowed_6" => $eff_percent_6,
+						"min_allowed_7" => $eff_percent_7
 				)
 		);
-		$colors = array(
-				'Hitachi Curve' => array(200,36,220),
-				'Test Curve' => array(114,171,237),
-				'Min Allowed' => array(163,36,153)
 
-		);
+		$myfile = fopen("/home/aqeel/workspace/mak_rmc/assets/images/efficiency_data.json", "w") or die("Unable to open file!");
+		fwrite($myfile, json_encode($efficiency_data));
+
+		$command = escapeshellcmd('python3 /home/aqeel/workspace/mak_rmc/assets/images/plot_graphs_efficiency.py');
+
+    $output = shell_exec($command);
 
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',12);
@@ -1426,8 +1438,7 @@ class Motor_Test extends BaseController
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
-		$pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors,6,3);
-
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/efficiency_graph.png',10,50,200),0,1,'R');
 		/****************** Speed Curve ***************************/
 
 
