@@ -1422,12 +1422,14 @@ class Motor_Test extends BaseController
 				)
 		);
 
-		$myfile = fopen("/home/aqeel/workspace/mak_rmc/assets/images/efficiency_data.json", "w") or die("Unable to open file!");
+		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/efficiency_data.json", "w") or die("Unable to open file!");
 		fwrite($myfile, json_encode($efficiency_data));
 
-		$command = escapeshellcmd('python3 /home/aqeel/workspace/mak_rmc/assets/images/plot_graphs_efficiency.py');
 
-    $output = shell_exec($command);
+    sleep(5);
+
+
+
 
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',12);
