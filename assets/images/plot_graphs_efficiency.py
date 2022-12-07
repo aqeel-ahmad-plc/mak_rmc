@@ -7,11 +7,12 @@ import pandas as pd
 from scipy.interpolate import make_interp_spline
 import time
 import json
-
+import os
 
 # Opening JSON file
 
 def efficiency_graph():
+    plt.figure()
     f = open('C:/wamp64/www/mak_rmc/assets/images/efficiency_data.json')
     hitachi = []
     test_curve = []
@@ -71,11 +72,14 @@ def efficiency_graph():
     plt.legend(loc='lower right')
 
     # plt.show()
+    #os.remove('C:/wamp64/www/mak_rmc/assets/images/efficiency_graph.png')
 
     plt.savefig('C:/wamp64/www/mak_rmc/assets/images/efficiency_graph.png'
                 )
+    plt.close()
 
 def speed_graph():
+    plt.figure()
     f = open('C:/wamp64/www/mak_rmc/assets/images/speed_data.json')
     hitachi = []
     test_curve = []
@@ -117,9 +121,9 @@ def speed_graph():
 
     X_Y_Spline = make_interp_spline(x, test_curve)
 
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Test Curve')
+    # X_ = np.linspace(min(x), max(x), 500)
+    # Y_ = X_Y_Spline(X_)
+    # plt.plot(X_, Y_, label='Test Curve')
 
     X_Y_Spline = make_interp_spline(x, min_allowed)
     X_ = np.linspace(min(x), max(x), 500)
@@ -144,9 +148,11 @@ def speed_graph():
     plt.legend(loc='lower right')
 
     # plt.show()
+    #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')
 
     plt.savefig('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png'
                 )
+    plt.close()
 
 
 
@@ -154,6 +160,6 @@ def speed_graph():
 # a dictionary
 
 while True:
-    efficiency_graph()
+    #efficiency_graph()
     speed_graph()
     time.sleep(2)
