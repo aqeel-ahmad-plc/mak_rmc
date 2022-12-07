@@ -240,7 +240,7 @@ def cos_graph():
         iterator = iterator + 1
     iterator = 0
     for i in data['Min_Allowed']:
-        test_curve.insert(iterator, data['Min_Allowed'][i])
+        min_allowed.insert(iterator, data['Min_Allowed'][i])
         iterator = iterator + 1
 
     X_Y_Spline = make_interp_spline(x, hitachi)
@@ -285,4 +285,5 @@ while True:
     efficiency_graph()
     speed_graph()
     current_graph()
+    cos_graph()
     time.sleep(2)
