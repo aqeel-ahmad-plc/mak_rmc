@@ -45,7 +45,7 @@ def efficiency_graph():
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Hitachi Curve')
+    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve)
 
@@ -118,7 +118,7 @@ def speed_graph():
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Hitachi Curve')
+    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve)
 
@@ -187,7 +187,7 @@ def current_graph():
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Hitachi Curve')
+    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve)
 
@@ -249,7 +249,7 @@ def cos_graph():
     X_Y_Spline = make_interp_spline(x, hitachi)
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Hitachi Curve')
+    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve)
     X_ = np.linspace(min(x), max(x), 500)
