@@ -1425,16 +1425,6 @@ class Motor_Test extends BaseController
 		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/efficiency_data.json", "w") or die("Unable to open file!");
 		fwrite($myfile, json_encode($efficiency_data));
 
-		$pdf->AddPage();
-		$pdf->SetFont('Arial','B',12);
-		$pdf->SetFillColor(0,0,0);
-		$pdf->SetTextColor(255,255,255);
-		$pdf->Cell(195,6,'8. EFFICIENCY CURVE',1,0,'C', true);
-		$pdf->Ln(20);
-		$pdf->SetFont('Arial','',12);
-		$pdf->SetFillColor(255,255,255);
-		$pdf->SetTextColor(0,0,0);
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/efficiency_graph.png',10,50,200),0,1,'R');
 		/****************** Speed Curve ***************************/
 
 
@@ -1482,7 +1472,89 @@ class Motor_Test extends BaseController
 		fwrite($myfile, json_encode($speed_data));
 
 
-    sleep(5);
+
+
+
+		/****************** 10. CURRENT CURVE ***************************/
+
+
+		$current_data = array(
+				'Hitachi_Curve' => array(
+						"hitachi_1" => $rated_curves['current_in_amps_1'],
+						"hitachi_2" => $rated_curves['current_in_amps_2'],
+						"hitachi_3" => $rated_curves['current_in_amps_3'],
+						"hitachi_4" => $rated_curves['current_in_amps_4'],
+						"hitachi_5" => $rated_curves['current_in_amps_5'],
+						"hitachi_6" => $rated_curves['current_in_amps_6'],
+						"hitachi_7" => $rated_curves['current_in_amps_7']
+				),
+				'Test_Curve' => array(
+						"test_curve_1" => $total_current_graph[0],
+						"test_curve_2" => $total_current_graph[1],
+						"test_curve_3" => $total_current_graph[2],
+						"test_curve_4" => $total_current_graph[3],
+						"test_curve_5" => $total_current_graph[4],
+						"test_curve_6" => $total_current_graph[5],
+						"test_curve_7" => $total_current_graph[6]
+				),
+		);
+
+
+
+		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/current_data.json", "w") or die("Unable to open file!");
+		fwrite($myfile, json_encode($current_data));
+
+
+
+
+		$cos_data = array(
+				'Hitachi_Curve' => array(
+						"hitachi_1" => $rated_curves['cos_in_percent_1'],
+						"hitachi_2" => $rated_curves['cos_in_percent_2'],
+						"hitachi_3" => $rated_curves['cos_in_percent_3'],
+						"hitachi_4" => $rated_curves['cos_in_percent_4'],
+						"hitachi_5" => $rated_curves['cos_in_percent_5'],
+						"hitachi_6" => $rated_curves['cos_in_percent_6'],
+						"hitachi_7" => $rated_curves['cos_in_percent_7']
+				),
+				'Test_Curve' => array(
+						"test_curve_1" => $power_factor_percentage_graph[0],
+						"test_curve_2" => $power_factor_percentage_graph[1],
+						"test_curve_3" => $power_factor_percentage_graph[2],
+						"test_curve_4" => $power_factor_percentage_graph[3],
+						"test_curve_5" => $power_factor_percentage_graph[4],
+						"test_curve_6" => $power_factor_percentage_graph[5],
+						"test_curve_7" => $power_factor_percentage_graph[6]
+				),
+				'Min_Allowed' => array(
+						"min_allowed_1" => $rated_curves['cos_in_percent_1'] - $pfactor1,
+						"min_allowed_2" => $rated_curves['cos_in_percent_2'] - $pfactor2,
+						"min_allowed_3" => $rated_curves['cos_in_percent_3'] - $pfactor3,
+						"min_allowed_4" => $rated_curves['cos_in_percent_4'] - $pfactor4,
+						"min_allowed_5" => $rated_curves['cos_in_percent_5'] - $pfactor5,
+						"min_allowed_6" => $rated_curves['cos_in_percent_6'] - $pfactor6,
+						"min_allowed_7" => $rated_curves['cos_in_percent_7'] - $pfactor7
+				)
+		);
+
+		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/cos_data.json", "w") or die("Unable to open file!");
+		fwrite($myfile, json_encode($cos_data));
+
+		sleep(5);
+
+		/****************** 11. COSØ CURVE ***************************/
+
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFillColor(0,0,0);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->Cell(195,6,'8. EFFICIENCY CURVE',1,0,'C', true);
+		$pdf->Ln(20);
+		$pdf->SetFont('Arial','',12);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/efficiency_graph.png',10,50,200),0,1,'R');
+
 
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',12);
@@ -1495,38 +1567,6 @@ class Motor_Test extends BaseController
 		$pdf->SetTextColor(0,0,0);
 		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/speed_graph.png',10,50,200),0,1,'R');
 
-
-
-
-		/****************** 10. CURRENT CURVE ***************************/
-
-
-		$data = array(
-				'Hitachi_Curve' => array(
-						$rated_curves['shaft_power_p2_1'] => $rated_curves['current_in_amps_1'],
-						$rated_curves['shaft_power_p2_2'] => $rated_curves['current_in_amps_2'],
-						$rated_curves['shaft_power_p2_3'] => $rated_curves['current_in_amps_3'],
-						$rated_curves['shaft_power_p2_4'] => $rated_curves['current_in_amps_4'],
-						$rated_curves['shaft_power_p2_5'] => $rated_curves['current_in_amps_5'],
-						$rated_curves['shaft_power_p2_6'] => $rated_curves['current_in_amps_6'],
-						$rated_curves['shaft_power_p2_7'] => $rated_curves['current_in_amps_7']
-				),
-				'Test_Curve' => array(
-						$shaft_power_graph[0] => $total_current_graph[0],
-						$shaft_power_graph[1] => $total_current_graph[1],
-						$shaft_power_graph[2] => $total_current_graph[2],
-						$shaft_power_graph[3] => $total_current_graph[3],
-						$shaft_power_graph[4] => $total_current_graph[4],
-						$shaft_power_graph[5] => $total_current_graph[5],
-						$shaft_power_graph[6] => $total_current_graph[6]
-				),
-		);
-		$colors = array(
-			  'Hitachi Curve' => array(150,206,210),
-				'Test Curve' => array(200,36,220)
-
-		);
-
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
@@ -1536,48 +1576,7 @@ class Motor_Test extends BaseController
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
-
-		$pdf->LineGraph(190,100,$data,'HgBdB',null,200,5);
-
-
-		/****************** 11. COSØ CURVE ***************************/
-
-
-		$data = array(
-				'Hitachi Curve' => array(
-						$rated_curves['shaft_power_p2_1'] => $rated_curves['cos_in_percent_1'],
-						$rated_curves['shaft_power_p2_2'] => $rated_curves['cos_in_percent_2'],
-						$rated_curves['shaft_power_p2_3'] => $rated_curves['cos_in_percent_3'],
-						$rated_curves['shaft_power_p2_4'] => $rated_curves['cos_in_percent_4'],
-						$rated_curves['shaft_power_p2_5'] => $rated_curves['cos_in_percent_5'],
-						$rated_curves['shaft_power_p2_6'] => $rated_curves['cos_in_percent_6'],
-						$rated_curves['shaft_power_p2_7'] => $rated_curves['cos_in_percent_7']
-				),
-				'Test Curve' => array(
-						$shaft_power_graph[0] => $power_factor_percentage_graph[0],
-						$shaft_power_graph[1] => $power_factor_percentage_graph[1],
-						$shaft_power_graph[2] => $power_factor_percentage_graph[2],
-						$shaft_power_graph[3] => $power_factor_percentage_graph[3],
-						$shaft_power_graph[4] => $power_factor_percentage_graph[4],
-						$shaft_power_graph[5] => $power_factor_percentage_graph[5],
-						$shaft_power_graph[6] => $power_factor_percentage_graph[6]
-				),
-				'Min Allowed' => array(
-						$rated_curves['shaft_power_p2_1'] => $rated_curves['cos_in_percent_1'] - $pfactor1,
-						$rated_curves['shaft_power_p2_2'] => $rated_curves['cos_in_percent_2'] - $pfactor2,
-						$rated_curves['shaft_power_p2_3'] => $rated_curves['cos_in_percent_3'] - $pfactor3,
-						$rated_curves['shaft_power_p2_4'] => $rated_curves['cos_in_percent_4'] - $pfactor4,
-						$rated_curves['shaft_power_p2_5'] => $rated_curves['cos_in_percent_5'] - $pfactor5,
-						$rated_curves['shaft_power_p2_6'] => $rated_curves['cos_in_percent_6'] - $pfactor6,
-						$rated_curves['shaft_power_p2_7'] => $rated_curves['cos_in_percent_7'] - $pfactor7
-				)
-		);
-		$colors = array(
-				'Hitachi Curve' => array(150,206,210),
-				'Test Curve' => array(20,36,220),
-				'Min Allowed' => array(100,136,210)
-
-		);
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/current_graph.png',10,50,200),0,1,'R');
 
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',12);
@@ -1588,15 +1587,7 @@ class Motor_Test extends BaseController
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
-
-		$pdf->LineGraph(190,100,$data,'HgBdB',null,100,5);
-
-
-
-
-
-
-
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/cos_graph.png',10,50,200),0,1,'R');
 
 		$pdf->Output('D','Test_Report.pdf');
   }
