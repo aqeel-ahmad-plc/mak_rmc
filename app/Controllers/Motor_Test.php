@@ -361,6 +361,7 @@ class Motor_Test extends BaseController
 			$rules = [
 				'test_report_no' => 'required|min_length[2]|max_length[200]',
         'test_date' => 'required',
+				'hitachi_curve' => 'required',
         'motor_manufacturer' => 'required',
         'motor_model' => 'required',
         'motor_type' => 'required',
@@ -450,6 +451,7 @@ class Motor_Test extends BaseController
 				$newData = [
 					'test_report_no' => $this->request->getVar('test_report_no'),
           'test_date' => $this->request->getVar('test_date'),
+					'hitachi_curve' => $this->request->getVar('hitachi_curve'),
           'motor_manufacturer' => $this->request->getVar('motor_manufacturer'),
           'motor_model' => $this->request->getVar('motor_model'),
           'motor_type' => $this->request->getVar('motor_type'),
@@ -1393,6 +1395,7 @@ class Motor_Test extends BaseController
 		$pdf->SetFont('Arial','',10);
 
 		$efficiency_data = array(
+			  'Hitachi_Curve_Legend' => $result[0]['hitachi_curve']
 				'Hitachi_Curve' => array(
 						"hitachi_1" => $rated_curves['efficiency_in_percent_1'],
 						"hitachi_2" => $rated_curves['efficiency_in_percent_2'],
@@ -1429,6 +1432,7 @@ class Motor_Test extends BaseController
 
 
 		$speed_data = array(
+			'Hitachi_Curve_Legend' => $result[0]['hitachi_curve']
 
 				'Max_Allowed' => array(
 					"max_speed_1" => $max_speed_rpm_1,
@@ -1479,6 +1483,7 @@ class Motor_Test extends BaseController
 
 
 		$current_data = array(
+			'Hitachi_Curve_Legend' => $result[0]['hitachi_curve']
 				'Hitachi_Curve' => array(
 						"hitachi_1" => $rated_curves['current_in_amps_1'],
 						"hitachi_2" => $rated_curves['current_in_amps_2'],
@@ -1508,6 +1513,7 @@ class Motor_Test extends BaseController
 
 
 		$cos_data = array(
+			'Hitachi_Curve_Legend' => $result[0]['hitachi_curve']
 				'Hitachi_Curve' => array(
 						"hitachi_1" => $rated_curves['cos_in_percent_1'],
 						"hitachi_2" => $rated_curves['cos_in_percent_2'],

@@ -22,6 +22,11 @@
                 <label for="test_date">Test Date</label>
                 <input type="date" class="form-control" name="test_date" id="test_date"  value="<?= set_value('test_date') ?>" placeholder="Enter Package">
             </div>
+
+            <div class="form-group col-md-4">
+                <label for="hitachi_curve">Hitachi Curve</label>
+                <input type="text" class="form-control" name="hitachi_curve" id="hitachi_curve" value="Hitachi Curve">
+            </div>
         </div>
         <h3 class="mt-3">Motor Nameplate and Rated Data</h3>
 

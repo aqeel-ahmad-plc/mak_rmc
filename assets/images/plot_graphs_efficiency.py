@@ -203,7 +203,8 @@ def current_graph():
 
     # plt.grid()
 
-    plt.legend(loc='lower right')
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+          fancybox=True, shadow=True, ncol=5)
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')

@@ -8,6 +8,7 @@ class Motor_Test_model extends Model{
   protected $allowedFields  = [
                                 'test_report_no',
                                 'test_date',
+                                'hitachi_curve',
                                 'motor_manufacturer',
                                 'motor_model',
                                 'motor_type',
