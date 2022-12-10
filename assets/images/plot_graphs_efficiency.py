@@ -12,7 +12,9 @@ import os
 # Opening JSON file
 
 def efficiency_graph():
-    plt.figure()
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.margins(x=0, y=0)
     f = open('C:/wamp64/www/mak_rmc/assets/images/efficiency_data.json')
     hitachi = []
     test_curve = []
@@ -67,6 +69,23 @@ def efficiency_graph():
     plt.ylabel('Measured Efficiency, in %')
     plt.grid(True)
 
+
+    major_ticks = np.arange(0, 60, 5)
+    minor_ticks = np.arange(0, 60, 5)
+
+    ax.set_xticks(major_ticks)
+    #ax.set_xticks(minor_ticks, minor=True)
+    ax.set_yticks(np.arange(0, 100, 5))
+    #ax.set_yticks(np.arange(0, 300, 5), minor=True)
+
+    # And a corresponding grid
+    ax.grid(which='both')
+
+    # Or if you want different settings for the grids:
+    #ax.grid(which='minor', alpha=0.2)
+    ax.grid(which='major', alpha=0.5)
+
+
     # plt.grid()
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
@@ -80,7 +99,9 @@ def efficiency_graph():
     plt.close()
 
 def speed_graph():
-    plt.figure()
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.margins(x=0, y=0)
     f = open('C:/wamp64/www/mak_rmc/assets/images/speed_data.json')
     hitachi = []
     test_curve = []
@@ -144,6 +165,24 @@ def speed_graph():
     plt.ylabel('Speed, in RPM')
     plt.grid(True)
 
+    major_ticks = np.arange(0, 60, 5)
+    minor_ticks = np.arange(0, 60, 5)
+
+    ax.set_xticks(major_ticks)
+    #ax.set_xticks(minor_ticks, minor=True)
+    ax.set_yticks(np.arange(2800, 3000, 50), minor=False)
+    ax.set_yticks(np.arange(2800, 3000, 10), minor=True)
+    #ax.set_yticks(np.arange(0, 300, 5), minor=True)
+
+    # And a corresponding grid
+    ax.grid(which='both')
+
+    # Or if you want different settings for the grids:
+    #ax.grid(which='minor', alpha=0.2)
+    ax.grid(which='major', alpha=0.5)
+
+
+
     # plt.grid()
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
@@ -157,7 +196,9 @@ def speed_graph():
     plt.close()
 
 def current_graph():
-    plt.figure()
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.margins(x=0, y=0)
     f = open('C:/wamp64/www/mak_rmc/assets/images/current_data.json')
     hitachi = []
     test_curve = []
@@ -203,6 +244,23 @@ def current_graph():
     plt.ylabel('Current, in Amps')
     plt.grid(True)
 
+    major_ticks = np.arange(0, 60, 5)
+    minor_ticks = np.arange(0, 60, 5)
+
+    ax.set_xticks(major_ticks)
+    #ax.set_xticks(minor_ticks, minor=True)
+    ax.set_yticks(np.arange(0, 200, 10))
+    #ax.set_yticks(np.arange(0, 300, 5), minor=True)
+
+    # And a corresponding grid
+    ax.grid(which='both')
+
+    # Or if you want different settings for the grids:
+    #ax.grid(which='minor', alpha=0.2)
+    ax.grid(which='major', alpha=0.5)
+
+
+
     # plt.grid()
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
@@ -217,7 +275,9 @@ def current_graph():
 
 
 def cos_graph():
-    plt.figure()
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.margins(x=0, y=0)
     f = open('C:/wamp64/www/mak_rmc/assets/images/cos_data.json')
     hitachi = []
     test_curve = []
@@ -268,6 +328,23 @@ def cos_graph():
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('CosØ , in %')
     plt.grid(True)
+
+    major_ticks = np.arange(0, 60, 5)
+    minor_ticks = np.arange(0, 60, 5)
+
+    ax.set_xticks(major_ticks)
+    #ax.set_xticks(minor_ticks, minor=True)
+    ax.set_yticks(np.arange(0, 100, 5))
+    #ax.set_yticks(np.arange(0, 300, 5), minor=True)
+
+    # And a corresponding grid
+    ax.grid(which='both')
+
+    # Or if you want different settings for the grids:
+    #ax.grid(which='minor', alpha=0.2)
+    ax.grid(which='major', alpha=0.5)
+
+
 
     # plt.grid()
 

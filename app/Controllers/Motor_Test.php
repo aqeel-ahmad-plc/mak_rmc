@@ -17,6 +17,7 @@ class PDF extends FPDF
 		/* Logo */
 		//$this->Image(base_url().'/assets/images/logo_2.png',10,6,15);
 		/* Move to the right */
+		$this->SetTextColor(0);
 		$this->Cell(70);
 		$this->SetFont('Arial','B',20);
 		$this->Cell(50,15,'MOTOR EFFICIENCY TEST REPORT',0,0,'C');
@@ -678,6 +679,8 @@ class Motor_Test extends BaseController
 
 		$pdf = new PDF();
 		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
+
 		$motor_tests_model = new Motor_Test_model();
 		$result = $motor_tests_model->getMotorTestData($id);
 
@@ -706,12 +709,13 @@ class Motor_Test extends BaseController
 
 		$pdf->Ln(20);
     //need uncomment
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
 
 
 		//Second page
 
 		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
 
 
 		/*output the result*/
@@ -741,7 +745,7 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 		//need uncomment
-		$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,75),0,1,'R');
+		$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],20,76,160),0,1,'R');
 
 		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
 		$pdf->Ln(10);
@@ -958,6 +962,11 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 		/******************** 4. MAXIMUM ALLOWED DEVIATION FROM RATED DATA AS PER IEC 60034-1 TABLE-20 ***************************/
+		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
+
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+
 
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
@@ -1118,6 +1127,7 @@ class Motor_Test extends BaseController
 
 
 		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
 
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(150 ,5,'',0,1);
@@ -1185,6 +1195,7 @@ class Motor_Test extends BaseController
 
 
 		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
 
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(150 ,5,'',0,1);
@@ -1212,7 +1223,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(195,6,'7. LOAD TEST RESULTS',1,0,'C', true);
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','B',14);
+		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(125,125,125);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1226,7 +1237,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(17,6,$load_test_result[5]['loading_factor']."%",1,0,'C');
 		$pdf->Cell(17,6,$load_test_result[6]['loading_factor']."%",1,0,'C');
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',12);
+		$pdf->SetFont('Arial','',10);
 		$pdf->SetFillColor(125,125,125);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1245,7 +1256,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(71,6,'Stator Resistance(Cold) measure at Temp C',1,0,'LR');
 		$pdf->Cell(119,6,$result[0]['temp_at_which_winding_resistance_measured'],1,0,'C');
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',12);
+		$pdf->SetFont('Arial','',10);
 
 
 
@@ -1546,54 +1557,212 @@ class Motor_Test extends BaseController
 		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/cos_data.json", "w") or die("Unable to open file!");
 		fwrite($myfile, json_encode($cos_data));
 
-		sleep(5);
+		sleep(6);
 
 		/****************** 11. COSØ CURVE ***************************/
 
 		$pdf->AddPage();
+
+		$pdf->Rect(5, 5, 200, 287, 'S');
+
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->SetFont('Arial', 'B', 12);
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
+		$pdf->Ln();
+
+
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
-		$pdf->Cell(195,6,'8. EFFICIENCY CURVE',1,0,'C', true);
-		$pdf->Ln(20);
-		$pdf->SetFont('Arial','',12);
-		$pdf->SetFillColor(255,255,255);
-		$pdf->SetTextColor(0,0,0);
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/efficiency_graph.png',10,50,200),0,1,'R');
+		$pdf->Cell(195,6,'8. EFFICIENCY CURVE',1,1,'C', true);
+
+		$pdf->SetTextColor(0);
+		$pdf->SetFont('Arial', '', 12);
+		$pdf->Cell(62,6,'Measured Efficiency, in %',1,0,'C');
+		$pdf->Cell(19,6,$efficiency_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$efficiency_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$efficiency_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$efficiency_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$efficiency_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$efficiency_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$efficiency_graph[6],1,0,'C');
+		$pdf->Ln();
+
+		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+
+
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/efficiency_graph.png',7,80,190),0,1,'R');
 
 
 		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
+
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+
+
+		$pdf->SetFont('Arial', 'B', 12);
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
+		$pdf->Ln();
+
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'9. SPEED CURVE',1,0,'C', true);
-		$pdf->Ln(20);
+		$pdf->Ln();
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/speed_graph.png',10,50,200),0,1,'R');
+
+
+		$pdf->SetTextColor(0);
+		$pdf->SetFont('Arial', '', 12);
+		$pdf->Cell(62,6,'Measured Speed, in RPM',1,0,'C');
+		$pdf->Cell(19,6,$corrected_speed_rmin_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$corrected_speed_rmin_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$corrected_speed_rmin_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$corrected_speed_rmin_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$corrected_speed_rmin_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$corrected_speed_rmin_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$corrected_speed_rmin_graph[6],1,0,'C');
+		$pdf->Ln();
+
+		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/speed_graph.png',7,80,190),0,1,'R');
 
 		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
+
+
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+
+		$pdf->SetFont('Arial', 'B', 12);
+
+		$pdf->SetTextColor(0);
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
+		$pdf->Ln();
+
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'10. CURRENT CURVE',1,0,'C', true);
-		$pdf->Ln(20);
+		$pdf->Ln();
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/current_graph.png',10,50,200),0,1,'R');
+
+		$pdf->SetTextColor(0);
+		$pdf->SetFont('Arial', '', 12);
+		$pdf->Cell(62,6,'Measured Current, in Amps',1,0,'C');
+		$pdf->Cell(19,6,$total_current_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$total_current_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$total_current_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$total_current_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$total_current_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$total_current_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$total_current_graph[6],1,0,'C');
+		$pdf->Ln();
+
+		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/current_graph.png',7,80,190),0,1,'R');
 
 		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
+
+
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->SetFont('Arial', 'B', 12);
+
+
+		$pdf->SetTextColor(0);
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
+		$pdf->Ln();
+
 		$pdf->SetFont('Arial','B',12);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'11. COSØ CURVE',1,0,'C', true);
-		$pdf->Ln(20);
+		$pdf->Ln();
 		$pdf->SetFont('Arial','',12);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
-		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/cos_graph.png',10,50,200),0,1,'R');
+
+		$pdf->SetTextColor(0);
+		$pdf->SetFont('Arial', '', 12);
+		$pdf->Cell(62,6,'Measured CosØ , in %',1,0,'C');
+		$pdf->Cell(19,6,$power_factor_percentage_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$power_factor_percentage_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$power_factor_percentage_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$power_factor_percentage_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$power_factor_percentage_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$power_factor_percentage_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$power_factor_percentage_graph[6],1,0,'C');
+		$pdf->Ln();
+
+		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
+		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+
+		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/cos_graph.png',7,80,190),0,1,'R');
 
 		$pdf->Output('D','Test_Report.pdf');
   }
