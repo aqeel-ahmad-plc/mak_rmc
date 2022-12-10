@@ -2,6 +2,8 @@
 .htaccess
 /app/Config/App.php
 /assets/uploads/
+/assets/images/*.png
+/assets/images/*.json
 writable/cache/*
 !writable/cache/index.html
 
