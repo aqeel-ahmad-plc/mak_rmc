@@ -64,7 +64,7 @@ def efficiency_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x=7, color='g', label='F.L.', linewidth=2)
+    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('Measured Efficiency, in %')
     plt.grid(True)
@@ -160,7 +160,7 @@ def speed_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x=7, color='g', label='F.L.', linewidth=2)
+    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('Speed, in RPM')
     plt.grid(True)
@@ -239,7 +239,7 @@ def current_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x=7, color='g', label='F.L.', linewidth=2)
+    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('Current, in Amps')
     plt.grid(True)
@@ -324,7 +324,7 @@ def cos_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x=7, color='g', label='F.L.', linewidth=2)
+    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('CosØ , in %')
     plt.grid(True)

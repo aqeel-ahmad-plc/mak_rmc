@@ -1406,6 +1406,7 @@ class Motor_Test extends BaseController
 		$pdf->SetFont('Arial','',10);
 
 		$efficiency_data = array(
+			  'FL' => $result[0]['motor_rated_kw'],
 			  'Hitachi_Curve_Legend' => $result[0]['hitachi_curve'],
 				'Hitachi_Curve' => array(
 						"hitachi_1" => $rated_curves['efficiency_in_percent_1'],
@@ -1443,7 +1444,7 @@ class Motor_Test extends BaseController
 
 
 		$speed_data = array(
-
+       'FL' => $result[0]['motor_rated_kw'],
 			'Hitachi_Curve_Legend' => $result[0]['hitachi_curve'],
 				'Max_Allowed' => array(
 					"max_speed_1" => $max_speed_rpm_1,
@@ -1494,6 +1495,7 @@ class Motor_Test extends BaseController
 
 
 		$current_data = array(
+			'FL' => $result[0]['motor_rated_kw'],
 			'Hitachi_Curve_Legend' => $result[0]['hitachi_curve'],
 				'Hitachi_Curve' => array(
 						"hitachi_1" => $rated_curves['current_in_amps_1'],
@@ -1524,6 +1526,7 @@ class Motor_Test extends BaseController
 
 
 		$cos_data = array(
+			'FL' => $result[0]['motor_rated_kw'], 
 			'Hitachi_Curve_Legend' => $result[0]['hitachi_curve'],
 				'Hitachi_Curve' => array(
 						"hitachi_1" => $rated_curves['cos_in_percent_1'],
