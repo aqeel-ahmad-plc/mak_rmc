@@ -1108,6 +1108,30 @@ class Motor_Test extends BaseController
 
 		/******************** 5. TEST INFORMATION ***************************/
 
+		$pdf->AddPage();
+		$pdf->Rect(5, 5, 200, 287, 'S');
+
+
+		/*output the result*/
+
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(150 ,5,'',0,1);
+
+		//need uncomment
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+
+
+		// Header
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
+
 
 		$pdf->Ln();
 		$pdf->SetFont('Arial','B',12);
@@ -1526,7 +1550,7 @@ class Motor_Test extends BaseController
 
 
 		$cos_data = array(
-			'FL' => $result[0]['motor_rated_kw'], 
+			'FL' => $result[0]['motor_rated_kw'],
 			'Hitachi_Curve_Legend' => $result[0]['hitachi_curve'],
 				'Hitachi_Curve' => array(
 						"hitachi_1" => $rated_curves['cos_in_percent_1'],
