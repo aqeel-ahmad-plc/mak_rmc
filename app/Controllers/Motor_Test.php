@@ -676,32 +676,184 @@ class Motor_Test extends BaseController
 	}
 
 	public function export_csv($id){
-		$path = 'Load_Test_Result_'.date('Ymd').'.csv';
-		$file = new \CodeIgniter\Files\File($path);
+
+		$motor_tests_model = new Motor_Test_model();
+		$result = $motor_tests_model->getMotorTestData($id);
+
+		$noload_test_tests_model = new No_Load_Test_model();
+		$no_load_test_result = $noload_test_tests_model->getNoLoadTestData($id);
+
+		$load_test_tests_model = new Load_Test_model();
+		$load_test_result = $load_test_tests_model->getLoadTestData($id);
+
+		$file_name = 'Load_Test_Report.csv';
 		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=$path");
+		header("Content-Disposition: attachment; filename=$file_name");
 		header("Content-Type: application/csv;");
 
+		// file creation
+		$file = fopen('php://output', 'w');
+		fputcsv($file, array("","","","Load Test Report","","","",""));
+		fputcsv($file, array("","","","","","","",""));
+		fputcsv($file, array("","","","","","","",""));
+		fputcsv($file, array("TEST REPORT NO",$result[0]['test_report_no'], "DATED", $result[0]['test_date']));
+		fputcsv($file, array("MOTOR MODEL",$result[0]['motor_model'],"SR. NO",$result[0]['motor_sno']));
+		fputcsv($file, array("","","","","","","",""));
+		fputcsv($file, array("","","","","","","",""));
+		$header = array("Sr. No","Test Point",$load_test_result[0]['loading_factor']."%",$load_test_result[1]['loading_factor']."%",$load_test_result[2]['loading_factor']."%",
+	                  $load_test_result[3]['loading_factor']."%",$load_test_result[4]['loading_factor']."%",$load_test_result[5]['loading_factor']."%",
+									  $load_test_result[6]['loading_factor']."%");
+		fputcsv($file, $header);
+		fputcsv($file, array(1, "Specified temperature, ts, in C",$result[0]['specified_temp']));
+		fputcsv($file, array(2, "Stator Resistance (Cold), in Ohms",$result[0]['winding_resistance']));
+		fputcsv($file, array(3, "Stator Resistance(Cold) measure at Temp C",$result[0]['temp_at_which_winding_resistance_measured']));
+		$load_test_col = array(
+			"motor_temperature", "amb_temperature", "averge_voltage_phase_to_phase", "frequency",
+			"synchronous_speed_rpm","rpm_load","observed_slip_rmin", "observed_slip_pu", "corrected_slip_pu",
+			"corrected_speed_rmin","torque","dynamometer_correction","corrected_torque","shaft_power","total_current","average_power",
+			"stator_i2r_loss_kw","winding_resistance_ts","stator_i2r_loss_kw_ts","stator_power_correction_kw","corrected_stator_power_correction_kw",
+			"efficiency_percentage","power_factor_percentage"
+		);
+		$load_test_label = array(
+			"Stator Winding Temp, tt in C", "Ambient Temperature, in C", "Line-to-Line Voltage, in V", "Frequency, in Hz",
+			"Synchronous speed, ns, in RPM","Observed Speed, in r/min","Observed Slip, in r/min", "Observed Slip, in p.u.",
+			"Corrected Slip, in p.u.","Corrected Speed, in r/min","Torque, in N-m","Dynamometer Correction, in N-m","Corrected Torque, in N-m",
+			"Shaft Power, in kW","Line Current, in A","Stator Power, in kW","Stator I2R Loss, in kW, at tt","Winding Resistance at ts",
+			"Stator I2R Loss, in kW, at ts","Stator Power Correction, in kW","Corrected Stator Power, in kW","Efficiency, in %","Power Factor, in %"
+		);
 
 
-		 $csv = $file->openFile('w');
-		 $csv->fputcsv(array("Student Name","Student Phone"));
+		$efficiency_graph = array();
+		$shaft_power_graph = array();
+		$corrected_speed_rmin_graph = array();
+		$total_current_graph = array();
+		$power_factor_percentage_graph = array();
 
-    // foreach ($rows as $row) {
-    //     $csv->fputcsv($row);
-    // }
+		for ($i=0; $i < sizeof($load_test_col); $i++) {
 
-		 //
-     // // get data
-     // $student_data = $this->export_csv_model->fetch_data();
-		 //
-     // // file creation
-     //$csv->openFile('php://output', 'w');
-		 //
-     // $header = array("Student Name","Student Phone");
-     // fputcsv($file, $header);
-		 // fputcsv($file, array("Aqeel ahmad","+923159486402"));
-     exit;
+
+
+			for ($var = 0; $var < sizeof($load_test_result); $var++) {
+
+				$A = $result[0]['specified_temp'];
+				$B = $result[0]['winding_resistance'];
+				$C = $result[0]['temp_at_which_winding_resistance_measured'];
+				$D = $load_test_result[$var]['motor_temperature'];
+				$R = $load_test_result[$var]['total_current'];
+				$U = ($B*($A+234.5)/($C+234.5));
+				$V = ((1.5*$R*$R*$U)/1000);
+				$T = (((1.5*$R*$R*$B*(234.5+$D))/(234.5+$C))/1000);
+
+				if($load_test_col[$i] == 'synchronous_speed_rpm'){
+					$load_test_result[$var][$load_test_col[$i]] = (120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'];
+				}
+				if($load_test_col[$i] == 'observed_slip_rmin'){
+					$load_test_result[$var][$load_test_col[$i]] = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					$load_test_result[$var][$load_test_col[$i]] = number_format($load_test_result[$var][$load_test_col[$i]], 2);
+				}
+				if($load_test_col[$i] == 'observed_slip_pu'){
+					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
+					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					if($h == 0){
+						$load_test_result[$var][$load_test_col[$i]] = '--';
+					}else{
+						 $load_test_result[$var][$load_test_col[$i]] = number_format($j/$h,2);
+					}
+
+				}
+				if($load_test_col[$i] == 'corrected_slip_pu'){
+					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
+					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					if($h == 0){
+						$load_test_result[$var][$load_test_col[$i]] = '--';
+					}else{
+						$k = $j/$h;
+						$load_test_result[$var][$load_test_col[$i]] = number_format(($k * ($A+234.5)/($D+234.5)), 2);
+					}
+				}
+				if($load_test_col[$i] == 'corrected_speed_rmin'){
+					$h = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles']);
+					$j = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
+					if($h == 0){
+						$load_test_result[$var][$load_test_col[$i]] = '--';
+						array_push($corrected_speed_rmin_graph,0);
+					}else{
+						$k = $j/$h;
+						$L = (($k * ($A+234.5)/($D+234.5)));
+						$load_test_result[$var][$load_test_col[$i]] = ceil(((120*($result[0]['motor_rated_frequency']/$result[0]['no_of_poles'])) * (1-$L)));
+						array_push($corrected_speed_rmin_graph,$load_test_result[$var][$load_test_col[$i]]);
+					}
+
+				}
+				if($load_test_col[$i] == 'dynamometer_correction'){
+					$load_test_result[$var][$load_test_col[$i]] = 0;
+				}
+				if($load_test_col[$i] == 'corrected_torque'){
+					$load_test_result[$var][$load_test_col[$i]] = 0 + $load_test_result[$var]['torque'];
+				}
+				if($load_test_col[$i] == 'stator_i2r_loss_kw'){
+					$load_test_result[$var][$load_test_col[$i]] = number_format((((1.5*$R*$R*$B*(234.5+$D))/(234.5+$C))/1000),2);
+				}
+				if($load_test_col[$i] == 'winding_resistance_ts'){
+					$load_test_result[$var][$load_test_col[$i]] = number_format(($B*($A+234.5)/($C+234.5)),2);
+				}
+				if($load_test_col[$i] == 'stator_i2r_loss_kw_ts'){
+					$U = ($B*($A+234.5)/($C+234.5));
+					$load_test_result[$var][$load_test_col[$i]] = number_format(((1.5*$R*$R*$U)/1000),2);
+				}
+				if($load_test_col[$i] == 'stator_power_correction_kw'){
+					$U = ($B*($A+234.5)/($C+234.5));
+					$V = ((1.5*$R*$R*$U)/1000);
+					$T = (((1.5*$R*$R*$B*(234.5+$D))/(234.5+$C))/1000);
+					$load_test_result[$var][$load_test_col[$i]] = number_format(($V - $T),2);
+				}
+
+				if($load_test_col[$i] == 'corrected_stator_power_correction_kw'){
+					$W = $V - $T;
+					$load_test_result[$var][$load_test_col[$i]] = number_format(($load_test_result[$var]['average_power'] + $W), 2);
+				}
+				if($load_test_col[$i] == 'efficiency_percentage'){
+					$W = $V - $T;
+					$X = $load_test_result[$var]['average_power'] + $W;
+					$load_test_result[$var][$load_test_col[$i]] = number_format(((100*$load_test_result[$var]['shaft_power'])/$X),2);
+					array_push($efficiency_graph,$load_test_result[$var][$load_test_col[$i]]);
+				}
+				if($load_test_col[$i] == 'power_factor_percentage'){
+					$W = $V - $T;
+					$X = $load_test_result[$var]['average_power'] + $W;
+					$F = $load_test_result[$var]['averge_voltage_phase_to_phase'];
+					if($F == 0 && $R == 0){
+						$load_test_result[$var][$load_test_col[$i]] = '--';
+						array_push($power_factor_percentage_graph,0);
+					}else{
+						$Z = ((100*$X)/(1.732*$F*$R))*1000;
+						$load_test_result[$var][$load_test_col[$i]] = number_format($Z, 2);
+						array_push($power_factor_percentage_graph,$load_test_result[$var][$load_test_col[$i]]);
+					}
+
+				}
+				if($load_test_col[$i] == 'shaft_power'){
+					array_push($shaft_power_graph,$load_test_result[$var][$load_test_col[$i]]);
+				}
+				if($load_test_col[$i] == 'total_current'){
+					array_push($total_current_graph,$load_test_result[$var][$load_test_col[$i]]);
+				}
+
+			}
+			fputcsv($file, array($i+4, $load_test_label[$i], $load_test_result[0][$load_test_col[$i]],
+		                 $load_test_result[1][$load_test_col[$i]], $load_test_result[2][$load_test_col[$i]],
+									   $load_test_result[3][$load_test_col[$i]], $load_test_result[4][$load_test_col[$i]],
+									   $load_test_result[5][$load_test_col[$i]], $load_test_result[6][$load_test_col[$i]]));
+
+		}
+
+
+
+
+		fclose($file);
+		exit;
+
+
  }
 
 	public function generate_report($id){
