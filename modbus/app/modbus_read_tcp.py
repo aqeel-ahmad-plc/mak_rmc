@@ -23,7 +23,7 @@ while 1:
         # data2 = readHolding(client, 1, 100)
         data2 = readHolding(client, 1, 100)
         print(data2)
-        result = parseData(data2, 'config/energy_meter/parameters_config.json')
+        result = parseData(data2, 'C:/wamp64/www/mak_rmc/modbus/app/config/energy_meter/parameters_config.json')
         for param in result:
             x[param['col_name']] = param['value']
         x['sysdt'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

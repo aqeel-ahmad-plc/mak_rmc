@@ -8,11 +8,11 @@ while 1:
     if(client != False):
         x={}
         data = readInputRTU(client, 1000, 1, 1)
-        result = parseData(data, 'config/temp_sensor/parameters_config.json')
+        result = parseData(data, 'C:/wamp64/www/mak_rmc/modbus/app/config/temp_sensor/parameters_config.json')
         x['amb_temperature'] = result[0]['value']
 
         data = readInputRTU(client, 1000, 1, 2)
-        result = parseData(data, 'config/temp_sensor/parameters_config.json')
+        result = parseData(data, 'C:/wamp64/www/mak_rmc/modbus/app/config/temp_sensor/parameters_config.json')
         x['motor_temperature'] = result[0]['value']
         print(x)
         # for param in result:
