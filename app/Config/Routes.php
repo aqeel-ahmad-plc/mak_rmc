@@ -66,6 +66,7 @@ $routes->get('/motor_test/manage', 'Motor_Test::manage', ['filter' => 'admin']);
 
 $routes->get('/motor_test/complete_test/(:any)', 'Motor_Test::complete_test/$1', ['filter' => 'admin']);
 $routes->get('/motor_test/generate_report/(:any)', 'Motor_Test::generate_report/$1', ['filter' => 'admin']);
+$routes->get('/motor_test/export_csv/(:any)', 'Motor_Test::export_csv/$1', ['filter' => 'admin']);
 $routes->get('/motor_test/countLoadTestData/(:any)', 'Motor_Test::countLoadTestData/$1', ['filter' => 'admin']);
 
 

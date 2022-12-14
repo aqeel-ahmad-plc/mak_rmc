@@ -675,6 +675,35 @@ class Motor_Test extends BaseController
 
 	}
 
+	public function export_csv($id){
+		$path = 'Load_Test_Result_'.date('Ymd').'.csv';
+		$file = new \CodeIgniter\Files\File($path);
+		header("Content-Description: File Transfer");
+		header("Content-Disposition: attachment; filename=$path");
+		header("Content-Type: application/csv;");
+
+
+
+		 $csv = $file->openFile('w');
+		 $csv->fputcsv(array("Student Name","Student Phone"));
+
+    // foreach ($rows as $row) {
+    //     $csv->fputcsv($row);
+    // }
+
+		 //
+     // // get data
+     // $student_data = $this->export_csv_model->fetch_data();
+		 //
+     // // file creation
+     //$csv->openFile('php://output', 'w');
+		 //
+     // $header = array("Student Name","Student Phone");
+     // fputcsv($file, $header);
+		 // fputcsv($file, array("Aqeel ahmad","+923159486402"));
+     exit;
+ }
+
 	public function generate_report($id){
 
 		$pdf = new PDF();

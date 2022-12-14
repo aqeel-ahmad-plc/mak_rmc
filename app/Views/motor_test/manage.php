@@ -32,6 +32,7 @@
                               <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/load_test/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Start Load Test </a>
                             <?php } else if($motor_test['test_status'] == 2){ ?>
                               <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/generate_report/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Generate Report </a>
+                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/export_csv/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Generate CSV </a>
                             <?php } ?>
                         </td>
                     </tr>
