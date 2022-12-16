@@ -32,6 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->resource('stats');
 $routes->resource('rpm');
+$routes->resource('torque');
 $routes->resource('temperature');
 $routes->get('/', 'Auth::login', ['filter' => 'auth']);
 
