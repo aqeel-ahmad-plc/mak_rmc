@@ -87,9 +87,7 @@ def efficiency_graph():
 
 
     # plt.grid()
-
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
-          fancybox=True, shadow=True, ncol=5)
+    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/efficiency_graph.png')
@@ -170,8 +168,12 @@ def speed_graph():
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
-    ax.set_yticks(np.arange(2800, 3000, 50), minor=False)
-    ax.set_yticks(np.arange(2800, 3000, 10), minor=True)
+    low_y_axis__point = min(max_allowed)-50
+    high_y_axis__point = max(max_allowed)+100
+    number_of_points_major = int((high_y_axis__point - low_y_axis__point)/50)
+    number_of_points_minor = int((high_y_axis__point - low_y_axis__point)/10)
+    ax.set_yticks(np.arange(low_y_axis__point, high_y_axis__point, number_of_points_major), minor=False)
+    ax.set_yticks(np.arange(low_y_axis__point, high_y_axis__point, number_of_points_minor), minor=True)
     #ax.set_yticks(np.arange(0, 300, 5), minor=True)
 
     # And a corresponding grid
@@ -184,9 +186,7 @@ def speed_graph():
 
 
     # plt.grid()
-
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
-          fancybox=True, shadow=True, ncol=5)
+    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')
@@ -262,9 +262,7 @@ def current_graph():
 
 
     # plt.grid()
-
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
-          fancybox=True, shadow=True, ncol=5)
+    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')
@@ -347,9 +345,7 @@ def cos_graph():
 
 
     # plt.grid()
-
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
-          fancybox=True, shadow=True, ncol=5)
+    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')
