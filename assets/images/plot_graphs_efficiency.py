@@ -30,6 +30,8 @@ def efficiency_graph():
         ]
     data = json.load(f)
 
+    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
+
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
@@ -64,7 +66,7 @@ def efficiency_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
+
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('Measured Efficiency, in %')
     plt.grid(True)
@@ -87,7 +89,8 @@ def efficiency_graph():
 
 
     # plt.grid()
-    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+          fancybox=True, shadow=True, ncol=5)
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/efficiency_graph.png')
@@ -115,7 +118,6 @@ def speed_graph():
         60,
         ]
     data = json.load(f)
-
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
@@ -157,26 +159,29 @@ def speed_graph():
 
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
-
-    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
+    #plt.axvline(x=0, color='g', label='F.L.', linewidth=2)
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('Speed, in RPM')
     plt.grid(True)
 
+
+
     major_ticks = np.arange(0, 60, 5)
     minor_ticks = np.arange(0, 60, 5)
 
-    ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
-    low_y_axis__point = min(max_allowed)-50
-    high_y_axis__point = max(max_allowed)+100
-    number_of_points_major = int((high_y_axis__point - low_y_axis__point)/50)
-    number_of_points_minor = int((high_y_axis__point - low_y_axis__point)/10)
+    low_y_axis__point = min(max_allowed)-20
+    high_y_axis__point = max(max_allowed)+20
+
+    #plt.plot([data['FL'], 0], [data['FL'], high_y_axis__point], 'bo', linestyle="-")
+    number_of_points_major = int((high_y_axis__point - low_y_axis__point)/10)
+    number_of_points_minor = int((high_y_axis__point - low_y_axis__point)/50)
     ax.set_yticks(np.arange(low_y_axis__point, high_y_axis__point, number_of_points_major), minor=False)
     ax.set_yticks(np.arange(low_y_axis__point, high_y_axis__point, number_of_points_minor), minor=True)
     #ax.set_yticks(np.arange(0, 300, 5), minor=True)
 
     # And a corresponding grid
+    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
     ax.grid(which='both')
 
     # Or if you want different settings for the grids:
@@ -186,7 +191,9 @@ def speed_graph():
 
 
     # plt.grid()
-    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+          fancybox=True, shadow=True, ncol=5)
+    plt.tight_layout()
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')
@@ -239,7 +246,7 @@ def current_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
+    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('Current, in Amps')
     plt.grid(True)
@@ -262,7 +269,8 @@ def current_graph():
 
 
     # plt.grid()
-    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+          fancybox=True, shadow=True, ncol=5)
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')
@@ -322,7 +330,7 @@ def cos_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x=data['FL'], color='g', label='F.L.', linewidth=2)
+    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('CosØ , in %')
     plt.grid(True)
@@ -345,7 +353,8 @@ def cos_graph():
 
 
     # plt.grid()
-    plt.legend(bbox_to_anchor = (1.25, 0.6), loc='center right')
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+          fancybox=True, shadow=True, ncol=5)
 
     # plt.show()
     #os.remove('C:/wamp64/www/mak_rmc/assets/images/speed_graph.png')
