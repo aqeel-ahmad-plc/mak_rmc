@@ -59,7 +59,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="motor_rated_kw">Motor Rated kW</label>
-                <input type="number" class="form-control" name="motor_rated_kw" id="motor_rated_kw"  value="<?= set_value('motor_rated_kw') ?>" placeholder="Enter Motor Rated kW">
+                <input type="number" step="0.0001" class="form-control" name="motor_rated_kw" id="motor_rated_kw"  value="<?= set_value('motor_rated_kw') ?>" placeholder="Enter Motor Rated kW">
             </div>
         </div>
 
@@ -87,7 +87,7 @@
 
             <div class="form-group col-md-4">
                 <label for="motor_rated_current">Motor Rated Current</label>
-                <input type="number" class="form-control" name="motor_rated_current" id="motor_rated_current"  value="<?= set_value('motor_rated_current') ?>" placeholder="Enter Motor Rated Current">
+                <input type="number" step="0.0001" class="form-control" name="motor_rated_current" id="motor_rated_current"  value="<?= set_value('motor_rated_current') ?>" placeholder="Enter Motor Rated Current">
             </div>
 
             <div class="form-group col-md-4">
@@ -115,7 +115,7 @@
 
             <div class="form-group col-md-4">
                 <label for="service_factor">Service Factor</label>
-                <input type="number" class="form-control" name="service_factor" id="service_factor" value="<?= set_value('service_factor') ?>" placeholder="Enter Service Factor">
+                <input type="number" step="0.0001" class="form-control" name="service_factor" id="service_factor" value="<?= set_value('service_factor') ?>" placeholder="Enter Service Factor">
             </div>
         </div>
 
