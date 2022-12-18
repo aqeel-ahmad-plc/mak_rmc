@@ -198,11 +198,12 @@
       </div>
       <div class="col-xl-2 col-md-2">
 
+        <h3>Load Test Count : <span id="load_test_count"></span> </h3>
       </div>
       <div class="col-xl-2 col-md-2" id="record_load_point_button">
         <input type="submit" value="Record Load Point" class="btn btn-primary"/>
       </div>
-      <div class="col-xl-2 col-md-2" id="complete_test_button">
+      <div class="col-xl-2 col-md-2" id="complete_test_button" style="display:none">
 
           <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/complete_test/".$test_id;?>"><i class="fas fa-edit"></i> Complete Test </a>
       </div>

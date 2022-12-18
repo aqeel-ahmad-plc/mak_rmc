@@ -110,7 +110,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="efficiency">Efficiency</label>
-                <input type="number" class="form-control" name="efficiency" id="efficiency"  value="<?= set_value('efficiency') ?>" placeholder="Enter Efficiency">
+                <input type="number" step="0.0001" class="form-control" name="efficiency" id="efficiency"  value="<?= set_value('efficiency') ?>" placeholder="Enter Efficiency">
             </div>
 
             <div class="form-group col-md-4">

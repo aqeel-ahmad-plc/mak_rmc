@@ -403,47 +403,47 @@ class Motor_Test extends BaseController
 				$rated_curves_array = array(
 
 
-					"shaft_power_p2_1" => $this->request->getVar("shaft_power_p2_1"),
-					"shaft_power_p2_2" => $this->request->getVar("shaft_power_p2_2"),
-					"shaft_power_p2_3" => $this->request->getVar("shaft_power_p2_3"),
-					"shaft_power_p2_4" => $this->request->getVar("shaft_power_p2_4"),
-					"shaft_power_p2_5" => $this->request->getVar("shaft_power_p2_5"),
-					"shaft_power_p2_6" => $this->request->getVar("shaft_power_p2_6"),
-					"shaft_power_p2_7" => $this->request->getVar("shaft_power_p2_7"),
+					"shaft_power_p2_1" => ($this->request->getVar("shaft_power_p2_1")=="") ? 0 : $this->request->getVar("shaft_power_p2_1"),
+					"shaft_power_p2_2" => ($this->request->getVar("shaft_power_p2_2")=="") ? 0 : $this->request->getVar("shaft_power_p2_2"),
+					"shaft_power_p2_3" => ($this->request->getVar("shaft_power_p2_3")=="") ? 0 : $this->request->getVar("shaft_power_p2_3"),
+					"shaft_power_p2_4" => ($this->request->getVar("shaft_power_p2_4")=="") ? 0 : $this->request->getVar("shaft_power_p2_4"),
+					"shaft_power_p2_5" => ($this->request->getVar("shaft_power_p2_5")=="") ? 0 : $this->request->getVar("shaft_power_p2_5"),
+					"shaft_power_p2_6" => ($this->request->getVar("shaft_power_p2_6")=="") ? 0 : $this->request->getVar("shaft_power_p2_6"),
+					"shaft_power_p2_7" => ($this->request->getVar("shaft_power_p2_7")=="") ? 0 : $this->request->getVar("shaft_power_p2_7"),
 
-					"efficiency_in_percent_1" => $this->request->getVar("efficiency_in_percent_1"),
-					"efficiency_in_percent_2" => $this->request->getVar("efficiency_in_percent_2"),
-					"efficiency_in_percent_3" => $this->request->getVar("efficiency_in_percent_3"),
-					"efficiency_in_percent_4" => $this->request->getVar("efficiency_in_percent_4"),
-					"efficiency_in_percent_5" => $this->request->getVar("efficiency_in_percent_5"),
-					"efficiency_in_percent_6" => $this->request->getVar("efficiency_in_percent_6"),
-					"efficiency_in_percent_7" => $this->request->getVar("efficiency_in_percent_7"),
-
-
-					"speed_in_rpm_1" => $this->request->getVar("speed_in_rpm_1"),
-					"speed_in_rpm_2" => $this->request->getVar("speed_in_rpm_2"),
-					"speed_in_rpm_3" => $this->request->getVar("speed_in_rpm_3"),
-					"speed_in_rpm_4" => $this->request->getVar("speed_in_rpm_4"),
-					"speed_in_rpm_5" => $this->request->getVar("speed_in_rpm_5"),
-					"speed_in_rpm_6" => $this->request->getVar("speed_in_rpm_6"),
-					"speed_in_rpm_7" => $this->request->getVar("speed_in_rpm_7"),
-
-					"current_in_amps_1" => $this->request->getVar("current_in_amps_1"),
-					"current_in_amps_2" => $this->request->getVar("current_in_amps_2"),
-					"current_in_amps_3" => $this->request->getVar("current_in_amps_3"),
-					"current_in_amps_4" => $this->request->getVar("current_in_amps_4"),
-					"current_in_amps_5" => $this->request->getVar("current_in_amps_5"),
-					"current_in_amps_6" => $this->request->getVar("current_in_amps_6"),
-					"current_in_amps_7" => $this->request->getVar("current_in_amps_7"),
+					"efficiency_in_percent_1" => ($this->request->getVar("efficiency_in_percent_1")=="") ? 0 : $this->request->getVar("efficiency_in_percent_1"),
+					"efficiency_in_percent_2" => ($this->request->getVar("efficiency_in_percent_2")=="") ? 0 : $this->request->getVar("efficiency_in_percent_2"),
+					"efficiency_in_percent_3" => ($this->request->getVar("efficiency_in_percent_3")=="") ? 0 : $this->request->getVar("efficiency_in_percent_3"),
+					"efficiency_in_percent_4" => ($this->request->getVar("efficiency_in_percent_4")=="") ? 0 : $this->request->getVar("efficiency_in_percent_4"),
+					"efficiency_in_percent_5" => ($this->request->getVar("efficiency_in_percent_5")=="") ? 0 : $this->request->getVar("efficiency_in_percent_5"),
+					"efficiency_in_percent_6" => ($this->request->getVar("efficiency_in_percent_6")=="") ? 0 : $this->request->getVar("efficiency_in_percent_6"),
+					"efficiency_in_percent_7" => ($this->request->getVar("efficiency_in_percent_7")=="") ? 0 : $this->request->getVar("efficiency_in_percent_7"),
 
 
-					"cos_in_percent_1" => $this->request->getVar("cos_in_percent_1"),
-					"cos_in_percent_2" => $this->request->getVar("cos_in_percent_2"),
-					"cos_in_percent_3" => $this->request->getVar("cos_in_percent_3"),
-					"cos_in_percent_4" => $this->request->getVar("cos_in_percent_4"),
-					"cos_in_percent_5" => $this->request->getVar("cos_in_percent_5"),
-					"cos_in_percent_6" => $this->request->getVar("cos_in_percent_6"),
-					"cos_in_percent_7" => $this->request->getVar("cos_in_percent_7")
+					"speed_in_rpm_1" => ($this->request->getVar("speed_in_rpm_1")=="") ? 0 : $this->request->getVar("speed_in_rpm_1"),
+					"speed_in_rpm_2" => ($this->request->getVar("speed_in_rpm_2")=="") ? 0 : $this->request->getVar("speed_in_rpm_2"),
+					"speed_in_rpm_3" => ($this->request->getVar("speed_in_rpm_3")=="") ? 0 : $this->request->getVar("speed_in_rpm_3"),
+					"speed_in_rpm_4" => ($this->request->getVar("speed_in_rpm_4")=="") ? 0 : $this->request->getVar("speed_in_rpm_4"),
+					"speed_in_rpm_5" => ($this->request->getVar("speed_in_rpm_5")=="") ? 0 : $this->request->getVar("speed_in_rpm_5"),
+					"speed_in_rpm_6" => ($this->request->getVar("speed_in_rpm_6")=="") ? 0 : $this->request->getVar("speed_in_rpm_6"),
+					"speed_in_rpm_7" => ($this->request->getVar("speed_in_rpm_7")=="") ? 0 : $this->request->getVar("speed_in_rpm_7"),
+
+					"current_in_amps_1" => ($this->request->getVar("current_in_amps_1") == "") ? 0 : $this->request->getVar("current_in_amps_1"),
+					"current_in_amps_2" => ($this->request->getVar("current_in_amps_2") == "") ? 0 : $this->request->getVar("current_in_amps_2"),
+					"current_in_amps_3" => ($this->request->getVar("current_in_amps_3") == "") ? 0 : $this->request->getVar("current_in_amps_3"),
+					"current_in_amps_4" => ($this->request->getVar("current_in_amps_4") == "") ? 0 : $this->request->getVar("current_in_amps_4"),
+					"current_in_amps_5" => ($this->request->getVar("current_in_amps_5") == "") ? 0 : $this->request->getVar("current_in_amps_5"),
+					"current_in_amps_6" => ($this->request->getVar("current_in_amps_6") == "") ? 0 : $this->request->getVar("current_in_amps_6"),
+					"current_in_amps_7" => ($this->request->getVar("current_in_amps_7") == "") ? 0 : $this->request->getVar("current_in_amps_7"),
+
+
+					"cos_in_percent_1" => ($this->request->getVar("cos_in_percent_1") == "") ? 0 : $this->request->getVar("cos_in_percent_1"),
+					"cos_in_percent_2" => ($this->request->getVar("cos_in_percent_2") == "") ? 0 : $this->request->getVar("cos_in_percent_2"),
+					"cos_in_percent_3" => ($this->request->getVar("cos_in_percent_3") == "") ? 0 : $this->request->getVar("cos_in_percent_3"),
+					"cos_in_percent_4" => ($this->request->getVar("cos_in_percent_4") == "") ? 0 : $this->request->getVar("cos_in_percent_4"),
+					"cos_in_percent_5" => ($this->request->getVar("cos_in_percent_5") == "") ? 0 : $this->request->getVar("cos_in_percent_5"),
+					"cos_in_percent_6" => ($this->request->getVar("cos_in_percent_6") == "") ? 0 : $this->request->getVar("cos_in_percent_6"),
+					"cos_in_percent_7" => ($this->request->getVar("cos_in_percent_7") == "") ? 0 : $this->request->getVar("cos_in_percent_7")
 
 				);
 
@@ -529,12 +529,47 @@ class Motor_Test extends BaseController
 
 				$model = new No_Load_Test_model();
 
+				$model_load = new Load_Test_model();
+
 				$newData = [
 					'rpm_no_load' => $this->request->getVar('rpm_no_load'),
 					'torque' => 0,
 					'shaft_power' => 0,
 					'loading_factor' => 0,
 					'motor_size_no_load' => $this->request->getVar('motor_size_no_load'),
+					'voltage_a' => $this->request->getVar('voltage_a'),
+					'voltage_b' => $this->request->getVar('voltage_b'),
+					'voltage_c' => $this->request->getVar('voltage_c'),
+					'averge_voltage' => $this->request->getVar('averge_voltage'),
+					'voltage_ab' => $this->request->getVar('voltage_ab'),
+					'voltage_bc' => $this->request->getVar('voltage_bc'),
+					'voltage_ca' => $this->request->getVar('voltage_ca'),
+					'averge_voltage_phase_to_phase' => $this->request->getVar('averge_voltage_phase_to_phase'),
+					'current_a' => $this->request->getVar('current_a'),
+					'current_b' => $this->request->getVar('current_b'),
+					'current_c' => $this->request->getVar('current_c'),
+					'total_current' => $this->request->getVar('total_current'),
+					'pf_a' => $this->request->getVar('pf_a'),
+					'pf_b' => $this->request->getVar('pf_b'),
+					'pf_c' => $this->request->getVar('pf_c'),
+					'average_pf' => $this->request->getVar('average_pf'),
+					'power_a' => $this->request->getVar('power_a'),
+					'power_b' => $this->request->getVar('power_b'),
+					'power_c' => $this->request->getVar('power_c'),
+					'average_power' => $this->request->getVar('average_power'),
+					'frequency' => $this->request->getVar('frequency'),
+					'amb_temperature' => $this->request->getVar('amb_temperature'),
+					'motor_temperature' => $this->request->getVar('motor_temperature'),
+					'estimated_efficiency' => 0,
+					'motor_test_fk' => $this->request->getVar('test_id')
+				];
+
+				$newData_Load_Test_Table = [
+					'rpm_load' => $this->request->getVar('rpm_no_load'),
+					'torque' => 0,
+					'shaft_power' => 0,
+					'loading_factor' => 0,
+					'motor_size_load' => $this->request->getVar('motor_size_no_load'),
 					'voltage_a' => $this->request->getVar('voltage_a'),
 					'voltage_b' => $this->request->getVar('voltage_b'),
 					'voltage_c' => $this->request->getVar('voltage_c'),
@@ -570,6 +605,7 @@ class Motor_Test extends BaseController
 
 
 				$model->insert($newData);
+				$model_load->insert($newData_Load_Test_Table);
 				$updateData = [];
 				$updateData['test_status'] = 1;
 
@@ -632,7 +668,7 @@ class Motor_Test extends BaseController
 
 				$model->insert($newData);
 				$session = session();
-				$session->setFlashdata('success', 'No load test data saved');
+				$session->setFlashdata('success', 'Load test data saved');
 				return redirect()->to(base_url().'/motor_test/load_test/'.$test_id);
 
 		}
@@ -901,7 +937,7 @@ class Motor_Test extends BaseController
 
 		/*output the result*/
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
@@ -919,7 +955,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
 		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
 		$pdf->Ln(10);
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
     $pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'1. MOTOR PICTURE(S)',1,0,'C', true);
@@ -937,107 +973,107 @@ class Motor_Test extends BaseController
 
 
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_manufacturer'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'MANUFACTURER',0,0,'LR');
     $pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(10,6,$result[0]['motor_rated_pf'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'PF',0,0,'LR');
 		$pdf->Ln();
-    $pdf->SetFont('Arial','',11);
+    $pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_model'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'MODEL',0,0,'LR');
     $pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(10,6,$result[0]['motor_rated_rpm'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'RPM',0,0,'LR');
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_type'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'TYPE',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(10,6,$result[0]['no_of_poles'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'POLE',0,0,'LR');
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['stator_size'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'FRAME',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(10,6,$result[0]['efficiency'],0,0,'LR');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'EFFICIENCY',0,0,'LR');
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['number_of_phase'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'PHASE',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
-		$pdf->Cell(10,6,$result[0]['number_of_phase'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','',9);
+		$pdf->Cell(10,6,$result[0]['service_factor'],0,0,'C');
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'DUTY',0,0,'LR');
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_rated_kw'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'KW',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(10,6,$result[0]['insulation_class'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'INS. CLASS',0,0,'LR');
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_rated_hp'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'HP',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(10,6,$result[0]['cooling_class'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'IC',0,0,'LR');
 
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_rated_voltage'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'VOLTS',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(10,6,$result[0]['ip_rating'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'IP',0,0,'LR');
 
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_rated_frequency'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'HERTZ',0,0,'LR');
 		$pdf->Cell(30,6,'',0,0,'LR');
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(20,6,$result[0]['connection_type'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'CONNECTION',0,0,'LR');
 
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(70,6,$result[0]['motor_rated_current'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'AMPS',0,0,'LR');
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(60,6,$result[0]['motor_sno'],0,0,'C');
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'SR. NO.',0,0,'LR');
 
 
@@ -1057,13 +1093,13 @@ class Motor_Test extends BaseController
 
 
 		$pdf->Ln(10);
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'3. MOTOR RATED DATA',1,0,'C', true);
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1152,13 +1188,13 @@ class Motor_Test extends BaseController
 		/******************** 4. MAXIMUM ALLOWED DEVIATION FROM RATED DATA AS PER IEC 60034-1 TABLE-20 ***************************/
 
 
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'4. MAXIMUM ALLOWED DEVIATION FROM RATED DATA AS PER IEC 60034-1 TABLE-20',1,0,'C', true);
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1298,7 +1334,7 @@ class Motor_Test extends BaseController
 
 		/*output the result*/
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
@@ -1318,13 +1354,13 @@ class Motor_Test extends BaseController
 
 
 		$pdf->Ln();
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'5. TEST INFORMATION',1,0,'C', true);
 		$pdf->Ln(10);
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1337,7 +1373,7 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
@@ -1357,7 +1393,7 @@ class Motor_Test extends BaseController
 
 
 		$pdf->Ln();
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'6. NO LOAD DATA (MOTOR UNCOUPLED)',1,0,'C', true);
@@ -1371,7 +1407,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(90,6,'Parameter',1,0,'C');
 		$pdf->Cell(90,6,'Value',1,0,'C');
 
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,102);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1405,7 +1441,7 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
@@ -1425,13 +1461,13 @@ class Motor_Test extends BaseController
 
 
 		$pdf->Ln();
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'7. LOAD TEST RESULTS',1,0,'C', true);
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->SetFillColor(125,125,125);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1578,7 +1614,12 @@ class Motor_Test extends BaseController
 				if($load_test_col[$i] == 'efficiency_percentage'){
 					$W = $V - $T;
 					$X = $load_test_result[$var]['average_power'] + $W;
-					$load_test_result[$var][$load_test_col[$i]] = number_format(((100*$load_test_result[$var]['shaft_power'])/$X),2);
+					if($X == 0){
+						$load_test_result[$var][$load_test_col[$i]] = 0;
+					}else{
+					  $load_test_result[$var][$load_test_col[$i]] = number_format(((100*$load_test_result[$var]['shaft_power'])/$X),2);
+					}
+
 					array_push($efficiency_graph,$load_test_result[$var][$load_test_col[$i]]);
 				}
 				if($load_test_col[$i] == 'power_factor_percentage'){
@@ -1790,7 +1831,7 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'8. EFFICIENCY CURVE',1,1,'C', true);
@@ -1838,12 +1879,12 @@ class Motor_Test extends BaseController
 		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'9. SPEED CURVE',1,0,'C', true);
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1891,12 +1932,12 @@ class Motor_Test extends BaseController
 		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'10. CURRENT CURVE',1,0,'C', true);
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
 
@@ -1943,12 +1984,12 @@ class Motor_Test extends BaseController
 		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','B',12);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(0,0,0);
 		$pdf->SetTextColor(255,255,255);
 		$pdf->Cell(195,6,'11. COSØ CURVE',1,0,'C', true);
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',11);
+		$pdf->SetFont('Arial','',9);
 		$pdf->SetFillColor(255,255,255);
 		$pdf->SetTextColor(0,0,0);
 
