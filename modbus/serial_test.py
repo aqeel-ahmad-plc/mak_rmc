@@ -10,7 +10,8 @@ ser = serial.Serial(
 	baudrate=9600,
 	parity=serial.PARITY_NONE,
 	stopbits=serial.STOPBITS_ONE,
-	bytesize=serial.EIGHTBITS
+	bytesize=serial.EIGHTBITS,
+	timeout=2
 )
 ser.close()
 
@@ -29,6 +30,13 @@ while 1 :
     time.sleep(1)
     print("After delay")
     data = ser.read(14)
+    print(len(data))
+
+    if len(data) == 0:
+        print("data is none")
+        time.sleep(5)
+        ser.close()
+        continue
     print(data)
     print((data.decode("utf-8")))
     #reverse_data = data[::-1]

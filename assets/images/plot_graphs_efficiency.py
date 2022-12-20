@@ -21,12 +21,12 @@ def efficiency_graph():
     min_allowed = []
     x = [
         0,
-        10,
         20,
-        30,
         40,
-        50,
         60,
+        80,
+        100,
+        120
         ]
     data = json.load(f)
 
@@ -72,8 +72,8 @@ def efficiency_graph():
     plt.grid(True)
 
 
-    major_ticks = np.arange(0, 60, 5)
-    minor_ticks = np.arange(0, 60, 5)
+    major_ticks = np.arange(0, 150, 25)
+    minor_ticks = np.arange(0, 150, 25)
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
@@ -110,12 +110,12 @@ def speed_graph():
     max_allowed = []
     x = [
         0,
-        10,
         20,
-        30,
         40,
-        50,
         60,
+        80,
+        100,
+        120
         ]
     data = json.load(f)
     iterator = 0
@@ -166,8 +166,8 @@ def speed_graph():
 
 
 
-    major_ticks = np.arange(0, 60, 5)
-    minor_ticks = np.arange(0, 60, 5)
+    major_ticks = np.arange(0, 150, 25)
+    minor_ticks = np.arange(0, 150, 25)
 
     #ax.set_xticks(minor_ticks, minor=True)
     low_y_axis__point = min(max_allowed)-20
@@ -175,7 +175,9 @@ def speed_graph():
 
     #plt.plot([data['FL'], 0], [data['FL'], high_y_axis__point], 'bo', linestyle="-")
     number_of_points_major = int((high_y_axis__point - low_y_axis__point)/10)
-    number_of_points_minor = int((high_y_axis__point - low_y_axis__point)/50)
+    number_of_points_minor = int((high_y_axis__point - low_y_axis__point)/20)
+    # print("number_of_points_major", number_of_points_major)
+    # print("number_of_points_minor", number_of_points_minor)
     ax.set_yticks(np.arange(low_y_axis__point, high_y_axis__point, number_of_points_major), minor=False)
     ax.set_yticks(np.arange(low_y_axis__point, high_y_axis__point, number_of_points_minor), minor=True)
     #ax.set_yticks(np.arange(0, 300, 5), minor=True)
@@ -213,12 +215,12 @@ def current_graph():
     max_allowed = []
     x = [
         0,
-        10,
         20,
-        30,
         40,
-        50,
         60,
+        80,
+        100,
+        120
         ]
     data = json.load(f)
 
@@ -251,8 +253,8 @@ def current_graph():
     plt.ylabel('Current, in Amps')
     plt.grid(True)
 
-    major_ticks = np.arange(0, 60, 5)
-    minor_ticks = np.arange(0, 60, 5)
+    major_ticks = np.arange(0, 150, 25)
+    minor_ticks = np.arange(0, 150, 25)
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
@@ -290,12 +292,12 @@ def cos_graph():
     min_allowed = []
     x = [
         0,
-        10,
         20,
-        30,
         40,
-        50,
         60,
+        80,
+        100,
+        120
         ]
     data = json.load(f)
 
@@ -335,8 +337,8 @@ def cos_graph():
     plt.ylabel('CosØ , in %')
     plt.grid(True)
 
-    major_ticks = np.arange(0, 60, 5)
-    minor_ticks = np.arange(0, 60, 5)
+    major_ticks = np.arange(0, 150, 25)
+    minor_ticks = np.arange(0, 150, 25)
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)

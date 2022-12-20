@@ -10,7 +10,8 @@ ser = serial.Serial(
 	baudrate=9600,
 	parity=serial.PARITY_NONE,
 	stopbits=serial.STOPBITS_ONE,
-	bytesize=serial.EIGHTBITS
+	bytesize=serial.EIGHTBITS,
+	timeout=2
 )
 ser.close()
 
@@ -23,9 +24,14 @@ while 1 :
     ser.write(serial.to_bytes(cw))
     print("write command")
     print("reading the data")
-    time.sleep(0.5)
+    time.sleep(0.001)
     print("After delay")
     data = ser.read(20)
+    if len(data) == 0:
+        print("data is none")
+        time.sleep(5)
+        ser.close()
+        continue
     print((data.decode("utf-8")))
     torque = float(data[1:8]) * 200;
     print(torque)
@@ -48,7 +54,7 @@ while 1 :
     # #     print("Keyboard Interrupt")
     #     break
     ser.close()
-    time.sleep(0.1)
+    time.sleep(0.002)
 
 
     print("====================================")

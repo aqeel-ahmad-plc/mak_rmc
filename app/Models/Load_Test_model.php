@@ -47,7 +47,7 @@ class Load_Test_model extends Model
       }
       public function getLoadTestData($test_id = null)
       {
-         $query = $this->builder()->select()->where(['motor_test_fk' => $test_id])->get();
+         $query = $this->builder()->select()->where(['motor_test_fk' => $test_id])->orderBy('sno', 'asc')->get();
          return $query->getResultArray();
       }
       public function countLoadTestData($test_id = null)

@@ -722,7 +722,7 @@ class Motor_Test extends BaseController
 		$load_test_tests_model = new Load_Test_model();
 		$load_test_result = $load_test_tests_model->getLoadTestData($id);
 
-		$file_name = 'Load_Test_Report.csv';
+		$file_name = $result[0]['test_report_no'].'.csv';
 		header("Content-Description: File Transfer");
 		header("Content-Disposition: attachment; filename=$file_name");
 		header("Content-Type: application/csv;");
@@ -2016,7 +2016,7 @@ class Motor_Test extends BaseController
 
 		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/cos_graph.png',7,80,190),0,1,'R');
 
-		$pdf->Output('D','Test_Report.pdf');
+		$pdf->Output('D',$result[0]['test_report_no'].'.pdf');
   }
 
 
