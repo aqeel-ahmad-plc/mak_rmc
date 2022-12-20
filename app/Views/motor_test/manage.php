@@ -26,13 +26,14 @@
                         <td><?= $motor_test['test_report_no']  ?></td>
                         <td><?= $motor_test['test_date']  ?></td>
                         <td class="text-center">
+                          <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/edit_rated_data/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Edit Rated Data</a>
                               <?php if($motor_test['test_status'] == 0){?>
-                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/no_load_test/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Start Tests </a>
+                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/no_load_test/".$motor_test['id'];?>"><i class="fas fa-play"></i> Start Tests </a>
                             <?php } else if($motor_test['test_status'] == 1) { ?>
-                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/load_test/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Start Load Test </a>
+                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/load_test/".$motor_test['id'];?>"><i class="fas fa-play"></i> Start Load Test </a>
                             <?php } else if($motor_test['test_status'] == 2){ ?>
-                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/generate_report/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Generate Report </a>
-                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/export_csv/".$motor_test['id'];?>"><i class="fas fa-edit"></i> Generate CSV </a>
+                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/generate_report/".$motor_test['id'];?>"><i class="fas fa-download"></i> Generate Report </a>
+                              <a class="btn btn-primary" href="<?php echo base_url()."/motor_test/export_csv/".$motor_test['id'];?>"><i class="fas fa-download"></i> Generate CSV </a>
                             <?php } ?>
                         </td>
                     </tr>

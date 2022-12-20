@@ -61,6 +61,7 @@ $routes->match(['get','post'],'/users/delete/(:any)', 'Users::delete/$1', ['filt
 
 //Motor Testing
 $routes->match(['get','post'],'/motor_test/create', 'Motor_Test::create', ['filter' => 'admin']);
+$routes->match(['get','post'],'/motor_test/edit_rated_data/(:any)', 'Motor_Test::edit_rated_data/$1', ['filter' => 'admin']);
 $routes->match(['get','post'],'/motor_test/edit', 'Motor_Test::manage', ['filter' => 'admin']);
 // $routes->match(['get','post'],'/motor_test/edit/(:any)', 'Motor_Test::edit/$1', ['filter' => 'admin']);
 $routes->get('/motor_test/manage', 'Motor_Test::manage', ['filter' => 'admin']);

@@ -58,6 +58,11 @@ class Motor_Test_model extends Model{
 
       }
 
+      public function updateMotorRatedData($test_id, $data)
+      {
+          $this->where('id', $test_id)->update($this->test_id, $data);
+      }
+
       //$servey_model->updateServey($this->request->getVar('site_id'), $newData);
 
       public function updateTestStatus($test_id, $data)
