@@ -72,8 +72,8 @@ def efficiency_graph():
     plt.grid(True)
 
 
-    major_ticks = np.arange(0, 150, 25)
-    minor_ticks = np.arange(0, 150, 25)
+    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
@@ -89,7 +89,7 @@ def efficiency_graph():
 
 
     # plt.grid()
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.1),
           fancybox=True, shadow=True, ncol=5)
 
     # plt.show()
@@ -128,11 +128,11 @@ def speed_graph():
         iterator = iterator + 1
     iterator = 0
     for i in data['Min_Allowed']:
-        min_allowed.insert(iterator, data['Min_Allowed'][i])
+        min_allowed.insert(iterator, float(data['Min_Allowed'][i]))
         iterator = iterator + 1
     iterator = 0
     for i in data['Max_Allowed']:
-        max_allowed.insert(iterator, data['Max_Allowed'][i])
+        max_allowed.insert(iterator, float(data['Max_Allowed'][i]))
         iterator = iterator + 1
 
     X_Y_Spline = make_interp_spline(x, hitachi)
@@ -166,8 +166,8 @@ def speed_graph():
 
 
 
-    major_ticks = np.arange(0, 150, 25)
-    minor_ticks = np.arange(0, 150, 25)
+    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
 
     #ax.set_xticks(minor_ticks, minor=True)
     low_y_axis__point = min(max_allowed)-20
@@ -193,7 +193,7 @@ def speed_graph():
 
 
     # plt.grid()
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.2),
           fancybox=True, shadow=True, ncol=5)
     plt.tight_layout()
 
@@ -253,8 +253,8 @@ def current_graph():
     plt.ylabel('Current, in Amps')
     plt.grid(True)
 
-    major_ticks = np.arange(0, 150, 25)
-    minor_ticks = np.arange(0, 150, 25)
+    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
@@ -271,7 +271,7 @@ def current_graph():
 
 
     # plt.grid()
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.1),
           fancybox=True, shadow=True, ncol=5)
 
     # plt.show()
@@ -337,8 +337,8 @@ def cos_graph():
     plt.ylabel('CosØ , in %')
     plt.grid(True)
 
-    major_ticks = np.arange(0, 150, 25)
-    minor_ticks = np.arange(0, 150, 25)
+    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
@@ -355,7 +355,7 @@ def cos_graph():
 
 
     # plt.grid()
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.1),
           fancybox=True, shadow=True, ncol=5)
 
     # plt.show()
@@ -370,8 +370,10 @@ def cos_graph():
 # a dictionary
 
 while True:
+    #start_time = time.time()
     efficiency_graph()
     speed_graph()
     current_graph()
     cos_graph()
     time.sleep(2)
+    #print("--- %s seconds ---" % (time.time() - start_time))

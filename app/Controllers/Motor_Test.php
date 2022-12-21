@@ -1830,6 +1830,15 @@ class Motor_Test extends BaseController
 			$pdf->Ln();
 		}
 
+		$pdf->Ln(10);
+
+		$pdf->SetFont('Arial','',10);
+		$pdf->SetFillColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->Cell(195,8,'Note: Dynamometer Correction is not applicable when torque sensor is inline to motor shaft (5.6.1.2 IEEE 112)',0,1,'L');
+		$pdf->Ln();
+
+
 		/****************** Efficiency Curve ***************************/
 
 
