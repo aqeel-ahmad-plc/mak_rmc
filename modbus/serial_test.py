@@ -30,15 +30,17 @@ while 1 :
     time.sleep(1)
     print("After delay")
     data = ser.read(14)
-    print(len(data))
 
     if len(data) == 0:
         print("data is none")
         time.sleep(5)
         ser.close()
         continue
-    print(data)
-    print((data.decode("utf-8")))
+    print((data[0]), data[1])
+    if(data[1] > 1 and data[1]<256):
+        ser.close()
+        time.sleep(1)
+        continue
     #reverse_data = data[::-1]
     #print(reverse_data)
     rpm = float(data[9:13])
