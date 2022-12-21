@@ -1130,105 +1130,107 @@ class Motor_Test extends BaseController
 
 
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_manufacturer'],0,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_manufacturer'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'MANUFACTURER',0,0,'LR');
     $pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['motor_rated_pf'],0,0,'LR');
+		$pdf->Cell(10,6,$result[0]['motor_rated_pf'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'PF',0,0,'LR');
 		$pdf->Ln();
     $pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_model'],0,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_model'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'MODEL',0,0,'LR');
     $pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['motor_rated_rpm'],0,0,'LR');
+		$pdf->Cell(10,6,$result[0]['motor_rated_rpm'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'RPM',0,0,'LR');
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_type'],0,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_type'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'TYPE',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['no_of_poles'],0,0,'LR');
+		$pdf->Cell(10,6,$result[0]['no_of_poles'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'POLE',0,0,'LR');
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['stator_size'],0,0,'LR');
+		$pdf->Cell(70,6,$result[0]['stator_size'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'FRAME',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['efficiency'],0,0,'LR');
+		$pdf->Cell(10,6,$result[0]['efficiency'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'EFFICIENCY',0,0,'LR');
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['number_of_phase'],0,0,'C');
+		$pdf->Cell(70,6,$result[0]['number_of_phase'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'PHASE',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['service_factor'],0,0,'C');
+		$pdf->Cell(10,6,$result[0]['service_factor'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'DUTY',0,0,'LR');
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_rated_kw'],0,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_rated_kw'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'KW',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['insulation_class'],0,0,'C');
+		$pdf->Cell(10,6,$result[0]['insulation_class'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'INS. CLASS',0,0,'LR');
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_rated_hp'],0,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_rated_hp'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'HP',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['cooling_class'],0,0,'C');
+		$pdf->Cell(10,6,$result[0]['cooling_class'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'IC',0,0,'LR');
 
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_rated_voltage'],0,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_rated_voltage'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'VOLTS',0,0,'LR');
 		$pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(10,6,$result[0]['ip_rating'],0,0,'C');
+		$pdf->Cell(10,6,$result[0]['ip_rating'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'IP',0,0,'LR');
 
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_rated_frequency'],0,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_rated_frequency'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'HERTZ',0,0,'LR');
-		$pdf->Cell(30,6,'',0,0,'LR');
+		$pdf->Cell(40,6,'',0,0,'LR');
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(20,6,$result[0]['connection_type'],0,0,'C');
+		$pdf->Cell(10,6,$result[0]['connection_type'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'CONNECTION',0,0,'LR');
 
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(70,6,$result[0]['motor_rated_current'],0,0,'C');
+		$pdf->Cell(70,6,$result[0]['motor_rated_current'],0,0,'R');
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(40,6,'AMPS',0,0,'LR');
 
 		$pdf->SetFont('Arial','',9);
-		$pdf->Cell(60,6,$result[0]['motor_sno'],0,0,'C');
+    $pdf->Cell(11,6,'',0,0,'LR');
+		$pdf->Cell(40,6,$result[0]['motor_sno'],0,0,'R');
+
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(10,6,'SR. NO.',0,0,'LR');
 
@@ -1263,24 +1265,24 @@ class Motor_Test extends BaseController
 
 		$pdf->Cell(5,6,'1',1,0,'C');
 		$pdf->Cell(50,6,'Shaft Power (P2), in kW',1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_1'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_2'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_3'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_4'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_5'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_6'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['shaft_power_p2_7'],1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['shaft_power_p2_1'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['shaft_power_p2_2'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['shaft_power_p2_3'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['shaft_power_p2_4'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['shaft_power_p2_5'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['shaft_power_p2_6'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['shaft_power_p2_7'], 2, '.', ''),1,0,'C');
 
 		$pdf->Ln();
 		$pdf->Cell(5,6,'2',1,0,'LR');
 		$pdf->Cell(50,6,'Efficiency, in %',1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_1'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_2'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_3'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_4'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_5'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_6'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['efficiency_in_percent_7'],1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['efficiency_in_percent_1'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['efficiency_in_percent_2'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['efficiency_in_percent_3'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['efficiency_in_percent_4'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['efficiency_in_percent_5'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['efficiency_in_percent_6'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['efficiency_in_percent_7'], 2, '.', ''),1,0,'C');
 
 		$pdf->Ln();
 		$pdf->Cell(5,6,'3',1,0,'LR');
@@ -1320,24 +1322,24 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 		$pdf->Cell(5,6,'5',1,0,'LR');
 		$pdf->Cell(50,6,'Current, in Amps',1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['current_in_amps_1'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['current_in_amps_2'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['current_in_amps_3'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['current_in_amps_4'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['current_in_amps_5'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['current_in_amps_6'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['current_in_amps_7'],1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['current_in_amps_1'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['current_in_amps_2'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['current_in_amps_3'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['current_in_amps_4'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['current_in_amps_5'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['current_in_amps_6'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['current_in_amps_7'], 2, '.', ''),1,0,'C');
 
 		$pdf->Ln();
 		$pdf->Cell(5,6,'6',1,0,'LR');
 		$pdf->Cell(50,6,'CosØ, in %',1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_1'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_2'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_3'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_4'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_5'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_6'],1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_7'],1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_1'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_2'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_3'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_4'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_5'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_6'], 2, '.', ''),1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_7'], 2, '.', ''),1,0,'C');
 
 		$pdf->Ln();
 
@@ -1384,13 +1386,14 @@ class Motor_Test extends BaseController
 
 
 
-    $eff_percent_1 = ($eff_percent_1 < 0) ? 0 : $eff_percent_1;
-		$eff_percent_2 = ($eff_percent_2 < 0) ? 0 : $eff_percent_2;
-		$eff_percent_3 = ($eff_percent_3 < 0) ? 0 : $eff_percent_3;
-		$eff_percent_4 = ($eff_percent_4 < 0) ? 0 : $eff_percent_4;
-		$eff_percent_5 = ($eff_percent_5 < 0) ? 0 : $eff_percent_5;
-		$eff_percent_6 = ($eff_percent_6 < 0) ? 0 : $eff_percent_6;
-		$eff_percent_7 = ($eff_percent_7 < 0) ? 0 : $eff_percent_7;
+    $eff_percent_1 = ($eff_percent_1 < 0) ? 0 : number_format((float)$eff_percent_1, 2, '.', '');
+		$eff_percent_2 = ($eff_percent_2 < 0) ? 0 : number_format((float)$eff_percent_2, 2, '.', '');
+		$eff_percent_3 = ($eff_percent_3 < 0) ? 0 : number_format((float)$eff_percent_3, 2, '.', '');
+		$eff_percent_4 = ($eff_percent_4 < 0) ? 0 : number_format((float)$eff_percent_4, 2, '.', '');
+		$eff_percent_5 = ($eff_percent_5 < 0) ? 0 : number_format((float)$eff_percent_5, 2, '.', '');
+		$eff_percent_6 = ($eff_percent_6 < 0) ? 0 : number_format((float)$eff_percent_6, 2, '.', '');
+		$eff_percent_7 = ($eff_percent_7 < 0) ? 0 : number_format((float)$eff_percent_7, 2, '.', '');
+
 
 
 
@@ -1418,6 +1421,14 @@ class Motor_Test extends BaseController
 		$max_speed_rpm_6 = (120*($k/$o))*(1-($slip_in_pu_6-($slip_in_pu_6 * $sfactor)));
 		$max_speed_rpm_7 = (120*($k/$o))*(1-($slip_in_pu_7-($slip_in_pu_7 * $sfactor)));
 
+		$max_speed_rpm_1 = number_format((float)$max_speed_rpm_1, 2, '.', '');
+		$max_speed_rpm_2 = number_format((float)$max_speed_rpm_2, 2, '.', '');
+		$max_speed_rpm_3 = number_format((float)$max_speed_rpm_3, 2, '.', '');
+		$max_speed_rpm_4 = number_format((float)$max_speed_rpm_4, 2, '.', '');
+		$max_speed_rpm_5 = number_format((float)$max_speed_rpm_5, 2, '.', '');
+		$max_speed_rpm_6 = number_format((float)$max_speed_rpm_6, 2, '.', '');
+		$max_speed_rpm_7 = number_format((float)$max_speed_rpm_7, 2, '.', '');
+
 		$pdf->Ln();
 		$pdf->Cell(5,6,'3',1,0,'LR');
 		$pdf->Cell(50,6,'Max Speed, in RPM',1,0,'C');
@@ -1436,6 +1447,15 @@ class Motor_Test extends BaseController
 		$min_speed_rpm_5 = (120*($k/$o))*(1-($slip_in_pu_5+($slip_in_pu_5 * $sfactor)));
 		$min_speed_rpm_6 = (120*($k/$o))*(1-($slip_in_pu_6+($slip_in_pu_6 * $sfactor)));
 		$min_speed_rpm_7 = (120*($k/$o))*(1-($slip_in_pu_7+($slip_in_pu_7 * $sfactor)));
+
+		$min_speed_rpm_1 = number_format((float)$min_speed_rpm_1, 2, '.', '');
+		$min_speed_rpm_2 = number_format((float)$min_speed_rpm_2, 2, '.', '');
+		$min_speed_rpm_3 = number_format((float)$min_speed_rpm_3, 2, '.', '');
+		$min_speed_rpm_4 = number_format((float)$min_speed_rpm_4, 2, '.', '');
+		$min_speed_rpm_5 = number_format((float)$min_speed_rpm_5, 2, '.', '');
+		$min_speed_rpm_6 = number_format((float)$min_speed_rpm_6, 2, '.', '');
+		$min_speed_rpm_7 = number_format((float)$min_speed_rpm_7, 2, '.', '');
+
 
 
 		$pdf->Ln();
@@ -1471,16 +1491,17 @@ class Motor_Test extends BaseController
 		$pfactor7 = ($pfactor7 > 7) ? 7 : $pfactor7;
 		$pfactor7 = ($pfactor7 < 2) ? 2 : $pfactor7;
 
+
 		$pdf->Ln();
 		$pdf->Cell(5,6,'5',1,0,'LR');
 		$pdf->Cell(50,6,'CosØ, in %',1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_1'] - $pfactor1 ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_2'] - $pfactor2 ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_3'] - $pfactor3 ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_4'] - $pfactor4 ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_5'] - $pfactor5 ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_6'] - $pfactor6 ,1,0,'C');
-		$pdf->Cell(20,6,$rated_curves['cos_in_percent_7'] - $pfactor7 ,1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_1'] - $pfactor1, 2, '.', '') ,1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_2'] - $pfactor2, 2, '.', '') ,1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_3'] - $pfactor3, 2, '.', '') ,1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_4'] - $pfactor4, 2, '.', '') ,1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_5'] - $pfactor5, 2, '.', '') ,1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_6'] - $pfactor6, 2, '.', '') ,1,0,'C');
+		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_7'] - $pfactor7, 2, '.', '') ,1,0,'C');
 
 		/******************** 5. TEST INFORMATION ***************************/
 
@@ -1568,26 +1589,26 @@ class Motor_Test extends BaseController
 		$pdf->SetTextColor(0,0,0);
 
 		$pdf->Ln();
-		$pdf->Cell(90,6,'Frequency, in Hz',1,0,'C');
+		$pdf->Cell(90,6,'Frequency, in Hz',1,0,'L');
 		$pdf->Cell(90,6,$no_load_test_result[0]['frequency'],1,0,'C');
 		$pdf->Ln();
-		$pdf->Cell(90,6,'Line-to-Line Voltage, in V',1,0,'C');
+		$pdf->Cell(90,6,'Line-to-Line Voltage, in V',1,0,'L');
 		$pdf->Cell(90,6,$no_load_test_result[0]['averge_voltage_phase_to_phase'],1,0,'C');
 		$pdf->Ln();
-		$pdf->Cell(90,6,'Line Current, in A',1,0,'C');
+		$pdf->Cell(90,6,'Line Current, in A',1,0,'L');
 		$pdf->Cell(90,6,$no_load_test_result[0]['total_current'],1,0,'C');
 		$pdf->Ln();
-		$pdf->Cell(90,6,'Power Factor, in p.u.',1,0,'C');
+		$pdf->Cell(90,6,'Power Factor, in p.u.',1,0,'L');
 		$pdf->Cell(90,6,$no_load_test_result[0]['average_pf'],1,0,'C');
 		$pdf->Ln();
-		$pdf->Cell(90,6,'Stator Power, in kW',1,0,'C');
+		$pdf->Cell(90,6,'Stator Power, in kW',1,0,'L');
 		$pdf->Cell(90,6,$no_load_test_result[0]['average_power'],1,0,'C');
 		$pdf->Ln();
-		$pdf->Cell(90,6,'Observed Speed, in r/min',1,0,'C');
+		$pdf->Cell(90,6,'Observed Speed, in r/min',1,0,'L');
 		$pdf->Cell(90,6,$no_load_test_result[0]['rpm_no_load'],1,0,'C');
-		$pdf->Ln();
-		$pdf->Cell(90,6,'Corrected Speed, in r/min',1,0,'C');
-		$pdf->Cell(90,6,$no_load_test_result[0]['rpm_no_load'],1,0,'C');
+		// $pdf->Ln();
+		// $pdf->Cell(90,6,'Corrected Speed, in r/min',1,0,'C');
+		// $pdf->Cell(90,6,$no_load_test_result[0]['rpm_no_load'],1,0,'C');
 
 
 
@@ -1629,13 +1650,13 @@ class Motor_Test extends BaseController
 
 		$pdf->Cell(5,6,'#',1,0,'C');
 		$pdf->Cell(71,6,'Test Point',1,0,'C');
-		$pdf->Cell(17,6,$load_test_result[0]['loading_factor']."%",1,0,'C');
-		$pdf->Cell(17,6,$load_test_result[1]['loading_factor']."%",1,0,'C');
-		$pdf->Cell(17,6,$load_test_result[2]['loading_factor']."%",1,0,'C');
-		$pdf->Cell(17,6,$load_test_result[3]['loading_factor']."%",1,0,'C');
-		$pdf->Cell(17,6,$load_test_result[4]['loading_factor']."%",1,0,'C');
-		$pdf->Cell(17,6,$load_test_result[5]['loading_factor']."%",1,0,'C');
-		$pdf->Cell(17,6,$load_test_result[6]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,(int)$load_test_result[0]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,(int)$load_test_result[1]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,(int)$load_test_result[2]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,(int)$load_test_result[3]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,(int)$load_test_result[4]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,(int)$load_test_result[5]['loading_factor']."%",1,0,'C');
+		$pdf->Cell(17,6,(int)$load_test_result[6]['loading_factor']."%",1,0,'C');
 		$pdf->Ln();
 		$pdf->SetFont('Arial','',10);
 		$pdf->SetFillColor(125,125,125);
@@ -1701,6 +1722,11 @@ class Motor_Test extends BaseController
 
 				if($load_test_col[$i] == 'synchronous_speed_rpm'){
 					$load_test_result[$var][$load_test_col[$i]] = (120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'];
+					$load_test_result[$var][$load_test_col[$i]] = number_format($load_test_result[$var][$load_test_col[$i]],2);
+				}
+				if($load_test_col[$i] == 'average_power' || $load_test_col[$i] == 'total_current' || $load_test_col[$i] == 'shaft_power'){
+
+					$load_test_result[$var][$load_test_col[$i]] = number_format($load_test_result[$var][$load_test_col[$i]],2);
 				}
 				if($load_test_col[$i] == 'observed_slip_rmin'){
 					$load_test_result[$var][$load_test_col[$i]] = ((120*$load_test_result[$var]['frequency'])/$result[0]['no_of_poles'])-$load_test_result[$var]['rpm_load'];
@@ -1712,7 +1738,7 @@ class Motor_Test extends BaseController
 					if($h == 0){
 						$load_test_result[$var][$load_test_col[$i]] = '--';
 					}else{
-					   $load_test_result[$var][$load_test_col[$i]] = number_format($j/$h,2);
+					   $load_test_result[$var][$load_test_col[$i]] = number_format($j/$h,4);
 					}
 
 				}
@@ -1723,7 +1749,7 @@ class Motor_Test extends BaseController
 						$load_test_result[$var][$load_test_col[$i]] = '--';
 					}else{
 						$k = $j/$h;
-						$load_test_result[$var][$load_test_col[$i]] = number_format(($k * ($A+234.5)/($D+234.5)), 2);
+						$load_test_result[$var][$load_test_col[$i]] = number_format(($k * ($A+234.5)/($D+234.5)), 4);
 					}
 				}
 				if($load_test_col[$i] == 'corrected_speed_rmin'){
@@ -1745,6 +1771,7 @@ class Motor_Test extends BaseController
 				}
 				if($load_test_col[$i] == 'corrected_torque'){
 					$load_test_result[$var][$load_test_col[$i]] = 0 + $load_test_result[$var]['torque'];
+					$load_test_result[$var][$load_test_col[$i]] = number_format($load_test_result[$var][$load_test_col[$i]],2);
 				}
 				if($load_test_col[$i] == 'stator_i2r_loss_kw'){
 					$load_test_result[$var][$load_test_col[$i]] = number_format((((1.5*$R*$R*$B*(234.5+$D))/(234.5+$C))/1000),2);
@@ -1793,10 +1820,10 @@ class Motor_Test extends BaseController
 
 				}
 				if($load_test_col[$i] == 'shaft_power'){
-					array_push($shaft_power_graph,$load_test_result[$var][$load_test_col[$i]]);
+					array_push($shaft_power_graph,number_format($load_test_result[$var][$load_test_col[$i]], 2));
 				}
 				if($load_test_col[$i] == 'total_current'){
-					array_push($total_current_graph,$load_test_result[$var][$load_test_col[$i]]);
+					array_push($total_current_graph,number_format($load_test_result[$var][$load_test_col[$i]], 2));
 				}
 				$pdf->Cell(17,6,$load_test_result[$var][$load_test_col[$i]],1,0,'C');
 			}
@@ -1995,23 +2022,23 @@ class Motor_Test extends BaseController
 		$pdf->SetTextColor(0);
 		$pdf->SetFont('Arial', '', 12);
 		$pdf->Cell(62,6,'Measured Efficiency, in %',1,0,'C');
-		$pdf->Cell(19,6,$efficiency_graph[0],1,0,'C');
-		$pdf->Cell(19,6,$efficiency_graph[1],1,0,'C');
-		$pdf->Cell(19,6,$efficiency_graph[2],1,0,'C');
-		$pdf->Cell(19,6,$efficiency_graph[3],1,0,'C');
-		$pdf->Cell(19,6,$efficiency_graph[4],1,0,'C');
-		$pdf->Cell(19,6,$efficiency_graph[5],1,0,'C');
-		$pdf->Cell(19,6,$efficiency_graph[6],1,0,'C');
+		$pdf->Cell(19,6,number_format($efficiency_graph[0],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($efficiency_graph[1],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($efficiency_graph[2],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($efficiency_graph[3],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($efficiency_graph[4],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($efficiency_graph[5],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($efficiency_graph[6],2),1,0,'C');
 		$pdf->Ln();
 
 		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[3],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[4],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[5],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[6],2),1,0,'C');
 
 
 		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/efficiency_graph.png',7,80,190),0,1,'R');
@@ -2058,13 +2085,13 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[3],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[4],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[5],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[6],2),1,0,'C');
 
 		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/speed_graph.png',7,80,190),0,1,'R');
 
@@ -2100,23 +2127,23 @@ class Motor_Test extends BaseController
 		$pdf->SetTextColor(0);
 		$pdf->SetFont('Arial', '', 12);
 		$pdf->Cell(62,6,'Measured Current, in Amps',1,0,'C');
-		$pdf->Cell(19,6,$total_current_graph[0],1,0,'C');
-		$pdf->Cell(19,6,$total_current_graph[1],1,0,'C');
-		$pdf->Cell(19,6,$total_current_graph[2],1,0,'C');
-		$pdf->Cell(19,6,$total_current_graph[3],1,0,'C');
-		$pdf->Cell(19,6,$total_current_graph[4],1,0,'C');
-		$pdf->Cell(19,6,$total_current_graph[5],1,0,'C');
-		$pdf->Cell(19,6,$total_current_graph[6],1,0,'C');
+		$pdf->Cell(19,6,number_format($total_current_graph[0],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($total_current_graph[1],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($total_current_graph[2],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($total_current_graph[3],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($total_current_graph[4],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($total_current_graph[5],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($total_current_graph[6],2),1,0,'C');
 		$pdf->Ln();
 
 		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[3],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[4],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[5],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[6],2),1,0,'C');
 
 		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/current_graph.png',7,80,190),0,1,'R');
 
@@ -2152,23 +2179,23 @@ class Motor_Test extends BaseController
 		$pdf->SetTextColor(0);
 		$pdf->SetFont('Arial', '', 12);
 		$pdf->Cell(62,6,'Measured CosØ , in %',1,0,'C');
-		$pdf->Cell(19,6,$power_factor_percentage_graph[0],1,0,'C');
-		$pdf->Cell(19,6,$power_factor_percentage_graph[1],1,0,'C');
-		$pdf->Cell(19,6,$power_factor_percentage_graph[2],1,0,'C');
-		$pdf->Cell(19,6,$power_factor_percentage_graph[3],1,0,'C');
-		$pdf->Cell(19,6,$power_factor_percentage_graph[4],1,0,'C');
-		$pdf->Cell(19,6,$power_factor_percentage_graph[5],1,0,'C');
-		$pdf->Cell(19,6,$power_factor_percentage_graph[6],1,0,'C');
+		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[0],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[1],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[2],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[3],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[4],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[5],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[6],2),1,0,'C');
 		$pdf->Ln();
 
 		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[0],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[1],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[2],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[3],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[4],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[5],1,0,'C');
-		$pdf->Cell(19,6,$shaft_power_graph[6],1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[3],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[4],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[5],2),1,0,'C');
+		$pdf->Cell(19,6,number_format($shaft_power_graph[6],2),1,0,'C');
 
 		$pdf->Cell(10 ,100,$pdf->Image(base_url().'/assets/images/cos_graph.png',7,80,190),0,1,'R');
 
