@@ -170,8 +170,8 @@ def speed_graph():
     minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
 
     #ax.set_xticks(minor_ticks, minor=True)
-    low_y_axis__point = min(max_allowed)-20
-    high_y_axis__point = max(max_allowed)+20
+    low_y_axis__point = int(min(max_allowed)-20)
+    high_y_axis__point = int(max(max_allowed)+20)
 
     #plt.plot([data['FL'], 0], [data['FL'], high_y_axis__point], 'bo', linestyle="-")
     number_of_points_major = int((high_y_axis__point - low_y_axis__point)/10)
