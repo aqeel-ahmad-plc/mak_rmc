@@ -19,16 +19,13 @@ def efficiency_graph():
     hitachi = []
     test_curve = []
     min_allowed = []
-    x = [
-        0,
-        20,
-        40,
-        60,
-        80,
-        100,
-        120
-        ]
+    x = []
     data = json.load(f)
+
+    iterator = 0
+    for i in data['Shaft_Power']:
+        x.insert(iterator, data['Shaft_Power'][i])
+        iterator = iterator + 1
 
     plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
 
@@ -108,16 +105,14 @@ def speed_graph():
     test_curve = []
     min_allowed = []
     max_allowed = []
-    x = [
-        0,
-        20,
-        40,
-        60,
-        80,
-        100,
-        120
-        ]
+    x = []
     data = json.load(f)
+
+    iterator = 0
+    for i in data['Shaft_Power']:
+        x.insert(iterator, data['Shaft_Power'][i])
+        iterator = iterator + 1
+
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
@@ -213,16 +208,13 @@ def current_graph():
     test_curve = []
     min_allowed = []
     max_allowed = []
-    x = [
-        0,
-        20,
-        40,
-        60,
-        80,
-        100,
-        120
-        ]
+    x = []
     data = json.load(f)
+
+    iterator = 0
+    for i in data['Shaft_Power']:
+        x.insert(iterator, data['Shaft_Power'][i])
+        iterator = iterator + 1    
 
     iterator = 0
     for i in data['Hitachi_Curve']:
@@ -290,16 +282,13 @@ def cos_graph():
     hitachi = []
     test_curve = []
     min_allowed = []
-    x = [
-        0,
-        20,
-        40,
-        60,
-        80,
-        100,
-        120
-        ]
+    x = []
     data = json.load(f)
+    
+    iterator = 0
+    for i in data['Shaft_Power']:
+        x.insert(iterator, data['Shaft_Power'][i])
+        iterator = iterator + 1
 
     iterator = 0
     for i in data['Hitachi_Curve']:
