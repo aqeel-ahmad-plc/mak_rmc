@@ -1246,6 +1246,20 @@ class Motor_Test extends BaseController
 
 		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
 
+		$pdf->SetFont('Arial','',9);
+
+		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
+		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
+		$pdf->Cell(30,6,'DATED',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['test_date'],1,0,'C');
+		$pdf->Ln();
+		$pdf->Cell(40,6,'MOTOR MODEL',1,0,'LR');
+		$pdf->Cell(70,6,$result[0]['motor_model'],1,0,'C');
+		$pdf->Cell(30,6,'SR. NO.',1,0,'LR');
+		$pdf->Cell(55,6,$result[0]['motor_sno'],1,0,'C');
+
+
+		$pdf->Ln();
 
 
 
