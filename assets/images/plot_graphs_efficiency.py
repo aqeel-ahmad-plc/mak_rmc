@@ -24,9 +24,9 @@ def efficiency_graph():
 
     iterator = 0
     for i in data['Shaft_Power']:
-        x.insert(iterator, data['Shaft_Power'][i])
+        x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
-
+    #print("Shaft_Power_efficiency", x)
     plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
 
     iterator = 0
@@ -110,9 +110,9 @@ def speed_graph():
 
     iterator = 0
     for i in data['Shaft_Power']:
-        x.insert(iterator, data['Shaft_Power'][i])
+        x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
-
+    #print("Shaft_Power_speed", x)
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
@@ -138,9 +138,9 @@ def speed_graph():
 
     X_Y_Spline = make_interp_spline(x, test_curve)
 
-    # X_ = np.linspace(min(x), max(x), 500)
-    # Y_ = X_Y_Spline(X_)
-    # plt.plot(X_, Y_, label='Test Curve')
+    X_ = np.linspace(min(x), max(x), 500)
+    Y_ = X_Y_Spline(X_)
+    plt.plot(X_, Y_, label='Test Curve')
 
     X_Y_Spline = make_interp_spline(x, min_allowed)
     X_ = np.linspace(min(x), max(x), 500)
@@ -164,7 +164,7 @@ def speed_graph():
     major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
     minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
 
-    #ax.set_xticks(minor_ticks, minor=True)
+    ax.set_xticks(major_ticks)
     low_y_axis__point = int(min(max_allowed)-20)
     high_y_axis__point = int(max(max_allowed)+20)
 
@@ -213,9 +213,9 @@ def current_graph():
 
     iterator = 0
     for i in data['Shaft_Power']:
-        x.insert(iterator, data['Shaft_Power'][i])
-        iterator = iterator + 1    
-
+        x.insert(iterator, float(data['Shaft_Power'][i]))
+        iterator = iterator + 1
+    #print("Shaft_Power_current", x)
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
@@ -250,7 +250,9 @@ def current_graph():
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
-    ax.set_yticks(np.arange(0, 200, 10))
+    y_axis_highest_limit = float(max(hitachi))
+    y_axis_highest_limit = (y_axis_highest_limit*1.5)
+    ax.set_yticks(np.arange(0,y_axis_highest_limit, 5))
     #ax.set_yticks(np.arange(0, 300, 5), minor=True)
 
     # And a corresponding grid
@@ -284,12 +286,12 @@ def cos_graph():
     min_allowed = []
     x = []
     data = json.load(f)
-    
+
     iterator = 0
     for i in data['Shaft_Power']:
-        x.insert(iterator, data['Shaft_Power'][i])
+        x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
-
+    #print("Shaft_Power_cos", x)
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])

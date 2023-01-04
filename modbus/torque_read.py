@@ -15,44 +15,54 @@ ser = serial.Serial(
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
     bytesize=serial.EIGHTBITS,
-    timeout=2,
+    timeout=0.1 # set to 100ms based on recieved data (Umer)
     )
 ser.close()
 
 
 def ReadData():
     ser.open()
-    cw = [0x23, 0x30, 0x30, 0x0d]
+    ser.flushInput()
+    ser.flushOutput()
+    #cw = [0x23, 0x30, 0x30, 0x0d]
+    cw = [0x23, 0x30, 0x30, 0x30, 0x0d]
     ser.write(serial.to_bytes(cw))
-    time.sleep(0.001)
-    data = ser.read(20)
+    #time.sleep(0.001)
+    data = ser.read_until (terminator='\r', size=60)
+
+    #ser.read(58)
     if len(data) == 0:
         ser.close()
         return -1
     ser.close()
-    torque = float(data[1:8]) * 200
-    return torque
+    #torque = data[1:8]
+    #print (torque)
+    #torque = float(data[1:8])
+
+    # * 200
+    return (float(data[1:9]),3)*200
+    #return float(data[1:9])
 
 
 while 1:
     x = {}
 
     # print((data.decode("utf-8")))
-    average_torque = 0
-    start_time = time.time()
-    for i in range(0,10):
-        torque = ReadData()
-        average_torque = average_torque + torque
-        time.sleep(0.05)
-    average_torque = average_torque/10
-    x['torque'] = average_torque
-    print('--- %s seconds ---' % (time.time() - start_time))
-    print(x)
+    # average_torque = 0
+    #start_time = time.time()
+    # for i in range(0,10):
+    #     torque = ReadData()
+    #     average_torque = average_torque + torque
+    #     #time.sleep(0.05)
+    # average_torque = round(average_torque/10) * 200
+    x['torque'] = ReadData()
+    #print('--- %s seconds ---' % (time.time() - start_time))
+    #print(x)
 
     ret = requests.post(url, data = x)
     result = json.loads(ret.text)
     print(result)
     if((result["status"]) == 200):
-        print("Data saved successfully")
+         print("Data saved successfully")
     else:
-        print("Error occurred in saving to db")
+         print("Error occurred in saving to db")

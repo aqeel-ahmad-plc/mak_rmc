@@ -1883,8 +1883,8 @@ class Motor_Test extends BaseController
 						"min_allowed_4" => $shaft_power_graph[3],
 						"min_allowed_5" => $shaft_power_graph[4],
 						"min_allowed_6" => $shaft_power_graph[5],
-						"min_allowed_7" => $shaft_power_graph[6]					
-				),
+						"min_allowed_7" => $shaft_power_graph[6]
+				)
 		);
 
 		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/efficiency_data.json", "w") or die("Unable to open file!");
@@ -1933,14 +1933,14 @@ class Motor_Test extends BaseController
 						"test_curve_7" => $corrected_speed_rmin_graph[6]
 				),
 				'Shaft_Power' => array(
-					"min_allowed_1" => $shaft_power_graph[0],
-					"min_allowed_2" => $shaft_power_graph[1],
-					"min_allowed_3" => $shaft_power_graph[2],
-					"min_allowed_4" => $shaft_power_graph[3],
-					"min_allowed_5" => $shaft_power_graph[4],
-					"min_allowed_6" => $shaft_power_graph[5],
-					"min_allowed_7" => $shaft_power_graph[6]					
-			    ),
+					"shaft_power_1" => $shaft_power_graph[0],
+					"shaft_power_2" => $shaft_power_graph[1],
+					"shaft_power_3" => $shaft_power_graph[2],
+					"shaft_power_4" => $shaft_power_graph[3],
+					"shaft_power_5" => $shaft_power_graph[4],
+					"shaft_power_6" => $shaft_power_graph[5],
+					"shaft_power_7" => $shaft_power_graph[6]
+			    )
 		);
 
 		$myfile = fopen("C:/wamp64/www/mak_rmc/assets/images/speed_data.json", "w") or die("Unable to open file!");
@@ -1975,13 +1975,13 @@ class Motor_Test extends BaseController
 						"test_curve_7" => $total_current_graph[6]
 				),
 				'Shaft_Power' => array(
-					"min_allowed_1" => $shaft_power_graph[0],
-					"min_allowed_2" => $shaft_power_graph[1],
-					"min_allowed_3" => $shaft_power_graph[2],
-					"min_allowed_4" => $shaft_power_graph[3],
-					"min_allowed_5" => $shaft_power_graph[4],
-					"min_allowed_6" => $shaft_power_graph[5],
-					"min_allowed_7" => $shaft_power_graph[6]					
+					"shaft_power_1" => $shaft_power_graph[0],
+					"shaft_power_2" => $shaft_power_graph[1],
+					"shaft_power_3" => $shaft_power_graph[2],
+					"shaft_power_4" => $shaft_power_graph[3],
+					"shaft_power_5" => $shaft_power_graph[4],
+					"shaft_power_6" => $shaft_power_graph[5],
+					"shaft_power_7" => $shaft_power_graph[6]
 			    ),
 		);
 
@@ -2024,13 +2024,13 @@ class Motor_Test extends BaseController
 						"min_allowed_7" => $rated_curves['cos_in_percent_7'] - $pfactor7
 				),
 				'Shaft_Power' => array(
-					"min_allowed_1" => $shaft_power_graph[0],
-					"min_allowed_2" => $shaft_power_graph[1],
-					"min_allowed_3" => $shaft_power_graph[2],
-					"min_allowed_4" => $shaft_power_graph[3],
-					"min_allowed_5" => $shaft_power_graph[4],
-					"min_allowed_6" => $shaft_power_graph[5],
-					"min_allowed_7" => $shaft_power_graph[6]					
+					"shaft_power_1" => $shaft_power_graph[0],
+					"shaft_power_2" => $shaft_power_graph[1],
+					"shaft_power_3" => $shaft_power_graph[2],
+					"shaft_power_4" => $shaft_power_graph[3],
+					"shaft_power_5" => $shaft_power_graph[4],
+					"shaft_power_6" => $shaft_power_graph[5],
+					"shaft_power_7" => $shaft_power_graph[6]
 			    ),
 		);
 

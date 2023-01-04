@@ -222,23 +222,33 @@ var motor_rated_hp = 0;
 
 
 
-            console.log("pathname", split_path[split_path.length-1]);
+            //console.log("pathname", split_path[split_path.length-1]);
             if(window.location.pathname.includes('/motor_test/no_load_test') || window.location.pathname.includes('/motor_test/load_test') || window.location.pathname.includes('/dashboard')){
 
               updateStats();
               ret = ratedData();
-              console.log("ratedData", ret);
               countLoadTestData(split_path[split_path.length-1]);
               updateTemperature();
-              //updateRPM();
+              updateRPM();
               updateTorque_RPM();
-              setInterval('updateStats()',2000);
-              setInterval('updateTemperature()',2000);
-              setInterval('updateTorque_RPM()',2000);
+              setInterval('updateStats()',1500);
+              setInterval('updateTemperature()',1500);
+              setInterval('updateTorque_RPM()',1500);
               //setInterval('updateRPM()',2000);
               //setInterval('updateTorque()',2000);
 
             }
+            //
+            // const socket = new WebSocket('ws://localhost:8000');
+            // socket.addEventListener('open', function (event) {
+            //     socket.send('Connection Established');
+            //     alert("test");
+            // });
+            // socket.addEventListener('message', function (event) {
+            //     console.log(event.data);
+            //     alert("data recieved from server");
+            // });
+
 
 
             if(document.body.contains(document.getElementById('map_card')))
@@ -273,10 +283,10 @@ var motor_rated_hp = 0;
                 $('#failed-sites-table').DataTable();
             }
 
-            if(document.body.contains(document.getElementById('myPieChart')))
-            {
-                PlotChart();
-            }
+            // if(document.body.contains(document.getElementById('myPieChart')))
+            // {
+            //     PlotChart();
+            // }
 
         });
 
