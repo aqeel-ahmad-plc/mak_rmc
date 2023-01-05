@@ -27,7 +27,7 @@ def efficiency_graph():
         x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
     #print("Shaft_Power_efficiency", x)
-    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
+    plt.axvline(x = float(data['FL']), ymin = 0, ymax = 1,color ='blue')
 
     iterator = 0
     for i in data['Hitachi_Curve']:
@@ -42,19 +42,19 @@ def efficiency_graph():
         min_allowed.insert(iterator, data['Min_Allowed'][i])
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi)
+    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
-    X_Y_Spline = make_interp_spline(x, test_curve)
+    X_Y_Spline = make_interp_spline(x, test_curve, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
 
-    X_Y_Spline = make_interp_spline(x, min_allowed)
+    X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
@@ -69,8 +69,8 @@ def efficiency_graph():
     plt.grid(True)
 
 
-    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
-    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    major_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
@@ -130,24 +130,24 @@ def speed_graph():
         max_allowed.insert(iterator, float(data['Max_Allowed'][i]))
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi)
+    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
-    X_Y_Spline = make_interp_spline(x, test_curve)
+    X_Y_Spline = make_interp_spline(x, test_curve, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
 
-    X_Y_Spline = make_interp_spline(x, min_allowed)
+    X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Min Allowed')
 
-    X_Y_Spline = make_interp_spline(x, max_allowed)
+    X_Y_Spline = make_interp_spline(x, max_allowed, k=5)
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Max Allowed')
@@ -161,12 +161,12 @@ def speed_graph():
 
 
 
-    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
-    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    major_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
-    low_y_axis__point = int(min(max_allowed)-20)
-    high_y_axis__point = int(max(max_allowed)+20)
+    low_y_axis__point = int(min(test_curve)-20)
+    high_y_axis__point = int(max(test_curve)+20)
 
     #plt.plot([data['FL'], 0], [data['FL'], high_y_axis__point], 'bo', linestyle="-")
     number_of_points_major = int((high_y_axis__point - low_y_axis__point)/10)
@@ -178,7 +178,7 @@ def speed_graph():
     #ax.set_yticks(np.arange(0, 300, 5), minor=True)
 
     # And a corresponding grid
-    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
+    plt.axvline(x = float(data['FL']), ymin = 0, ymax = 1,color ='blue')
     ax.grid(which='both')
 
     # Or if you want different settings for the grids:
@@ -225,13 +225,13 @@ def current_graph():
         test_curve.insert(iterator, data['Test_Curve'][i])
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi)
+    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
-    X_Y_Spline = make_interp_spline(x, test_curve)
+    X_Y_Spline = make_interp_spline(x, test_curve, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
@@ -240,13 +240,13 @@ def current_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
+    plt.axvline(x = float(data['FL']), ymin = 0, ymax = 1,color ='blue')
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('Current, in Amps')
     plt.grid(True)
 
-    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
-    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    major_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
@@ -305,17 +305,17 @@ def cos_graph():
         min_allowed.insert(iterator, data['Min_Allowed'][i])
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi)
+    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
-    X_Y_Spline = make_interp_spline(x, test_curve)
+    X_Y_Spline = make_interp_spline(x, test_curve, k=5)
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
 
-    X_Y_Spline = make_interp_spline(x, min_allowed)
+    X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Min Allowed')
@@ -323,13 +323,13 @@ def cos_graph():
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
 
-    plt.axvline(x = int(data['FL']), ymin = 0, ymax = 1,color ='blue')
+    plt.axvline(x = float(data['FL']), ymin = 0, ymax = 1,color ='blue')
     plt.xlabel('Shaft Power (P2), in kW')
     plt.ylabel('CosØ , in %')
     plt.grid(True)
 
-    major_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
-    minor_ticks = np.arange(0, int(int(data['FL'])*1.5), int((int(data['FL'])*1.5)/6))
+    major_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
+    minor_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)

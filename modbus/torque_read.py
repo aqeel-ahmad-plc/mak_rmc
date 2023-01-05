@@ -38,9 +38,9 @@ def ReadData():
     #torque = data[1:8]
     #print (torque)
     #torque = float(data[1:8])
-
+    data = (float(data[1:9]))*200
     # * 200
-    return (float(data[1:9]),3)*200
+    return data
     #return float(data[1:9])
 
 
@@ -57,7 +57,7 @@ while 1:
     # average_torque = round(average_torque/10) * 200
     x['torque'] = ReadData()
     #print('--- %s seconds ---' % (time.time() - start_time))
-    #print(x)
+    print(x)
 
     ret = requests.post(url, data = x)
     result = json.loads(ret.text)
