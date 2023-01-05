@@ -23,6 +23,7 @@ def efficiency_graph():
     data = json.load(f)
 
     iterator = 0
+    rated_curves_flag = int(data['rated_curves_flag'])    
     for i in data['Shaft_Power']:
         x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
@@ -43,10 +44,10 @@ def efficiency_graph():
         iterator = iterator + 1
 
     X_Y_Spline = make_interp_spline(x, hitachi, k=5)
-
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
+    if(rated_curves_flag == 1):
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve, k=5)
 
@@ -54,11 +55,11 @@ def efficiency_graph():
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
 
-    X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
-
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Min Allowed')
+    if(rated_curves_flag == 1):
+        X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label='Min Allowed')
 
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
@@ -109,6 +110,7 @@ def speed_graph():
     data = json.load(f)
 
     iterator = 0
+    rated_curves_flag = int(data['rated_curves_flag'])    
     for i in data['Shaft_Power']:
         x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
@@ -130,27 +132,26 @@ def speed_graph():
         max_allowed.insert(iterator, float(data['Max_Allowed'][i]))
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
-
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
+    if(rated_curves_flag == 1):
+        X_Y_Spline = make_interp_spline(x, hitachi, k=5)
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve, k=5)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
-
-    X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Min Allowed')
-
-    X_Y_Spline = make_interp_spline(x, max_allowed, k=5)
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Max Allowed')
+    if(rated_curves_flag == 1):
+        X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label='Min Allowed')
+        X_Y_Spline = make_interp_spline(x, max_allowed, k=5)
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label='Max Allowed')
 
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
@@ -210,7 +211,7 @@ def current_graph():
     max_allowed = []
     x = []
     data = json.load(f)
-
+    rated_curves_flag = int(data['rated_curves_flag'])
     iterator = 0
     for i in data['Shaft_Power']:
         x.insert(iterator, float(data['Shaft_Power'][i]))
@@ -225,11 +226,11 @@ def current_graph():
         test_curve.insert(iterator, data['Test_Curve'][i])
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
-
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
+    if(rated_curves_flag == 1):
+        X_Y_Spline = make_interp_spline(x, hitachi, k=5)
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve, k=5)
 
@@ -250,7 +251,7 @@ def current_graph():
 
     ax.set_xticks(major_ticks)
     #ax.set_xticks(minor_ticks, minor=True)
-    y_axis_highest_limit = float(max(hitachi))
+    y_axis_highest_limit = float(max(test_curve))
     y_axis_highest_limit = (y_axis_highest_limit*1.5)
     ax.set_yticks(np.arange(0,y_axis_highest_limit, 5))
     #ax.set_yticks(np.arange(0, 300, 5), minor=True)
@@ -286,7 +287,7 @@ def cos_graph():
     min_allowed = []
     x = []
     data = json.load(f)
-
+    rated_curves_flag = int(data['rated_curves_flag'])
     iterator = 0
     for i in data['Shaft_Power']:
         x.insert(iterator, float(data['Shaft_Power'][i]))
@@ -305,20 +306,22 @@ def cos_graph():
         min_allowed.insert(iterator, data['Min_Allowed'][i])
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
+    if(rated_curves_flag == 1):
+        X_Y_Spline = make_interp_spline(x, hitachi, k=5)
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve, k=5)
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
 
-    X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
-    X_ = np.linspace(min(x), max(x), 500)
-    Y_ = X_Y_Spline(X_)
-    plt.plot(X_, Y_, label='Min Allowed')
+    if(rated_curves_flag == 1):
+        X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
+        X_ = np.linspace(min(x), max(x), 500)
+        Y_ = X_Y_Spline(X_)
+        plt.plot(X_, Y_, label='Min Allowed')
 
     # plt.plot(x, hitachi, "-b", label="average temp",linewidth=2)
     # plt.plot(x, test_curve, "-c", label="average temp1",linewidth=2)
