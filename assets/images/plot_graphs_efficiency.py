@@ -23,13 +23,14 @@ def efficiency_graph():
     data = json.load(f)
 
     iterator = 0
-    rated_curves_flag = int(data['rated_curves_flag'])    
+    rated_curves_flag = int(data['rated_curves_flag'])
     for i in data['Shaft_Power']:
-        x.insert(iterator, float(data['Shaft_Power'][i]))
+        x.insert(iterator, (float(data['Shaft_Power'][i])))
         iterator = iterator + 1
     #print("Shaft_Power_efficiency", x)
+    x.sort()
     plt.axvline(x = float(data['FL']), ymin = 0, ymax = 1,color ='blue')
-
+    print(x)
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
@@ -43,14 +44,14 @@ def efficiency_graph():
         min_allowed.insert(iterator, data['Min_Allowed'][i])
         iterator = iterator + 1
 
-    X_Y_Spline = make_interp_spline(x, hitachi, k=5)
+
     if(rated_curves_flag == 1):
+        X_Y_Spline = make_interp_spline(x, hitachi, k=5)
         X_ = np.linspace(min(x), max(x), 500)
         Y_ = X_Y_Spline(X_)
         plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
     X_Y_Spline = make_interp_spline(x, test_curve, k=5)
-
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
@@ -110,12 +111,13 @@ def speed_graph():
     data = json.load(f)
 
     iterator = 0
-    rated_curves_flag = int(data['rated_curves_flag'])    
+    rated_curves_flag = int(data['rated_curves_flag'])
     for i in data['Shaft_Power']:
         x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
     #print("Shaft_Power_speed", x)
     iterator = 0
+    x.sort()
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
         iterator = iterator + 1
@@ -217,6 +219,7 @@ def current_graph():
         x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
     #print("Shaft_Power_current", x)
+    x.sort()
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])
@@ -293,6 +296,7 @@ def cos_graph():
         x.insert(iterator, float(data['Shaft_Power'][i]))
         iterator = iterator + 1
     #print("Shaft_Power_cos", x)
+    x.sort()
     iterator = 0
     for i in data['Hitachi_Curve']:
         hitachi.insert(iterator, data['Hitachi_Curve'][i])

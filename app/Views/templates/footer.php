@@ -133,7 +133,7 @@ var motor_rated_hp = 0;
 
       function countLoadTestData(id){
         console.log('countLoadTestData');
-
+        // const load_point = ["0%", "25%", ""];
         var  data = new Array();
         $.ajax({
             type: 'GET',
