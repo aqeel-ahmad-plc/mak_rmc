@@ -8,6 +8,7 @@
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl-N13dPLykJG9rBZKUBjpeyY_i5dWoc0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.4/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 var motor_rated_hp = 0;
         function capture () {
@@ -133,7 +134,7 @@ var motor_rated_hp = 0;
 
       function countLoadTestData(id){
         console.log('countLoadTestData');
-        // const load_point = ["0%", "25%", ""];
+        const load_point = ["0%", "25%", "50%","75%","100%","115%","130%"];
         var  data = new Array();
         $.ajax({
             type: 'GET',
@@ -149,8 +150,8 @@ var motor_rated_hp = 0;
                   $("#record_load_point_button").show();
                   $("#complete_test_button").hide();
                 }
-                $("#load_test_count").text(data[0]['count_load_test_record']);
-                console.log("countLoadTestData", data[0]['count_load_test_record']);
+                $("#load_test_count").text(load_point[data[0]['count_load_test_record']]);
+                console.log("countLoadTestData", load_point[data[0]['count_load_test_record']]);
             },
             error: function() {
             },
@@ -213,14 +214,121 @@ var motor_rated_hp = 0;
 
       }
 
+      function preview_load_data(){
+        Swal.fire({
+            title: 'Are you sure?',
+            html: `
+        <table id="table" style="font-size:14px" class="table table-hover">
+            <tbody>
+                <tr>
+                    <td>TORQUE (N.M)</td>
+                    <td>`+$("#load_test_torque").val()+`</td>
+                    <td>SPEED (RPM)</td>
+                    <td>`+$("#load_test_rpm").val()+`</td>
+                </tr>
+                <tr>
+                    <td>SHAFT POWER (KW)</td>
+                    <td>`+$("#load_test_shaft_power").val()+`</td>
+                    <td>LOADING FACTOR (%)</td>
+                    <td>`+$("#loading_factor_load").val()+`</td>
+                </tr>
+                <tr>
+                    <td>MOTOR SIZE (HP)</td>
+                    <td>`+$("#motor_size_load").val()+`</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <table id="table" style="font-size:12px" class="table table-hover">
+            <tbody>
+                <thead>
+                    <th>#</th>
+                    <th>Average/Total</th>
+                    <th>L1/L1-L2</th>
+                    <th>L2/L2-L3</th>
+                    <th>L3/L1-L3</th>
+                </thead>
+                <tr>
+                    <td>Voltage (V)</td>
+                    <td>`+$("#averge_voltage").val()+`</td>
+                    <td>`+$("#voltage_a").val()+`</td>
+                    <td>`+$("#voltage_b").val()+`</td>
+                    <td>`+$("#voltage_c").val()+`</td>
+                </tr>
+                <tr>
+                    <td>Voltage (L-L)</td>
+                    <td>`+$("#averge_voltage_phase_to_phase").val()+`</td>
+                    <td>`+$("#voltage_ab").val()+`</td>
+                    <td>`+$("#voltage_bc").val()+`</td>
+                    <td>`+$("#voltage_ca").val()+`</td>
+                </tr>
+                <tr>
+                    <td>Current (A)</td>
+                    <td>`+$("#total_current").val()+`</td>
+                    <td>`+$("#current_a").val()+`</td>
+                    <td>`+$("#current_b").val()+`</td>
+                    <td>`+$("#current_c").val()+`</td>
+                </tr>
+                <tr>
+                    <td>P.F.</td>
+                    <td>`+$("#average_pf").val()+`</td>
+                    <td>`+$("#pf_a").val()+`</td>
+                    <td>`+$("#pf_b").val()+`</td>
+                    <td>`+$("#pf_c").val()+`</td>
+                </tr>
+                <tr>
+                    <td>Active Power (kW)</td>
+                    <td>`+$("#average_power").val()+`</td>
+                    <td>`+$("#power_a").val()+`</td>
+                    <td>`+$("#power_b").val()+`</td>
+                    <td>`+$("#power_c").val()+`</td>
+                </tr>
+                <tr>
+                    <td>Frequency (Hz)</td>
+                    <td>`+$("#frequency").val()+`</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <table id="table" style="font-size:14px" class="table table-hover">
+            <tbody>
+                <tr>
+                    <td>AMBIENT TEMPERATURE(°C)</td>
+                    <td>`+$("#amb_temperature").val()+`</td>
+                </tr>
+                <tr>
+                    <td>MOTOR TEMPERATURE(°C)</td>
+                    <td>`+$("#motor_temperature").val()+`</td>
+                </tr>
+                <tr>
+                    <td>ESTIMATED EFFICIENCY(%)</td>
+                    <td>`+$("#motor_efficiency_load_test").val()+`</td>
+                </tr>
+            </tbody>
+        </table>
+        `,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Record Load Point'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("load_test_form").submit();
+                Swal.fire(
+                'Saved!',
+                'Record has been saved.',
+                'success'
+                )
+            }
+        })
+    }
+
         $(document).ready(function()
         {
             //setInterval(updateStats(), 10000);
             split_path = window.location.pathname.split("/");
-
-
-
-
 
             //console.log("pathname", split_path[split_path.length-1]);
             if(window.location.pathname.includes('/motor_test/no_load_test') || window.location.pathname.includes('/motor_test/load_test') || window.location.pathname.includes('/dashboard')){

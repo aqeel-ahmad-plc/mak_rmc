@@ -20,7 +20,7 @@
   <div class="d-sm-flex align-items-center justify-content-between mb-4 pt-2">
       <h1 class="h3 mb-0 text-gray-800"><b>Load Test</b></h1>
   </div>
-  <form action="<?php echo base_url()."/motor_test/load_test";?>" method="post">
+<form id = "load_test_form" action="<?php echo base_url()."/motor_test/load_test";?>" method="post">
     <input type="hidden" name="test_id" value="<?php echo $test_id ?>" id="test_id">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -198,10 +198,10 @@
       </div>
       <div class="col-xl-2 col-md-2">
 
-        <h3>Load Test Count : <span id="load_test_count"></span> </h3>
+        <h4>Load Test Count : <span id="load_test_count"></span> </h4>
       </div>
       <div class="col-xl-2 col-md-2" id="record_load_point_button">
-        <input type="submit" value="Record Load Point" class="btn btn-primary"/>
+        <input type="button" onclick="preview_load_data()" value="Record Load Point" class="btn btn-primary"/>
       </div>
       <div class="col-xl-2 col-md-2" id="complete_test_button" style="display:none">
 
@@ -209,6 +209,6 @@
       </div>
 
     </div>
-  </form>
+</form>
 
 </div>
