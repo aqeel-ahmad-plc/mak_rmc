@@ -1122,13 +1122,13 @@ class Motor_Test extends BaseController
 		$pdf->Ln(20);
 
     //need uncomment
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['first_title_image'],10,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['second_title_image'],70,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['third_title_image'],130,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['first_title_image'],10,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['second_title_image'],70,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['third_title_image'],130,75,60),0,1,'R');
 
 		$pdf->Ln(20);
     //need uncomment
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],70,180,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],70,180,60),0,1,'R');
 
 
 		//Second page
@@ -1143,7 +1143,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -1290,7 +1290,7 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 
 		$pdf->SetFont('Arial','',9);
 
@@ -1575,7 +1575,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -1614,7 +1614,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -1682,7 +1682,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -2109,7 +2109,7 @@ class Motor_Test extends BaseController
 
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 		$pdf->SetFont('Arial', 'B', 12);
 		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
 		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
@@ -2156,7 +2156,7 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 
 
 		$pdf->SetFont('Arial', 'B', 12);
@@ -2208,7 +2208,7 @@ class Motor_Test extends BaseController
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 
 		$pdf->SetFont('Arial', 'B', 12);
 
@@ -2260,7 +2260,7 @@ class Motor_Test extends BaseController
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'./public/assets/uploads/'.$report_images_result[0]['logo'],5,5,20),0,1,'R');
 		$pdf->SetFont('Arial', 'B', 12);
 
 
