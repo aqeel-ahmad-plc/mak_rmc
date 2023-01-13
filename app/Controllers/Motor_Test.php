@@ -3,6 +3,7 @@
 use App\Models\Motor_Test_model;
 use App\Models\No_Load_Test_model;
 use App\Models\Load_Test_model;
+use App\Models\Report_Images_model;
 
 use FPDF;
 
@@ -674,6 +675,48 @@ class Motor_Test extends BaseController
 			echo view('templates/footer');
 	}
 
+	public function report_images(){
+
+		$data = [];
+
+		if ($this->request->getMethod() == 'post') {
+
+			$data['id'] = 1;
+
+			$model = new Report_Images_model();
+			$logo = $this->request->getFile('logo');
+			$logo->move('./public/assets/uploads');
+			$logo_name = $logo->getName();
+			$data['logo'] = $logo_name;
+
+			$first_title_image = $this->request->getFile('first_title_image');
+			$first_title_image->move('./public/assets/uploads');
+			$first_title_image_name = $first_title_image->getName();
+			$data['first_title_image'] = $first_title_image_name;
+
+
+			$second_title_image = $this->request->getFile('second_title_image');
+			$second_title_image->move('./public/assets/uploads');
+			$second_title_image_name = $second_title_image->getName();
+			$data['second_title_image'] = $second_title_image_name;
+
+
+			$third_title_image = $this->request->getFile('third_title_image');
+			$third_title_image->move('./public/assets/uploads');
+			$third_title_image_name = $third_title_image->getName();
+			$data['third_title_image'] = $third_title_image_name;
+
+			$model->replace($data);
+			$session = session();
+			$session->setFlashdata('success', 'Images uploaded successfully');
+			return redirect()->to(base_url().'/motor_test/report_images');
+		}
+		echo view('templates/header');
+		echo view('templates/sidebar');
+		echo view('motor_test/report_images');
+		echo view('templates/footer');
+	}
+
 
 
 	public function no_load_test($test_id){
@@ -1057,6 +1100,9 @@ class Motor_Test extends BaseController
 		$motor_tests_model = new Motor_Test_model();
 		$result = $motor_tests_model->getMotorTestData($id);
 
+		$report_images_model = new Report_Images_model();
+		$report_images_result = $report_images_model->getReportImages();
+
 		$noload_test_tests_model = new No_Load_Test_model();
 		$no_load_test_result = $noload_test_tests_model->getNoLoadTestData($id);
 
@@ -1076,13 +1122,13 @@ class Motor_Test extends BaseController
 		$pdf->Ln(20);
 
     //need uncomment
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab1.png',10,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab2.png',70,75,60),0,1,'R');
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/lab3.png',130,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['first_title_image'],10,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['second_title_image'],70,75,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['third_title_image'],130,75,60),0,1,'R');
 
 		$pdf->Ln(20);
     //need uncomment
-		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/komax_logo.png',70,180,60),0,1,'R');
+		$pdf->Cell(10 ,10,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],70,180,60),0,1,'R');
 
 
 		//Second page
@@ -1097,7 +1143,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -1244,7 +1290,7 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 
 		$pdf->SetFont('Arial','',9);
 
@@ -1529,7 +1575,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -1568,7 +1614,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -1636,7 +1682,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(150 ,5,'',0,1);
 
 		//need uncomment
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 
 
 		// Header
@@ -2063,7 +2109,7 @@ class Motor_Test extends BaseController
 
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 		$pdf->SetFont('Arial', 'B', 12);
 		$pdf->Cell(40,6,'TEST REPORT NO.',1,0,'C');
 		$pdf->Cell(70,6,$result[0]['test_report_no'],1,0,'C');
@@ -2110,7 +2156,7 @@ class Motor_Test extends BaseController
 		$pdf->AddPage();
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 
 
 		$pdf->SetFont('Arial', 'B', 12);
@@ -2162,7 +2208,7 @@ class Motor_Test extends BaseController
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 
 		$pdf->SetFont('Arial', 'B', 12);
 
@@ -2214,7 +2260,7 @@ class Motor_Test extends BaseController
 		$pdf->Rect(5, 5, 200, 287, 'S');
 
 
-		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/komax_logo.png',5,5,20),0,1,'R');
+		$pdf->Cell(5 ,5,$pdf->Image(base_url().'/assets/images/'.$report_images_result['logo'],5,5,20),0,1,'R');
 		$pdf->SetFont('Arial', 'B', 12);
 
 

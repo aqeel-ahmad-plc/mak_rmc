@@ -59,6 +59,9 @@
                     <li>
                         <a href="<?php echo base_url()."/motor_test/manage";?>"> <i class="fa fa-wrench" aria-hidden="true"></i> Manage Tests</a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url()."/motor_test/report_images";?>"> <i class="fa fa-upload" aria-hidden="true"></i> Report Images</a>
+                    </li>
                 </ul>
             </li>
             <?php endif?>
