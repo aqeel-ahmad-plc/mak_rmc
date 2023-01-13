@@ -4,6 +4,7 @@
 /assets/uploads/
 /assets/images/*.png
 /assets/images/*.json
+/public/assets/uploads/
 writable/cache/*
 !writable/cache/index.html
 
