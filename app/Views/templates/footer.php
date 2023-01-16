@@ -4,11 +4,11 @@
     <script src="<?php echo base_url()."/assets/js/popper.min.js"; ?>"></script>
     <script src="<?php echo base_url()."/assets/js/bootstrap.min.js"; ?>"></script>
     <script src="<?php echo base_url()."/assets/js/chart.min.js"; ?>"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl-N13dPLykJG9rBZKUBjpeyY_i5dWoc0"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.4/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl-N13dPLykJG9rBZKUBjpeyY_i5dWoc0"></script> -->
+    <script src="<?php echo base_url()."/assets/js/jquery.dataTables.min.js"; ?>"></script>
+    <script src="<?php echo base_url()."/assets/js/sweetalert2@11"; ?>"></script>
+    <script src="<?php echo base_url()."/assets/js/html2canvas.min.js"; ?>"></script>
+    <script src="<?php echo base_url()."/assets/js/dataTables.bootstrap4.min.js"; ?>"></script>
 <script>
 var motor_rated_hp = 0;
         function capture () {
