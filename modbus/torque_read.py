@@ -7,6 +7,12 @@ import json
 import struct
 url = 'http://localhost/mak_rmc/torque/create'
 
+
+signal_peak =0
+signal_low = 2000
+sample_counter = 0
+sample_average = 0
+
 # configure the serial connections (the parameters differs on the device you are connecting to)
 
 ser = serial.Serial(
@@ -47,17 +53,44 @@ def ReadData():
 while 1:
     x = {}
 
-    # print((data.decode("utf-8")))
-    # average_torque = 0
+    #print((data.decode("utf-8")))
     #start_time = time.time()
     # for i in range(0,10):
     #     torque = ReadData()
     #     average_torque = average_torque + torque
-    #     #time.sleep(0.05)
-    # average_torque = round(average_torque/10) * 200
-    x['torque'] = ReadData()
+
+    average_torque = ReadData()
+
+    if signal_low < 0.01:
+            signal_low = 0.01
+
+    if signal_peak < average_torque :
+        signal_peak = average_torque
+
+    if signal_low > average_torque :
+        signal_low = average_torque
+
+    sample_counter = sample_counter + 1
+
+    if sample_counter > 10:
+        sample_counter = 0
+        signal_low = sample_average
+        signal_peak = sample_average
+
+    sample_average = (signal_peak + signal_low) / 2
+
+    x['torque'] = sample_average
+
+    #x['torque'] = ReadData()
+    if(x['torque'] == -1):
+        continue
     #print('--- %s seconds ---' % (time.time() - start_time))
     print(x)
+
+
+    #if average_torque != -1:
+    #    x['torque'] = average_torque
+    #    print(x)
 
     ret = requests.post(url, data = x)
     result = json.loads(ret.text)

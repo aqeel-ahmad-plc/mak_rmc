@@ -6,9 +6,14 @@ import requests
 import json
 import struct
 from tkinter import *
+from datetime import datetime
 
 url = 'http://localhost/mak_rmc/torque/create'
 
+signal_peak =0
+signal_low = 2000
+sample_counter = 0
+sample_average = 0
 
 
 # configure the serial connections (the parameters differs on the device you are connecting to)
@@ -20,7 +25,7 @@ ser = serial.Serial(
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
     bytesize=serial.EIGHTBITS,
-    timeout=0.15
+    timeout=0.100
     #inter_byte_timeout=0.100
     )
 ser.close()
@@ -67,13 +72,34 @@ while 1:
     #for i in range(0,2):
         #torque = ReadData()
         #average_torque = average_torque + torque
-        #time.sleep(0.05)
+    #time.sleep(0.100)
     #average_torque = round (average_torque/10,3)*200
     average_torque = ReadData()
-    print("%.3f" % average_torque, " Nm" , end="\r")
-    x['torque'] = average_torque
+
+    if signal_low < 0.01:
+            signal_low = 0.01
+
+    if signal_peak < average_torque :
+        signal_peak = average_torque
+
+    if signal_low > average_torque :
+        signal_low = average_torque
+
+    sample_counter = sample_counter + 1
+
+    if sample_counter > 5:
+        sample_counter = 0
+        signal_low = sample_average
+        signal_peak = sample_average
+
+    sample_average = (signal_peak + signal_low) / 2
+
+    print("  %.3f" % average_torque, " Nm   " , "  ",signal_peak, "  ",signal_low , "",(signal_peak + signal_low) / 2 , end="\r" )
+
+    if average_torque != -1:
+        x['torque'] = average_torque
     # print('--- %s seconds ---' % (time.time() - start_time))
-    print(x)
+        print(x)
     #
     # ret = requests.post(url, data = x)
     # result = json.loads(ret.text)
