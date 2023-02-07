@@ -135,22 +135,22 @@ def speed_graph():
         iterator = iterator + 1
 
     if(rated_curves_flag == 1):
-        X_Y_Spline = make_interp_spline(x, hitachi, k=5)
+        X_Y_Spline = make_interp_spline(x, hitachi, k=3)
         X_ = np.linspace(min(x), max(x), 500)
         Y_ = X_Y_Spline(X_)
         plt.plot(X_, Y_, label=data['Hitachi_Curve_Legend'])
 
-    X_Y_Spline = make_interp_spline(x, test_curve, k=5)
+    X_Y_Spline = make_interp_spline(x, test_curve, k=3)
 
     X_ = np.linspace(min(x), max(x), 500)
     Y_ = X_Y_Spline(X_)
     plt.plot(X_, Y_, label='Test Curve')
     if(rated_curves_flag == 1):
-        X_Y_Spline = make_interp_spline(x, min_allowed, k=5)
+        X_Y_Spline = make_interp_spline(x, min_allowed, k=3)
         X_ = np.linspace(min(x), max(x), 500)
         Y_ = X_Y_Spline(X_)
         plt.plot(X_, Y_, label='Min Allowed')
-        X_Y_Spline = make_interp_spline(x, max_allowed, k=5)
+        X_Y_Spline = make_interp_spline(x, max_allowed, k=3)
         X_ = np.linspace(min(x), max(x), 500)
         Y_ = X_Y_Spline(X_)
         plt.plot(X_, Y_, label='Max Allowed')
@@ -168,8 +168,8 @@ def speed_graph():
     minor_ticks = np.arange(0, int(float(data['FL'])*1.5), int((float(data['FL'])*1.5)/6))
 
     ax.set_xticks(major_ticks)
-    low_y_axis__point = int(min(test_curve)-20)
-    high_y_axis__point = int(max(test_curve)+20)
+    low_y_axis__point = int(min(test_curve)-300)
+    high_y_axis__point = int(max(test_curve)+100)
 
     #plt.plot([data['FL'], 0], [data['FL'], high_y_axis__point], 'bo', linestyle="-")
     number_of_points_major = int((high_y_axis__point - low_y_axis__point)/10)

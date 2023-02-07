@@ -1164,7 +1164,10 @@ class Motor_Test extends BaseController
 		$pdf->Ln();
 
 		//need uncomment
-		$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,76,60),0,1,'R');
+		$pdf->Cell(10 ,90,$pdf->Image(base_url().'/public/assets/uploads/'.$result[0]['motor_pic'],70,90,60),0,1,'R');
+
+
+		$pdf->Ln(40);
 
 		$pdf->Cell(195,6,'2. MOTOR NAME PLATE DATA',1,0,'C', true);
 		$pdf->Ln(10);
@@ -1286,6 +1289,7 @@ class Motor_Test extends BaseController
 
 		/******************** 3. MOTOR RATED DATA ***************************/
 
+if($result[0]['rated_curves_flag'] == 1){
 
 		$pdf->AddPage();
 		$pdf->Rect(5, 5, 200, 287, 'S');
@@ -1562,7 +1566,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_5'] - $pfactor5, 2, '.', '') ,1,0,'C');
 		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_6'] - $pfactor6, 2, '.', '') ,1,0,'C');
 		$pdf->Cell(20,6,number_format((float)$rated_curves['cos_in_percent_7'] - $pfactor7, 2, '.', '') ,1,0,'C');
-
+}
 		/******************** 5. TEST INFORMATION ***************************/
 
 		$pdf->AddPage();
@@ -1752,8 +1756,8 @@ class Motor_Test extends BaseController
 			"Stator Winding Temp, tt in C", "Ambient Temperature, in C", "Line-to-Line Voltage, in V", "Frequency, in Hz",
 			"Synchronous speed, ns, in RPM","Observed Speed, in r/min","Observed Slip, in r/min", "Observed Slip, in p.u.",
 			"Corrected Slip, in p.u.","Corrected Speed, in r/min","Torque, in N-m","Dynamometer Correction, in N-m","Corrected Torque, in N-m",
-			"Shaft Power, in kW","Line Current, in A","Stator Power, in kW","Stator I2R Loss, in kW, at tt","Winding Resistance at ts",
-			"Stator I2R Loss, in kW, at ts","Stator Power Correction, in kW","Corrected Stator Power, in kW","Efficiency, in %","Power Factor, in %"
+			"Shaft Power (P2), in kW","Line Current, in A","Stator Power, in kW","Stator I2R Loss, in kW, at tt","Winding Resistance at ts",
+			"Stator I2R Loss, in kW, at ts","Stator Power Correction, in kW","Corrected Stator Power (P1), in kW","Efficiency, in %","Power Factor, in %"
 		);
 
 		$efficiency_graph = array();
@@ -2140,7 +2144,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(19,6,number_format($efficiency_graph[6],2),1,0,'C');
 		$pdf->Ln();
 
-		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(62,6,'Shaft Power (P2), in kW',1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');
@@ -2193,7 +2197,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(19,6,$corrected_speed_rmin_graph[6],1,0,'C');
 		$pdf->Ln();
 
-		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(62,6,'Shaft Power (P2), in kW',1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');
@@ -2245,7 +2249,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(19,6,number_format($total_current_graph[6],2),1,0,'C');
 		$pdf->Ln();
 
-		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(62,6,'Shaft Power (P2), in kW',1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');
@@ -2297,7 +2301,7 @@ class Motor_Test extends BaseController
 		$pdf->Cell(19,6,number_format($power_factor_percentage_graph[6],2),1,0,'C');
 		$pdf->Ln();
 
-		$pdf->Cell(62,6,'Shaft Power, in kW',1,0,'C');
+		$pdf->Cell(62,6,'Shaft Power (P2), in kW',1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[0],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[1],2),1,0,'C');
 		$pdf->Cell(19,6,number_format($shaft_power_graph[2],2),1,0,'C');

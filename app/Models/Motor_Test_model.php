@@ -41,7 +41,7 @@ class Motor_Test_model extends Model{
 
       public function getMotorTest()
       {
-          return $this->findAll();
+          return $this->orderBy('id', 'DESC')->findAll();
       }
 
 
